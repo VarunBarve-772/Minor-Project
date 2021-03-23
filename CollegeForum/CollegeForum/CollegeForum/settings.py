@@ -56,7 +56,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'myapp/build')
+            os.path.join(BASE_DIR, 'reactFront/build')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -123,5 +123,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'myapp/build/static')
+    os.path.join(BASE_DIR, 'reactFront/build/static')
 ]
