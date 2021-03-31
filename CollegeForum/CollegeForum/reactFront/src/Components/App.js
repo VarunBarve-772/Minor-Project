@@ -1,9 +1,11 @@
 import React from 'react';
-import Input from './Input';
+import Register from './Register';
+import Login from './Login';
 
 function App() {
+  
   return(
-<Input/>
+<Login/>
  );
 
 }

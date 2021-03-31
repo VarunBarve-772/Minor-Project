@@ -1,5 +1,5 @@
 import React from 'react';
-function Input() {
+function Register() {
 return(
   <div>
    <div class="card">
@@ -38,7 +38,7 @@ return(
                 </div>
                 <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
                 <p className="text-right">
-                    Already registered <a href="#">log in?</a>
+                    Already registered <a href="">log in?</a>
                 </p>
             </form>
       
@@ -51,4 +51,4 @@ return(
 
 );
 }
-export default Input;
+export default Register;
