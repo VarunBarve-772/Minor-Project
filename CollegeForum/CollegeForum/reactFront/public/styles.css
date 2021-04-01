@@ -1,114 +1,118 @@
 body{
   background-color:#39658f;
-
 }
 
 .card {
-margin: 10px 350px 100px 350px;
+  margin: 10px 350px 100px 350px;
   border-radius: 50px;
-background-color: #f2f2f2;
-padding: 10px 10px 10px 10px;
+  background-color: #f2f2f2;
+  padding: 10px 10px 10px 10px;
 }
+
 h3{
   text-align: center;
 }
 .input-style{
-
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 20px;
   width:100%;
   margin-top: 10px;
-
 }
-.id-label
-{
+
+.id-label{
   margin-right: 30px;
 }
-.id-div
-{
+
+.id-div{
   margin-bottom: 20px;
 }
-.OTP-div
-{
+
+.OTP-div{
   margin: 100px 250px 300px 250px;
   background-color: white;
   padding: 50px 50px 50px 50px;
   text-align: center;
 }
-.input-otp
-{
-width: 60px;
-margin-right: 40px;
+
+.input-otp{
+  width: 60px;
+  margin-right: 40px;
 }
-.otp-input-div
-{
+
+.otp-input-div{
   padding-left: 100px;
   padding-right: 100px;
   margin-bottom: 20px;
 }
-.title
-{
+
+.title{
+  cursor: pointer;
   color: white;
+  margin-left: 10%;
 }
-.sec-1
-{background-color: black;
+
+.sec-1{
+  background-color: #ffa161; /*91c788*/ /*7868e6*/
   height:100px;
   padding: 20px 40px 20px 40px;
 }
+
  /* havorthlogo img */
- .logo-img
- {
+.logo-img{
    height: 100px;
    width: 100px;
    border-radius: 100%;
- }
- /* Navigation bar */
- /* Style the links inside the navigation bar */
- .topnav a {
+}
+
+/* Navigation bar */
+/* Style the links inside the navigation bar */
+
+.topnav a {
    float: left;
    text-align: center;
    padding: 14px 16px;
    text-decoration: none;
    font-size: 1rem;
    color: white;
-   font-weight: bold;
- }
+}
 
+.topnav a:hover{
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
 
- /* Add a color to the active/current link */
- .topnav a.active {
-   background-color: #4CAF50;
-   color: white;
- }
- /* Right-aligned section inside the top navigation */
- .topnav-right {
+/* Right-aligned section inside the top navigation */
+.topnav-right {
+   margin-right: 25px;
    float: right;
- }
+}
 
-.sec-2
-{
-  background-color: skyblue;
+.sec-2 {
+  background-color: #ffb884; /*ddffbc*//*b8b5ff*/
   height:60px;
-  padding-left: 40px;
   padding-top: 10px;
- 
 }
-.sec-2-col a
-{
-color:black;
 
+.sec-2-col a {
+  color:black;
+}
 
+.sec-2-col a:hover {
+  color:black;
+  text-decoration: none;
+  font-weight: bold;
 }
-.sec-3
-{
-  padding:40px 40px;
-  
+
+.sec-3 {
+  padding: 40px 85px;
 }
-.sec-3-div
-{
-  border-style: solid;
+
+.sec-3-div {
+  border: 2px solid black;
   border-radius: 10px;
-  padding: 10px 10px 10px 10px;
-  margin-top: 5px;
+  padding: 10px 40px;
+  margin-bottom: 20px;
+  cursor: pointer;
 }
