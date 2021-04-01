@@ -1,11 +1,12 @@
 import React from 'react';
-import Register from './Register';
-import Login from './Login';
-
+// import Register from './Register';
+// import Login from './Login';
+// import OTP from './OTP';
+import Home from './Home';
 function App() {
   
   return(
-<Login/>
+<Home/>
  );
 
 }
