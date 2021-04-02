@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 function Home() {
     return(
 <div class="">
@@ -14,9 +15,10 @@ function Home() {
         <div class="topnav">
           <div class="topnav-right" >
             <a href="#Questions"> Ask Questions</a>
-            <a href="#">Answer Questions</a> 
+            <a href="#something">Answer Questions</a> 
             <a href="#about-us">About-us</a> 
             <a href="#profile">Student Profile</a>
+            <Link to="/Login">Logout</Link>
           </div>
         </div>
       </div>

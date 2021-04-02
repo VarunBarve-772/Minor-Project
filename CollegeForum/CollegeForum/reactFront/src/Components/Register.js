@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+
 function Register() {
 return(
   <div>
@@ -36,9 +38,12 @@ return(
                     <input type="file" accept="image/*"></input>
 
                 </div>
-                <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
+                <Link to="/OTP" className="btn btn-dark btn-lg btn-block">Get OTP</Link>
+                {/* <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button> */}
                 <p className="text-right">
-                    Already registered <a href="">log in?</a>
+                    Already registered? 
+                    <Link to='/Login'>Login</Link>
+                    {/* <a href="#something">log in?</a> */}
                 </p>
             </form>
       

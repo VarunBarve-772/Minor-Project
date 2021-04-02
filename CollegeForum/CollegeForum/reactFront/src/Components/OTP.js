@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+
 function OTP() {
     return(
         <div className="OTP-div">
@@ -12,7 +14,8 @@ function OTP() {
         <input type="text" class="form-control input-otp"/>
         </div>
     
-        <button type="button" class="btn btn-primary otp-button">Verify</button>
+        <Link to="/Home" className="btn btn-primary otp-button">Verify</Link>
+        {/* <button type="button" class="btn btn-primary otp-button">Verify</button> */}
         
         </div>
        
