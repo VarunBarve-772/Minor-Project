@@ -71,18 +71,16 @@ h3{
 .topnav a {
    float: left;
    text-align: center;
-   padding: 20px 24px;
+   padding: 14px 16px;
    text-decoration: none;
    font-size: 1rem;
    color: white;
-
 }
 
 .topnav a:hover{
   text-decoration: none;
-  color: black;
-  
-  /* font-weight: bold; */
+  color: white;
+  font-weight: bold;
 }
 
 /* Right-aligned section inside the top navigation */
@@ -118,5 +116,3 @@ h3{
   margin-bottom: 20px;
   cursor: pointer;
 }
-
-

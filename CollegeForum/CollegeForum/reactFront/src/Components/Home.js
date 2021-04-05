@@ -8,7 +8,7 @@ function Home() {
     <div class="row">
       <div class="col-lg-4">
         <h1 class="title">College Forum</h1>
-        {/* <img class="logo-img" src="Images/logo.png"/> */}  
+        {/* <img class="logo-img" src="..../public/Images/Varun.jpg" alt="not found"/>   */}
       </div>
 
       <div class="col-lg-8">
@@ -17,7 +17,7 @@ function Home() {
             <a href="#Questions"> Ask Questions</a>
             <a href="#something">Answer Questions</a> 
             <a href="#about-us">About-us</a> 
-            <a href="#profile">Student Profile</a>
+            <a href="#profile">Update Profile</a>
             <Link to="/Login">Logout</Link>
           </div>
         </div>

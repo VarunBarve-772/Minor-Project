@@ -4,15 +4,20 @@ import Register from './Register';
 import Login from './Login';
 import OTP from './OTP';
 import Home from './Home';
+import Update from './Update';
+import Questions from './Questions';
 function App() {
   
   return(
  
     <div>
-      <Route exact path="/Login" component= {Login}/>
+    
+    
+       <Route exact path="/Login" component= {Login}/>
       <Route  path="/Signin" component= {Register}/>
       <Route  path="/Home" component= {Home}/>
-      <Route  path="/OTP" component= {OTP}/>
+      <Route  path="/OTP" component= {OTP}/> 
+      
     </div>
  );
 
