@@ -15,7 +15,7 @@ function Home() {
         <div className="topnav">
           <div className="topnav-right" >
             <a href="#Questions"> Ask Questions</a>
-            <a href="#something">Answer Questions</a> 
+            <a href="#something">Contact-us</a> 
             <a href="#about-us">About-us</a> 
             <a href="#profile">Update Profile</a>
             <Link to="/Login">Logout</Link>
