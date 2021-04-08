@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import Register from './Register';
 import Login from './Login';
 import OTP from './OTP';
@@ -14,10 +14,15 @@ function App() {
   
 return( 
     <div>
-      <Route exact path="/Login" component= {Login}/>
-      <Route  path="/Signin" component= {Register}/>
-      <Route  path="/Home" component= {Home}/>
-      <Route  path="/OTP" component= {OTP}/> 
+      <Switch>
+        <Route  path="/Login" component= {Login}/>
+        <Route  path="/Signin" component= {Register}/>
+        <Route  path="/Home" component= {Home}/>
+        <Route  path="/OTP" component= {OTP}/> 
+        <Route  path="/AboutUs" component= {About}/> 
+        <Route  path="/ContactUS" component= {Contact}/> 
+        <Route  path="/AskQuestion" component= {Aques}/> 
+      </Switch>
     </div>
 );
 
