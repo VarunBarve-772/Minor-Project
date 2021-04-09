@@ -7,8 +7,8 @@ function OTP() {
     
    <h2>Account Verification!</h2>
  <h4> Enter the OTP we just send on your mobile phone. </h4>
-    <div class="d-flex flex-row mt-5 otp-input-div">
-        <input type="text" className="form-control input-otp" autofocus=""/>
+    <div className="d-flex flex-row mt-5 otp-input-div">
+        <input type="text" className="form-control input-otp" autoFocus=""/>
         <input type="text" className="form-control input-otp"/>
         <input type="text" className="form-control input-otp"/>
         <input type="text" className="form-control input-otp"/>

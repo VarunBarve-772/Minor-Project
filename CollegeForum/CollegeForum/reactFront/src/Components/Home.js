@@ -14,10 +14,10 @@ function Home() {
       <div className="col-lg-8">
         <div className="topnav">
           <div className="topnav-right" >
-            <a href="#Questions"> Ask Questions</a>
-            <a href="#something">Contact-us</a> 
-            <a href="#about-us">About-us</a> 
-            <a href="#profile">Update Profile</a>
+            <Link to="/AskQuestion">Ask A Question</Link>
+            <Link to="/ContactUs">Contact Us</Link>
+            <Link to="/AboutUs">About Us</Link>
+            <Link to="#something">Profile</Link>
             <Link to="/Login">Logout</Link>
           </div>
         </div>
@@ -28,7 +28,7 @@ function Home() {
   <div className="sec-2">
     <div className="row">
       <div className="col-sm-2 sec-2-col text-center">
-        <a href="#general" active >General</a>
+        <a href="#general" >General</a>
       </div>
 
       <div className="col-sm-2 sec-2-col text-center">
