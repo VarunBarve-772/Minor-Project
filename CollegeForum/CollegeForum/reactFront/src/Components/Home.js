@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import poster from "./Images/logo.png";
 function Home() {
     return(
 <div className="">
@@ -7,8 +8,9 @@ function Home() {
   <div className="sec-1" >
     <div className="row">
       <div className="col-lg-4">
+      {/* <img className="logo-img" src={poster} alt="not found"/> */}
         <h1 className="title">College Forum</h1>
-        {/* <img className="logo-img" src="..../public/Images/Varun.jpg" alt="not found"/>   */}
+          
       </div>
 
       <div className="col-lg-8">
