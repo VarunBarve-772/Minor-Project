@@ -24,6 +24,26 @@ const schema = yup.object().shape({
 
     const submitForm = (data) => {
         console.log(data);
+        fetch("http://127.0.0.1:8000/authentication/loginUser", {
+      
+            // Adding method type
+            method: "POST",
+            
+            // Adding body or contents to send
+            body: JSON.stringify(data),
+            
+            // Adding headers to the request
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+  
+        // Converting to JSON
+        .then(response => response.json())
+        
+        // Displaying results to console
+        .then(json => console.log(json));
+        
         history.push("/Home");
     }
 
@@ -42,7 +62,7 @@ const schema = yup.object().shape({
             <div className="form-group">
                 <label>Password</label>
                 <input type={passwordShown ? "text" : "password"} name="password" {...register('password')} className="form-control input-style" placeholder="Password..."/>
-                <span onClick={togglePasswordVisiblity}>Show Password   </span>
+                <span onClick={togglePasswordVisiblity}>Show Password</span>
                 <span>{ errors.password?.message }</span>
             </div>
 

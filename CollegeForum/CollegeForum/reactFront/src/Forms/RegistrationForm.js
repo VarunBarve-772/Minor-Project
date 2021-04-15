@@ -1,12 +1,12 @@
-import React,{ useState } from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import React,{ useState, useRef } from 'react';
+import {Link} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
 
 const schema = yup.object().shape({
     firstName: yup.string().min(2).max(50).matches(/^[A-Za-z]+((('|-|\.)?([A-Za-z])+))?$/, "Please Enter a Valid First Name").required("This Field is Required"),
-    lastName: yup.string().min(2).max(50).matches(/^[A-Za-z]+((('|-|\.)?([A-Za-z])+))?$/, "Please Enter a Valid LAst Name").required("This Field is Required"),
+    lastName: yup.string().min(2).max(50).matches(/^[A-Za-z]+((('|-|\.)?([A-Za-z])+))?$/, "Please Enter a Valid Last Name").required("This Field is Required"),
     enrollment: yup.string().min(12).max(20).required("This Field is Required"),
     email: yup.string().email("Please Enter a Valid Email").required("This Field is Required"),
     password: yup.string().min(8).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/).required("This Field is Required"),
@@ -14,12 +14,14 @@ const schema = yup.object().shape({
     mobile: yup.string().matches(/^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)$/, "Please Enter a Valid Mobile Number").required("This Field is Required"),
     institute: yup.string().max(100).matches(/^[a-zA-Z]+$/, "Please Enter a Valid Institute").required("This Field is Required"),
     year: yup.number().positive().integer().min(1).max(5).required("This Field is Required"),
-    // idCard: 
 })
 
 function Form() {
 
-    let history = useHistory();
+    // let history = useHistory();
+
+    const form = useRef(null)
+
 
     const [passwordShown, setPasswordShown] = useState(false);
     const togglePasswordVisiblity = () => {
@@ -31,15 +33,77 @@ function Form() {
         setConfirmPasswordShown(confirmPasswordShown ? false : true);
     };
 
+    const [idCardErrorMessage, setIdCardErrorMessage] = useState(false);
+
+    const checkFileFormat = function(fileList) {
+        let file = fileList[0];
+        if(file) {
+            if(file.type === "image/jpeg" || file.type === "image/jpg" || file.type === "image/png" || file.type === "application/pdf") {
+                setIdCardErrorMessage(' ')
+                return true;
+            } else {
+                setIdCardErrorMessage('Please Select Valid File Type Only!')
+                return false;
+            }
+        } else {
+            setIdCardErrorMessage('Please Select a File')
+            return false;
+        }
+        
+    }
+
+    const submitForm = async (data) => {
+        console.log(data);
+
+        if(checkFileFormat(data.idCard)) {
+            let file = data.idCard[0];
+            const base64File = await convertBase64(file);
+
+            data.idCard = base64File;
+
+            fetch("http://127.0.0.1:8000/authentication/registerUser", {
+      
+                // Adding method type
+                method: "POST",
+                
+                // Adding body or contents to send
+                body: JSON.stringify(data),
+                
+                // Adding headers to the request
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+      
+            // Converting to JSON
+            .then(response => response.json())
+            
+            // Displaying results to console
+            .then(json => console.log(json));
+        }
+        
+    }
+
+    const convertBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            };
+
+            fileReader.onerror = (error) => {
+                reject(error);
+            };
+        });
+    };
+
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     });
 
-    const submitForm = (data) => {
-        console.log(data);
-        history.push("/OTP");
-    }
-
+    
     return (
         <form onSubmit={handleSubmit(submitForm)}>
             <h3>Register Here!!</h3>
@@ -102,10 +166,10 @@ function Form() {
 
             <div className="id-div">
                 <label className="id-label">Id Card photo</label>
-                <input type="file" name="idCard" className="id" accept="image/*"/>
+                <input type="file" name="idCard" {...register('idCard')}/>
+                <span>{ idCardErrorMessage }</span>
             </div>
 
-            {/* <Link to="/OTP" type="submit" className="btn btn-dark btn-lg btn-block">Get OTP</Link>  */}
             <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
 
 
@@ -118,3 +182,43 @@ function Form() {
 }
 
 export default Form;
+
+// const submitForm = (data) => {
+//     console.log(data);
+//     const mydata = new FormData();
+//     let x;
+//     for (x in data) {
+//         // console.log(x);
+//         // console.log(data[x]);
+//         mydata.append(x, data[x]);
+//     }
+//     console.log(mydata);
+//     // console.log(mydata);
+//     // console.log("khbkfbv");
+//     if(checkFileFormat(data.idCard)) {
+//         fetch("http://127.0.0.1:8000/authentication/registerUser", {
+  
+//             // Adding method type
+//             method: "POST",
+            
+//             // Adding body or contents to send
+//             // body: JSON.stringify(data),
+//             body: mydata,
+//             // Adding headers to the request
+//             // headers: {
+//             //     "Content-type": "application/json; charset=UTF-8"
+//             // }
+//             headers: {
+//                 'content-type': 'multipart/form-data'
+//               }
+//         })
+
+//         // Converting to JSON
+//         .then(response => response.json())
+        
+//         // Displaying results to console
+//         .then(json => console.log(json));
+            
+//         // history.push("/OTP");
+//     }
+// }
