@@ -8,3 +8,4 @@ class CustomUser(AbstractUser):
     institute = models.CharField(max_length=80, null=True, blank=True)
     year = models.IntegerField(null=True, blank=True)
     image = models.ImageField(blank=True, null=True)
+    idCard = models.FileField(blank=True, null=True, upload_to='../static')

@@ -32,16 +32,7 @@ h3{
   text-align: center;
 }
 
-.input-otp{
-  width: 60px;
-  margin-right: 40px;
-}
 
-.otp-input-div{
-  padding-left: 100px;
-  padding-right: 100px;
-  margin-bottom: 20px;
-}
 
 .title{
   cursor: pointer;
@@ -56,11 +47,11 @@ h3{
 }
 
  /* havorthlogo img */
-.logo-img{
+/* .logo-img{
    height: 100px;
    width: 100px;
    border-radius: 100%;
-}
+} */
 
 /* Navigation bar */
 /* Style the links inside the navigation bar */
@@ -181,5 +172,21 @@ h3{
 {
   margin-left: 80px;
 }
-
-/* registration page */
+.otp-option
+{
+  margin-right:30px;
+}
+.smsCode {
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+  border: solid 1px #ccc;
+  box-shadow: 0 0 5px #ccc inset;
+  width:50%;
+  outline: none;
+  border-radius: 3px;
+}
+.otp-button
+{
+  margin-top: 20px;
+}
