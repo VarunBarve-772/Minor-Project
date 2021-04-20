@@ -12,16 +12,16 @@ const schema = yup.object().shape({
  function Login() {
        
     let history = useHistory();
-
     const [passwordShown, setPasswordShown] = useState(false);
-    const togglePasswordVisiblity = () => {
-        setPasswordShown(passwordShown ? false : true);
-    };
-
+    const [errorMessage, setErrorMessage]  = useState('');
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     });
 
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+    };
+    
     const submitForm = (data) => {
         console.log(data);
         fetch("http://127.0.0.1:8000/authentication/loginUser", {
@@ -42,9 +42,15 @@ const schema = yup.object().shape({
         .then(response => response.json())
         
         // Displaying results to console
-        .then(json => console.log(json));
+        .then(json => {
+            console.log(json);
+            if(json === 'valid') {
+                history.push("/Home");
+            } else {
+                setErrorMessage("Invalid Credentials")
+            }
+        });
         
-        history.push("/Home");
     }
 
     return(
@@ -66,6 +72,7 @@ const schema = yup.object().shape({
                     <span className="show-password" onClick={togglePasswordVisiblity}>Show Password</span>
                     <span>{ errors.password?.message }</span>
                 </div>
+                <span>{ errorMessage }</span>
 
                 {/* <Link className="btn btn-dark btn-lg btn-block" to="/Home">Login</Link> */}
                 <button type="submit" className="btn btn-dark btn-lg btn-block">Login</button>

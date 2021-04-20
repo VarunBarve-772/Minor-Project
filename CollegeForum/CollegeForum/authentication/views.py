@@ -25,12 +25,18 @@ def loginUser(request):
         data = request.body.decode('utf-8')
         userData = json.loads(data)
         user = authenticate(request, username=userData['enrollment'], password=userData['password'])
+        print(user)
         if user is None:
-            return JsonResponse('Invalid', safe=False)
-        # else:
-        #     login(request, user)
-        # showQues()
-    return JsonResponse('valid', safe=False)
+            resData = {
+                'response': "invalid"
+            }
+            return JsonResponse(resData)
+        else:
+            resData = {
+                'response': "valid"
+            }
+            # showQues()
+            return JsonResponse('valid', safe=False)
 
 @csrf_exempt
 def registerUser(request):
