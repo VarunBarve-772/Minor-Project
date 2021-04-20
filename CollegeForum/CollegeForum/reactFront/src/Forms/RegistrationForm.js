@@ -134,14 +134,14 @@ function Form() {
             <div className="form-group">
                 <label>Password</label>
                 <input type={passwordShown ? "text" : "password"} name="password" {...register('password')} className="form-control input-style" placeholder="Password..."/>
-                <span onClick={togglePasswordVisiblity}>Show Password</span>
+                <span className="show-password" onClick={togglePasswordVisiblity}>Show Password</span>
                 <span>{ errors.password?.message }</span>
             </div>
 
             <div className="form-group">
                 <label>Confirm Password</label>
                 <input type={confirmPasswordShown ? "text" : "password"} name="confirmPassword" {...register('confirmPassword')} className="form-control input-style" placeholder="Confirm Password..."/>
-                <span onClick={toggleConfirmPasswordVisiblity}>Show Password</span>
+                <span className="show-password" onClick={toggleConfirmPasswordVisiblity}>Show Password</span>
                 <span>{ errors.confirmPassword && "Passwords Should Match" }</span>
             </div>
 

@@ -4,7 +4,7 @@ import '../css/registration.css';
 
 function Register() {
     return(
-    <div>
+    <div className="container">
         <div className="card">
             <Form />
         </div>
