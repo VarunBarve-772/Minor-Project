@@ -11,4 +11,3 @@ def showQues():
         for a in ans:
             if(a.q_id.id==k.id):
                 print(a.a_content)
-
