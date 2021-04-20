@@ -17,19 +17,18 @@ otpValue = {
     'value': 0,
 }
 
-
 # Create your views here.
 @csrf_exempt
 def loginUser(request):
     if request.method == 'POST':  
-        data = request.body.decode('utf-8')
-        userData = json.loads(data)
-        user = authenticate(request, username=userData['enrollment'], password=userData['password'])
-        if user is None:
-            return JsonResponse('Invalid', safe=False)
+        # data = request.body.decode('utf-8')
+        # userData = json.loads(data)
+        # user = authenticate(request, username=userData['enrollment'], password=userData['password'])
+        # if user is None:
+        #     return JsonResponse('Invalid', safe=False)
         # else:
         #     login(request, user)
-        # showQues()
+        showQues()
     return JsonResponse('valid', safe=False)
 
 @csrf_exempt
