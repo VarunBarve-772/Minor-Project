@@ -1,42 +1,92 @@
 import React, { useState } from "react";
-import {Link} from 'react-router-dom';
-
+import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 function OTP() {
 
-    const [option, setOption] = useState("true");
-    const [option1, setOption1] = useState("");
-  function handleChange(event) {
-    const number = event.target.value;
-    const newValue = false;
-    setOption(newValue);
-    setOption1(number);
-  }
-    return(
-        <div>
-       {option?<div className="OTP-div">
- <h2>Account Verification!</h2>
-<h4>Get OTP on </h4>
-<button type="button" class="btn btn-primary otp-option" onClick={handleChange} value="Mobile phone">Mobile</button>
-<button type="button" class="btn btn-primary otp-option" onClick={handleChange} value="Email">Email</button>
-
-</div> :
- <div className="OTP-div">
-
-<h2>Account Verification!</h2>
-<h4> Enter the OTP we just send on your {option1}. </h4>
-
-<input type="text" className="smsCode" autoFocus="" maxlength="4" size="1" min="0" max="9" pattern="[0-9]{1}"/><br/>
-
-<Link to="/Home" className="btn btn-primary btn-lg otp-button">Verify</Link>
-{/* <button type="button" class="btn btn-primary otp-button">Verify</button> */}
-
-
-</div>} 
-        </div>
-       
-       
-    );
+  const [state, setState] = useState(true);
+  const [stateValue, setStateValue] = useState("");
+  const { register, handleSubmit } = useForm();
+  const history = useHistory();
+  const [otpError, setOtpError] = useState('');
   
+  function handleChange(event) {
+    const newStateValue = event.target.value;
+    getOTP(newStateValue);
+    const newState = false;
+    setState(newState);
+    setStateValue(newStateValue);
+  }
+
+  const getOTP = function(whereToOTP) {
+    console.log(whereToOTP)
+    fetch(`http://127.0.0.1:8000/authentication/OTP?otpDes=${whereToOTP}`)
+  
+        // Converting to JSON
+        .then(response => response.json())
+        
+        // Displaying results to console
+        .then(json => console.log(json));
+
+  }
+
+  const onSubmitOTP = function(data) {
+    fetch("http://127.0.0.1:8000/authentication/OTP", {
+      
+            // Adding method type
+            method: "POST",
+            
+            // Adding body or contents to send
+            body: JSON.stringify(data),
+            
+            // Adding headers to the request
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+  
+        // Converting to JSON
+        .then(response => response.json())
+        
+        // Displaying results to console
+        .then(json => {
+          console.log(json)
+          if(json['result'] === 'valid') {
+            history.push('/Home');
+          }else {
+            console.log('invalid');
+            setOtpError('Invalid OTP');
+          }
+        });
+
+  }
+
+    return(
+      <div>
+        {state
+          ?
+          <div className="OTP-div">
+            <h2>Account Verification!</h2>
+            <h4>Get OTP on </h4>
+            <button type="button" className="btn btn-primary otp-option" onClick={handleChange} value="Mobile phone">Mobile</button>
+            <button type="button" className="btn btn-primary otp-option" onClick={handleChange} value="Email">Email</button>
+
+          </div> 
+          :
+          <div className="OTP-div">
+
+            <h2>Account Verification!</h2>
+            <h4> Enter the OTP we just send on your {stateValue}. </h4>
+            
+            <form onSubmit={handleSubmit(onSubmitOTP)}>
+              <input type="text" name="otpValue" {...register('otpValue')} className="smsCode" autoFocus="" maxLength="4" size="1" min="0" max="9" pattern="[0-9]{4}"/><br/>
+              <span>{ otpError }</span>
+
+              {/* <Link to="/Home" className="btn btn-primary btn-lg otp-button">Verify</Link> */}
+              <button type="submit" className="btn btn-primary otp-button">Verify</button>
+            </form>
+          </div>} 
+      </div>       
+    );
 }
 export default OTP;

@@ -7,33 +7,64 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import CustomUser
 from django.core.files.base import ContentFile
 from django.contrib.auth import login, authenticate
+from .OTP import otp
+
+userOTPData = {
+    'email': '',
+    'mobile': '',
+}
+otpValue = {
+    'value': 0,
+}
+
 
 # Create your views here.
 @csrf_exempt
 def loginUser(request):
     if request.method == 'POST':  
-        # data = request.body.decode('utf-8')
-        # a = json.loads(data)
-        # user = authenticate(request, username=a['enrollment'], password=a['password'])
-        # if user is None:
-        #     return JsonResponse('Invalid', safe=False)
+        data = request.body.decode('utf-8')
+        userData = json.loads(data)
+        user = authenticate(request, username=userData['enrollment'], password=userData['password'])
+        if user is None:
+            return JsonResponse('Invalid', safe=False)
         # else:
         #     login(request, user)
-        showQues()
+        # showQues()
     return JsonResponse('valid', safe=False)
 
 @csrf_exempt
 def registerUser(request):
     if request.method == 'POST':  
         data = request.body.decode('utf-8')
-        a = json.loads(data)
-        idCardFile = base64.b64decode(a['idCard'], altchars=None, validate=False)
-        print("type of a[idCard]: ", type(a['idCard']))
-        print("type of idCardFile: ", type(idCardFile))
-        # user = CustomUser.objects.create_user(first_name=a['firstName'], last_name=a['lastName'], email=a['email'], password=a['password'], enrollment=a['enrollment'], mobile=a['mobile'], institute=a['institute'], year=a['year'], idCard=idCardFile, username=a['enrollment'])
-        # user.save()
-        
-        decodeit = open('t.jpeg', 'w')
-        decodeit.write(a['idCard'])
-        decodeit.close()
-    return JsonResponse('anything', safe=False)
+        userData = json.loads(data)
+        user = CustomUser.objects.create_user(first_name=userData['firstName'], last_name=userData['lastName'], email=userData['email'], password=userData['password'], username=userData['enrollment'], mobile=userData['mobile'], institute=userData['institute'], year=userData['year'], idCardString=userData['idCard'])
+        user.save()
+        userOTPData['email'] = userData['email']
+        userOTPData['mobile'] = userData['mobile']
+        resData = {
+            'response': "all good"
+        }
+        return JsonResponse(resData)
+
+@csrf_exempt
+def OTP(request):
+    print(otpValue)
+    if request.method == 'GET':
+        whereToOtp = request.GET.get('otpDes')
+        if whereToOtp == 'Email':
+            print(userOTPData['email'])
+            otpValue['value'] = otp.sendEmail(userOTPData['email'])
+            return JsonResponse('otp sent', safe=False)    
+    elif request.method == 'POST':
+        data = request.body.decode('utf-8')
+        userOTP = json.loads(data)
+        if otpValue['value'] == int(userOTP['otpValue']):
+            resData = {
+                'result': 'valid'
+            }
+            return JsonResponse(resData)
+        else:
+            resData = {
+                'result': 'invalid'
+            }
+            return JsonResponse(resData)

@@ -1,27 +1,24 @@
-import React,{ useState, useRef } from 'react';
-import {Link} from 'react-router-dom';
+import React,{ useState } from 'react';
+import {Link, useHistory} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
 
 const schema = yup.object().shape({
-    // firstName: yup.string().min(2).max(50).matches(/^[A-Za-z]+((('|-|\.)?([A-Za-z])+))?$/, "Please Enter a Valid First Name").required("This Field is Required"),
-    // lastName: yup.string().min(2).max(50).matches(/^[A-Za-z]+((('|-|\.)?([A-Za-z])+))?$/, "Please Enter a Valid Last Name").required("This Field is Required"),
-    // enrollment: yup.string().min(12).max(20).required("This Field is Required"),
-    // email: yup.string().email("Please Enter a Valid Email").required("This Field is Required"),
-    // password: yup.string().min(8).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/).required("This Field is Required"),
-    // confirmPassword: yup.string().oneOf([yup.ref("password"), null]),
-    // mobile: yup.string().matches(/^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)$/, "Please Enter a Valid Mobile Number").required("This Field is Required"),
-    // institute: yup.string().max(100).matches(/^[a-zA-Z]+$/, "Please Enter a Valid Institute").required("This Field is Required"),
+    firstName: yup.string().min(2).max(50).matches(/^[A-Za-z]+((('|-|\.)?([A-Za-z])+))?$/, "Please Enter a Valid First Name").required("This Field is Required"),
+    lastName: yup.string().min(2).max(50).matches(/^[A-Za-z]+((('|-|\.)?([A-Za-z])+))?$/, "Please Enter a Valid Last Name").required("This Field is Required"),
+    enrollment: yup.string().min(12).max(20).required("This Field is Required"),
+    email: yup.string().email("Please Enter a Valid Email").required("This Field is Required"),
+    password: yup.string().min(8).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/).required("This Field is Required"),
+    confirmPassword: yup.string().oneOf([yup.ref("password"), null]),
+    mobile: yup.string().matches(/^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)$/, "Please Enter a Valid Mobile Number").required("This Field is Required"),
+    institute: yup.string().max(100).matches(/^[a-zA-Z]+$/, "Please Enter a Valid Institute").required("This Field is Required"),
     year: yup.number().positive().integer().min(1).max(5).required("This Field is Required"),
 })
 
 function Form() {
 
-    // let history = useHistory();
-
-    const form = useRef(null)
-
+    const history = useHistory();
 
     const [passwordShown, setPasswordShown] = useState(false);
     const togglePasswordVisiblity = () => {
@@ -80,6 +77,8 @@ function Form() {
             
             // Displaying results to console
             .then(json => console.log(json));
+
+            history.push('/OTP');
         }
         
     }
@@ -182,43 +181,3 @@ function Form() {
 }
 
 export default Form;
-
-// const submitForm = (data) => {
-//     console.log(data);
-//     const mydata = new FormData();
-//     let x;
-//     for (x in data) {
-//         // console.log(x);
-//         // console.log(data[x]);
-//         mydata.append(x, data[x]);
-//     }
-//     console.log(mydata);
-//     // console.log(mydata);
-//     // console.log("khbkfbv");
-//     if(checkFileFormat(data.idCard)) {
-//         fetch("http://127.0.0.1:8000/authentication/registerUser", {
-  
-//             // Adding method type
-//             method: "POST",
-            
-//             // Adding body or contents to send
-//             // body: JSON.stringify(data),
-//             body: mydata,
-//             // Adding headers to the request
-//             // headers: {
-//             //     "Content-type": "application/json; charset=UTF-8"
-//             // }
-//             headers: {
-//                 'content-type': 'multipart/form-data'
-//               }
-//         })
-
-//         // Converting to JSON
-//         .then(response => response.json())
-        
-//         // Displaying results to console
-//         .then(json => console.log(json));
-            
-//         // history.push("/OTP");
-//     }
-// }

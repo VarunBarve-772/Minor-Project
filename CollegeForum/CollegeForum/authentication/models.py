@@ -7,4 +7,4 @@ class CustomUser(AbstractUser):
     mobile = models.IntegerField(null=True, blank=True)
     institute = models.CharField(max_length=80, null=True, blank=True)
     year = models.IntegerField(null=True, blank=True)
-    idcardstring = models.TextField(blank=True, null=True)
+    idCardString = models.TextField(blank=True, null=True)
