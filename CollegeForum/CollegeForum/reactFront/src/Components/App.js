@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import {Route} from 'react-router-dom';
 import Register from './Register';
 import Login from './Login';
@@ -12,18 +12,62 @@ import Front from "./front";
 // import Update from './Update';
 // import Questions from './Questions';
 function App() {
+
+    const setUserSession = () => {
+        if(sessionStorage.getItem('userId')) {
+            return sessionStorage.getItem('userId');
+        } else {
+            return '';
+        }
+    }
+
+    const[userId, setUserId] = useState(setUserSession);
+    const[tempUserId, setTempUserId] = useState('');
   
 return( 
     <div>
-        <Route exact path="/" component= {Front}/>
-    
-        <Route  path="/Login" component= {Login}/>
-        <Route  path="/Signin" component= {Register}/>
-        <Route  path="/Home" component= {Home}/>
-        <Route  path="/OTP" component= {OTP}/> 
-        <Route  path="/AboutUs" component= {About}/> 
-        <Route  path="/ContactUS" component= {Contact}/> 
-        <Route  path="/AskQuestion" component= {Aques}/> 
+        { userId 
+            ?
+            <div>
+                <Route exact path="/" component= {Front}/>        
+                <Route  path="/AboutUs" component= {About}/> 
+                <Route  path="/ContactUS" component= {Contact}/> 
+                <Route  path="/AskQuestion" component= {Aques}/> 
+
+                <Route  path="/Login" render={() => (
+                    <Login setUserId={setUserId}/>
+                )}/>
+
+                <Route  path="/Home" render={() => (
+                    <Home setUserId={setUserId}/>
+                )}/>
+
+                <Route  path="/Signin" render={() => (
+                    <Register setTempUserId={setTempUserId}/>
+                )}/>  
+
+                <Route  path="/OTP" render={() => (
+                    <OTP tempUserId={tempUserId}/>
+                )}/>  
+                          
+            </div>
+            :
+            <div>
+                <Route exact path="/" component= {Front}/> 
+                
+                <Route  path="/Login" render={() => (
+                    <Login setUserId={setUserId}/>
+                )}/>
+
+                <Route  path="/Signin" render={() => (
+                    <Register setTempUserId={setTempUserId}/>
+                )}/>  
+
+                <Route  path="/OTP" render={() => (
+                    <OTP tempUserId={tempUserId} setUserId={setUserId}/>
+                )}/>
+            </div>    
+            }
     </div>
 );
 

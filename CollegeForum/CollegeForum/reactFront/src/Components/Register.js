@@ -2,11 +2,11 @@ import React from 'react';
 import Form from '../Forms/RegistrationForm';
 import '../css/registration.css';
 
-function Register() {
+function Register(props) {
     return(
     <div className="container">
         <div className="card">
-            <Form />
+            <Form setTempUserId={props.setTempUserId} />
         </div>
     </div>
     )

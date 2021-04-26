@@ -9,7 +9,7 @@ const schema = yup.object().shape({
     password: yup.string().required("This Field is Required"),
 })
 
- function Login() {
+function Login(props) {
        
     let history = useHistory();
     const [passwordShown, setPasswordShown] = useState(false);
@@ -44,7 +44,9 @@ const schema = yup.object().shape({
         // Displaying results to console
         .then(json => {
             console.log(json);
-            if(json === 'valid') {
+            if(json['response'] === 'valid') {
+                props.setUserId(data['enrollment']);
+                sessionStorage.setItem('userId', JSON.stringify(data['enrollment']));
                 history.push("/Home");
             } else {
                 setErrorMessage("Invalid Credentials")

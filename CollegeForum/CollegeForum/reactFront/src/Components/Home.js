@@ -1,7 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 // import poster from "./Images/logo.png";
-function Home() {
+function Home(props) {
+
+  let history = useHistory();
+
+  const userLogout = () => {
+    props.setUserId('');
+    sessionStorage.clear();
+    history.push('/');
+  }
+
     return(
 <div className="">
 
@@ -20,7 +29,8 @@ function Home() {
             <Link to="/ContactUs">Contact Us</Link>
             <Link to="/AboutUs">About Us</Link>
             <Link to="#something">Profile</Link>
-            <Link to="/Login">Logout</Link>
+            <button onClick={userLogout}>Logout</button>
+            {/* <Link to="/Login">Logout</Link> */}
           </div>
         </div>
       </div>

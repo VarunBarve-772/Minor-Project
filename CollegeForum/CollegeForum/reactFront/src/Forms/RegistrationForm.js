@@ -16,7 +16,7 @@ const schema = yup.object().shape({
     year: yup.number().positive().integer().min(1).max(5).required("This Field is Required"),
 })
 
-function Form() {
+function Form(props) {
 
     const history = useHistory();
 
@@ -78,6 +78,7 @@ function Form() {
             // Displaying results to console
             .then(json => console.log(json));
 
+            props.setTempUserId(data['enrollment']);
             history.push('/OTP');
         }
         

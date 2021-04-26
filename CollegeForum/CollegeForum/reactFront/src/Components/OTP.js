@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-function OTP() {
+function OTP(props) {
 
   const [state, setState] = useState(true);
   const [stateValue, setStateValue] = useState("");
@@ -52,6 +52,8 @@ function OTP() {
         .then(json => {
           console.log(json)
           if(json['result'] === 'valid') {
+            props.setUserId(props.tempUserId);
+            sessionStorage.setItem('userId', JSON.stringify(props.tempUserId));
             history.push('/Home');
           }else {
             console.log('invalid');

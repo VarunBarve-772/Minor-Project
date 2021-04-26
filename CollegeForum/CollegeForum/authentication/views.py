@@ -34,8 +34,9 @@ def loginUser(request):
             resData = {
                 'response': "valid"
             }
-        showQues()
-        return JsonResponse('valid', safe=False)
+            return JsonResponse(resData)
+
+        # showQues()
 
 @csrf_exempt
 def registerUser(request):
