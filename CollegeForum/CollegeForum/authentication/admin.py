@@ -16,7 +16,7 @@ class CustomUserAdmin(UserAdmin):
                     'mobile',
                     'institute',
                     'year',
-                    'idcardstring',
+                    'idCardString',
                 )
             }
         )

@@ -1,0 +1,17 @@
+.send_btn{
+    background-color: #3AAFA9;
+    padding: 12px 150px;
+    color: #17242A;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+    cursor: pointer;
+    border: 3px solid #17242A;
+}
+
+form{
+    /* border: none; */
+}
+
+textarea{
+    font-weight: 500;
+}

@@ -3,6 +3,7 @@ import {Link, useHistory} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
+import '../css/registration.css';
 
 const schema = yup.object().shape({
     enrollment: yup.string().required("This Field is Required"),
@@ -77,8 +78,10 @@ function Login(props) {
                 <span>{ errorMessage }</span>
 
                 {/* <Link className="btn btn-dark btn-lg btn-block" to="/Home">Login</Link> */}
-                <button type="submit" className="btn btn-dark btn-lg btn-block">Login</button>
-                
+                <center>
+                    <button type="submit" className="register-btn">Login</button>
+                </center>
+
                 <p className="text-right">
                     <Link to="/Signin">Create Account</Link>
                     {/* <a href="">Create Account?</a> */}

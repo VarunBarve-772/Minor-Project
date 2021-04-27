@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import '../css/Home.css';
 // import poster from "./Images/logo.png";
 function Home(props) {
 
@@ -12,7 +13,7 @@ function Home(props) {
   }
 
     return(
-<div className="">
+<div>
 
   <div className="sec-1" >
     <div className="row">
@@ -25,10 +26,10 @@ function Home(props) {
       <div className="col-lg-8">
         <div className="topnav">
           <div className="topnav-right" >
-            <Link to="/AskQuestion">Ask A Question</Link>
-            <Link to="/ContactUs">Contact Us</Link>
-            <Link to="/AboutUs">About Us</Link>
-            <Link to="#something">Profile</Link>
+            <Link className="ask" to="/AskQuestion">Ask a question</Link>
+            <Link className="a" to="/ContactUs">Contact Us</Link>
+            <Link className="a" to="/AboutUs">About Us</Link>
+            <Link className="a" to="#something">Profile</Link>
             <button onClick={userLogout}>Logout</button>
             {/* <Link to="/Login">Logout</Link> */}
           </div>
@@ -38,7 +39,7 @@ function Home(props) {
   </div>
 
   <div className="sec-2">
-    <div className="row">
+    <div className="row rowsec2">
       <div className="col-sm-2 sec-2-col text-center">
         <a href="#general" >General</a>
       </div>

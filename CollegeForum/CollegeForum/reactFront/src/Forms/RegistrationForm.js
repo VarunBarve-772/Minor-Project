@@ -3,6 +3,7 @@ import {Link, useHistory} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
+import '../css/registration.css';
 
 const schema = yup.object().shape({
     firstName: yup.string().min(2).max(50).matches(/^[A-Za-z]+((('|-|\.)?([A-Za-z])+))?$/, "Please Enter a Valid First Name").required("This Field is Required"),
@@ -136,14 +137,14 @@ function Form(props) {
                 <label>Password</label>
                 <input type={passwordShown ? "text" : "password"} name="password" {...register('password')} className="form-control input-style" placeholder="Password..."/>
                 <span className="show-password" onClick={togglePasswordVisiblity}>Show Password</span>
-                <span>{ errors.password?.message }</span>
+                <span>  { errors.password?.message }</span>
             </div>
 
             <div className="form-group">
                 <label>Confirm Password</label>
                 <input type={confirmPasswordShown ? "text" : "password"} name="confirmPassword" {...register('confirmPassword')} className="form-control input-style" placeholder="Confirm Password..."/>
                 <span className="show-password" onClick={toggleConfirmPasswordVisiblity}>Show Password</span>
-                <span>{ errors.confirmPassword && "Passwords Should Match" }</span>
+                <span>  { errors.confirmPassword && "Passwords should match" }</span>
             </div>
 
             <div className="form-group">
@@ -161,7 +162,7 @@ function Form(props) {
             <div className="form-group">
                 <label>Year</label>
                 <input type="text" name="year" {...register('year')} className="form-control input-style" placeholder="Year..."/>
-                <span>{ errors.year?.message }</span>
+                <span>{ errors.year && "This must be a number" }</span>
             </div>
 
             <div className="id-div">
@@ -170,8 +171,9 @@ function Form(props) {
                 <span>{ idCardErrorMessage }</span>
             </div>
 
-            <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
-
+            <center>
+                <button type="submit" className="btn btn-center register-btn">Register</button>
+            </center>
 
             <p className="text-right">
                 Already registered? 
