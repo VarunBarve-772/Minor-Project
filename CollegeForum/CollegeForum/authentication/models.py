@@ -8,3 +8,6 @@ class CustomUser(AbstractUser):
     institute = models.CharField(max_length=80, null=True, blank=True)
     year = models.IntegerField(null=True, blank=True)
     idCardString = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.first_name
