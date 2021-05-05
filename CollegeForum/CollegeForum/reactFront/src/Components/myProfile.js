@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 function Myprofile() {
     
-    const [option, setOption] = useState(false);
+    const [option, setOption] = useState(true);
     const [option1, setOption1] = useState(false);
     
   function Click() {
@@ -26,10 +26,10 @@ function Myprofile() {
         <div className="left-profile">
 <h4>My profile</h4>
 <div className="profile-a">
-<a className="" href="#" onClick={Click}>Edit Profile</a><br/>
+<p className="" onClick={Click}>Edit Profile</p><br/>
 </div>
 <div className="profile-a">
-<a className="" href="#" onClick={Click1}>Change Password</a>
+<p className="" onClick={Click1}>Change Password</p>
 
 </div>
 

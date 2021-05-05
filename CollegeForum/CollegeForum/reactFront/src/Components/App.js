@@ -8,6 +8,7 @@ import About from "./About-us";
 import Contact from "./Contact-us";
 import Aques from "./Askques";
 import Front from "./front";
+import Myprofile from "./myProfile";
 
 // import Update from './Update';
 // import Questions from './Questions';
@@ -33,6 +34,7 @@ return(
                 <Route  path="/AboutUs" component= {About}/> 
                 <Route  path="/ContactUS" component= {Contact}/> 
                 <Route  path="/AskQuestion" component= {Aques}/> 
+                <Route  path="/Profile" component= {Myprofile}/> 
 
                 <Route  path="/Login" render={() => (
                     <Login setUserId={setUserId}/>

@@ -29,7 +29,7 @@ function Home(props) {
             <Link className="ask" to="/AskQuestion">Ask a question</Link>
             <Link className="a" to="/ContactUs">Contact Us</Link>
             <Link className="a" to="/AboutUs">About Us</Link>
-            <Link className="a" to="#something">Profile</Link>
+            <Link className="a" to="/Profile">Profile</Link>
             <button onClick={userLogout}>Logout</button>
             {/* <Link to="/Login">Logout</Link> */}
           </div>
