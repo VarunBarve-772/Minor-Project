@@ -1,6 +1,6 @@
 import React,{ useState } from 'react';
 import {Route} from 'react-router-dom';
-import Register from './Register';
+import Register from './RegisterUser/Register';
 import Login from './Login';
 import OTP from './OTP';
 import Home from './Home';
@@ -8,7 +8,7 @@ import About from "./About-us";
 import Contact from "./Contact-us";
 import Aques from "./Askques";
 import Front from "./front";
-import Myprofile from "./myProfile";
+import Profile from "./Profile/Profile";
 
 // import Update from './Update';
 // import Questions from './Questions';
@@ -34,7 +34,7 @@ return(
                 <Route  path="/AboutUs" component= {About}/> 
                 <Route  path="/ContactUS" component= {Contact}/> 
                 <Route  path="/AskQuestion" component= {Aques}/> 
-                <Route  path="/Profile" component= {Myprofile}/> 
+                <Route  path="/Profile" component= {Profile}/> 
 
                 <Route  path="/Login" render={() => (
                     <Login setUserId={setUserId}/>

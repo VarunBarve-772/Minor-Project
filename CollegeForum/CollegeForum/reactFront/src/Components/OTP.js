@@ -19,7 +19,6 @@ function OTP(props) {
   }
 
   const getOTP = function(whereToOTP) {
-    console.log(whereToOTP)
     fetch(`http://127.0.0.1:8000/authentication/OTP?otpDes=${whereToOTP}`)
   
         // Converting to JSON
@@ -50,13 +49,11 @@ function OTP(props) {
         
         // Displaying results to console
         .then(json => {
-          console.log(json)
           if(json['result'] === 'valid') {
             props.setUserId(props.tempUserId);
             sessionStorage.setItem('userId', JSON.stringify(props.tempUserId));
             history.push('/Home');
           }else {
-            console.log('invalid');
             setOtpError('Invalid OTP');
           }
         });

@@ -24,7 +24,6 @@ function Login(props) {
     };
     
     const submitForm = (data) => {
-        console.log(data);
         fetch("http://127.0.0.1:8000/authentication/loginUser", {
       
             // Adding method type
@@ -44,10 +43,10 @@ function Login(props) {
         
         // Displaying results to console
         .then(json => {
-            console.log(json);
             if(json['response'] === 'valid') {
                 props.setUserId(data['enrollment']);
                 sessionStorage.setItem('userId', JSON.stringify(data['enrollment']));
+                sessionStorage.setItem('pass', JSON.stringify(btoa(data['password'])));
                 history.push("/Home");
             } else {
                 setErrorMessage("Invalid Credentials")

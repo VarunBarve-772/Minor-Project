@@ -3,18 +3,19 @@ import {Link, useHistory} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
-import '../css/registration.css';
+// import 'CollegeForum/CollegeForum/reactFront/src/css/registration.css'
+import '../../css/registration.css'
 
 const schema = yup.object().shape({
-    firstName: yup.string().min(2).max(50).matches(/^[A-Za-z]+((('|-|\.)?([A-Za-z])+))?$/, "Please Enter a Valid First Name").required("This Field is Required"),
-    lastName: yup.string().min(2).max(50).matches(/^[A-Za-z]+((('|-|\.)?([A-Za-z])+))?$/, "Please Enter a Valid Last Name").required("This Field is Required"),
-    enrollment: yup.string().min(12).max(20).required("This Field is Required"),
-    email: yup.string().email("Please Enter a Valid Email").required("This Field is Required"),
-    password: yup.string().min(8).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/).required("This Field is Required"),
+    firstName: yup.string().required("This Field is Required").min(2).max(50).matches(/^[A-Za-z]+((('|-|\.)?([A-Za-z])+))?$/, "Please Enter a Valid First Name"),
+    lastName: yup.string().required("This Field is Required").min(2).max(50).matches(/^[A-Za-z]+((('|-|\.)?([A-Za-z])+))?$/, "Please Enter a Valid Last Name"),
+    enrollment: yup.string().required("This Field is Required").min(12).max(20),
+    email: yup.string().email("Please Enter a Valid Email"),
+    password: yup.string().required("This Field is Required").min(8).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,"Please Enter a Valid Password"),
     confirmPassword: yup.string().oneOf([yup.ref("password"), null]),
-    mobile: yup.string().matches(/^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)$/, "Please Enter a Valid Mobile Number").required("This Field is Required"),
-    institute: yup.string().max(100).matches(/^[a-zA-Z]+$/, "Please Enter a Valid Institute").required("This Field is Required"),
-    year: yup.number().positive().integer().min(1).max(5).required("This Field is Required"),
+    mobile: yup.string().required("This Field is Required").matches(/^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)$/, "Please Enter a Valid Mobile Number"),
+    institute: yup.string().required("This Field is Required").max(100).matches(/^[a-zA-Z]+$/, "Please Enter a Valid Institute"),
+    year: yup.number().required("This Field is Required").positive().integer().min(1).max(5),
 })
 
 function Form(props) {
@@ -51,8 +52,6 @@ function Form(props) {
     }
 
     const submitForm = async (data) => {
-        console.log(data);
-
         if(checkFileFormat(data.idCard)) {
             let file = data.idCard[0];
             const base64File = await convertBase64(file);

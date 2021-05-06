@@ -1,12 +1,10 @@
-from django.shortcuts import render
-import json
-import base64
-from qna.views import showQues 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate
+import json
+from qna.models import Questions
+# from qna.views import showQues 
 from .models import CustomUser
-from django.core.files.base import ContentFile
-from django.contrib.auth import login, authenticate
 from .OTP import otp
 
 userOTPData = {
@@ -16,21 +14,23 @@ userOTPData = {
 otpValue = {
     'value': 0,
 }
+userInfo = {
+    'username': ''
+}
 
-# Create your views here.
 @csrf_exempt
 def loginUser(request):
     if request.method == 'POST':  
         data = request.body.decode('utf-8')
         userData = json.loads(data)
         user = authenticate(request, username=userData['enrollment'], password=userData['password'])
-        print(user)
         if user is None:
             resData = {
                 'response': "invalid"
             }
             return JsonResponse(resData)
         else:
+            userInfo['username'] = user.username
             resData = {
                 'response': "valid"
             }
@@ -58,7 +58,6 @@ def OTP(request):
     if request.method == 'GET':
         whereToOtp = request.GET.get('otpDes')
         if whereToOtp == 'Email':
-            print(userOTPData['email'])
             otpValue['value'] = otp.sendEmail(userOTPData['email'])
             return JsonResponse('otp sent', safe=False)    
     elif request.method == 'POST':
@@ -74,3 +73,43 @@ def OTP(request):
                 'result': 'invalid'
             }
             return JsonResponse(resData)
+
+
+@csrf_exempt
+def updateProfile(request):
+    if request.method == 'GET':
+        user = CustomUser.objects.get(username__contains=userInfo['username'])
+        resData = {
+            'email': user.email,
+            'mobile': user.mobile,
+            'year': user.year 
+        }
+        return JsonResponse(resData)
+    if request.method == 'POST':
+        data = request.body.decode('utf-8')
+        userData = json.loads(data)
+        user = CustomUser.objects.get(username__contains=userInfo['username'])
+        user.email = userData['email']
+        user.mobile = userData['mobile']
+        user.year = userData['year']
+        user.save()
+        resData = {
+            'email': user.email,
+            'mobile': user.mobile,
+            'year': user.year 
+        }
+        return JsonResponse(resData)
+
+@csrf_exempt
+def changePassword(request):
+    if request.method == 'POST':
+        data = request.body.decode('utf-8')
+        userData = json.loads(data)  
+        user = CustomUser.objects.get(username__contains=userInfo['username'])
+        user.password = user.set_password(str(userData['password']))
+        print(user.password)
+        user.save()
+        resData = {
+            'response': 'Password Updated'
+        }
+        return JsonResponse(resData)

@@ -1,6 +1,8 @@
 import React from 'react';
-import Form from '../Forms/RegistrationForm';
-import '../css/registration.css';
+import Form from './RegistrationForm';
+// import 'src/css/registration.css';
+import '../../css/registration.css'
+// import 'CollegeForum/CollegeForum/reactFront/src/css/registration.css'
 
 function Register(props) {
     return(
