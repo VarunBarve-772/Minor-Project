@@ -36,8 +36,6 @@ def loginUser(request):
             }
             return JsonResponse(resData)
 
-        # showQues()
-
 @csrf_exempt
 def registerUser(request):
     if request.method == 'POST':  
