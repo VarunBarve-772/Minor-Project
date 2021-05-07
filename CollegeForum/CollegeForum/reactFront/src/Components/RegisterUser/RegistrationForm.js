@@ -176,7 +176,7 @@ function Form(props) {
 
             <p className="text-right">
                 Already registered? 
-                <Link to='/Login'>Login</Link>
+                <Link to='/Login'> Login</Link>
             </p>
         </form>
     )

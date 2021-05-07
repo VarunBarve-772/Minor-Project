@@ -8,8 +8,19 @@
     border-radius: 0;
     border: none;
     border-bottom: 2px solid #17242A;
+    height: 40px;
     padding: 0;
     margin-top: 0.8%;
+}
+
+a{
+    text-decoration: none;
+    color: #3AAFA9;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #3AAFA9;
 }
 
 .form-group{
@@ -122,8 +133,8 @@ button:active.register-btn:after {
 form{
     border: 3px solid #17242A;
     padding-top: 40px;
-    padding-left: 90px;
-    padding-right: 90px;
+    padding-left: 150px;
+    padding-right: 150px;
     padding-bottom: 70px;
     margin-bottom: 50px;
 }
@@ -135,11 +146,6 @@ form{
 h3{
     margin-bottom: 20px;
     color: #17242A;
-}
-
-span{
-    color: #3AAFA9;
-    opacity: 0.75;
 }
 
 label{

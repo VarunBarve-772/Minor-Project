@@ -5,7 +5,7 @@ import '../css/Askques.css';
 
 function Aques() {
 
-    return(
+return(
         <div className="askcard">       
             <img className="img-ask" src={ask1} alt="Please type your question below."/>
             <div className="form-group">
@@ -30,7 +30,7 @@ function Aques() {
                 </div>
             </div>
         </div>
-    );
+);
 }
 
 export default Aques;
