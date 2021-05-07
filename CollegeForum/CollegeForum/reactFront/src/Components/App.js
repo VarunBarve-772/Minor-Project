@@ -6,7 +6,7 @@ import OTP from './OTP';
 import Home from './Home';
 import About from "./About-us";
 import Contact from "./Contact-us";
-import Aques from "./Askques";
+import Aques from "./Question/Askques";
 import Front from "./front";
 import Profile from "./Profile/Profile";
 
