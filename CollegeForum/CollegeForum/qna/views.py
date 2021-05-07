@@ -4,6 +4,7 @@ from authentication.models import CustomUser
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+from authentication.views import userInfo
 import json
 
 @csrf_exempt
@@ -12,6 +13,7 @@ def showQues(request):
         lists = []
 
         data = request.body.decode('utf-8')
+        body = json.loads(data)
         index = data.index("=")+1
         kept_data = data[index:]
 
@@ -32,4 +34,27 @@ def showQues(request):
             lists.append(main_dict)
 
     response = {"questions":lists}
+    return JsonResponse(response, safe=False)
+
+@csrf_exempt
+def addQues(request):
+    if request.method == 'POST':
+        data = request.body.decode('utf-8')
+        body = json.loads(data)
+
+        user = CustomUser.objects.get(username__contains=userInfo['username'])
+
+        print("content: ", body['content'])
+        print("category: ", body['category'])
+        full_name = user.first_name+" "+user.last_name
+
+        question = Questions(full_name=full_name, content=body['content'], category=body['category'])
+        question.save()
+
+    response = {
+                "content":body['content'],
+                "category":body['category'],
+                "name": full_name
+                }
+
     return JsonResponse(response, safe=False)
