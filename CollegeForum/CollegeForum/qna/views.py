@@ -1,9 +1,9 @@
-from django.shortcuts import render
+# from django.shortcuts import render
 from .models import Questions
 from authentication.models import CustomUser
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from authentication.views import userInfo
 import json
 
@@ -14,10 +14,8 @@ def showQues(request):
 
         data = request.body.decode('utf-8')
         body = json.loads(data)
-        index = data.index("=")+1
-        kept_data = data[index:]
 
-        questions = list(Questions.objects.filter(category__startswith=kept_data))
+        questions = list(Questions.objects.filter(category__startswith=body['category']))
         print(questions)
 
         for question in questions:
@@ -38,23 +36,22 @@ def showQues(request):
 
 @csrf_exempt
 def addQues(request):
+    if request.method == "GET":
+        resData = {
+            "response": "Invalid Request"
+        }
     if request.method == 'POST':
         data = request.body.decode('utf-8')
         body = json.loads(data)
 
         user = CustomUser.objects.get(username__contains=userInfo['username'])
-
-        print("content: ", body['content'])
-        print("category: ", body['category'])
         full_name = user.first_name+" "+user.last_name
 
         question = Questions(full_name=full_name, content=body['content'], category=body['category'])
         question.save()
 
-    response = {
-                "content":body['content'],
-                "category":body['category'],
-                "name": full_name
-                }
+        resData = {
+            "response": "Question Added"
+        }
 
-    return JsonResponse(response, safe=False)
+        return JsonResponse(resData)
