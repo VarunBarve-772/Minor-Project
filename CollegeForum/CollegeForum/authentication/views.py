@@ -111,3 +111,17 @@ def changePassword(request):
             'response': 'Password Updated'
         }
         return JsonResponse(resData)
+
+@csrf_exempt
+def viewProfile(request):
+    user = CustomUser.objects.get(username__contains=userInfo['username'])
+    resData = {
+        'firstName': user.first_name,
+        'lastName': user.last_name,
+        'email': user.email,
+        'enrollment': user.username,
+        'mobile': user.mobile,
+        'institute': user.institute,
+        'year': user.year,
+    }
+    return JsonResponse(resData)
