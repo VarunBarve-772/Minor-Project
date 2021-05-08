@@ -36,7 +36,7 @@ const ShowQuestions = (props) => {
     questionsList = questionsList.map(question => {
         // questionsList.push(
             return (
-                <div key={question.id} className="sec-3-div">
+                <div key={question.id} className="sec-3_div">
                     <p> 
                         <span> { question.time } </span>                         
                         <span> { question.date } </span>                         

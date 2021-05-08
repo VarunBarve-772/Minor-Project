@@ -42,16 +42,16 @@ function Aques() {
 
     return(
         <div className="askcard">       
-            <img className="img-ask" src={ask1} alt="Please type your question below."/>
-
-            <form onSubmit={ handleSubmit(questionSubmit) }>
+            {/* <img className="img-ask" src={ask1} alt="Please type your question below."/> */}
+            <h2>Type your question below</h2>
+            <form className="form" onSubmit={ handleSubmit(questionSubmit) }>
                 <div className="form-group">
-                    <textarea {...register('content')} name="content" className="form-control input-style" rows="6" maxLength="1000" required></textarea>
+                    <textarea {...register('content')} name="content" className="form-control ask_ques_input" required></textarea>
                 </div>
             
                 <div className="row">
                     <div className="col-lg-6">
-                        <div className="dropdown">
+                        {/* <div className="dropdown"> */}
                             <select name="category" {...register('category')} defaultValue="General">
                                 <option value="General">General</option>
                                 <option value="SVIIT">SVIIT</option>
@@ -60,7 +60,7 @@ function Aques() {
                                 <option value="SVVV">SVVV</option>
                                 <option value="SVIFA">SVIFA</option>
                             </select>
-                        </div>
+                        {/* </div> */}
                     </div>
 
                     <div className="col-lg-6">

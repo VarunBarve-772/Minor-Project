@@ -3,27 +3,31 @@ body{
     padding-top: 0;
 }
 
-.img-ask{
-    height: 300px;
+.form{
+    width: fit-content;
+    margin: 0;
+    padding: 0;
 }
 
 .askcard{
+    width: fit-content;
     background-color: white;
+    padding: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-100%);
 }
 
-.input-style{
+.ask_ques_input{
     padding: 2px 5px;
+    width: 700px;
+    height: 150px;
     border: 3px solid #17242A;
 }
 
 .form-control:focus{
     box-shadow: none;
     border: 3px solid #17242A;
-}
-
-.ask_btn-1{
-    width: fit-content;
-
 }
 
 .ask_btn{
@@ -117,18 +121,18 @@ button:active.ask_btn:after {
     left: 1px;
 }
 
-.btn_toggle{
-    border-radius: 0;
-    border: 2.5PX solid #17242A;
-    background-color: white;
-    color: #17242A;
-    padding: 7px 15px;
+h2{
+    padding-bottom: 60px;
 }
 
-.dropdown-content{
-    background-color: white;
-    border: 2px solid #17242A;
-    border-top: 0px;
-    color: #17242A;
-    width: 187.9px;
+select{
+    height: 50px;
+    width: 170px;
+    padding-left: 5px;
+    border: 3px solid #17242A;
+}
+
+option{
+    max-height: 100px;
+    overflow: scroll;
 }

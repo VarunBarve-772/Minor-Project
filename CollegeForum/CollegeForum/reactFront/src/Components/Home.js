@@ -40,32 +40,35 @@ function Home(props) {
         </div>
 
         <div className="sec-2">
-          <div className="row rowsec2">
-            
-            <div className="col-sm-2 sec-2-col text-center">
-              <a href="#general" >General</a>
-            </div>
+          <input type="text" className="ques_input"/>
+          <button className="search_btn"><i className="fa fa-search" aria-hidden="true"></i></button>
 
-            <div className="col-sm-2 sec-2-col text-center">
-              <a href="#computer science">Computer Science</a>
+          <div className="drop_down">
+            <button className="dropbtn">Category 
+              <i className="fa fa-caret-down"></i>
+            </button>
+            <div className="drop_down-content">
+              <div className="header">
+                <h3 className="cat_heading">categories</h3>
+              </div>   
+              <div className="row">
+                <div className="column">
+                  <a href="#">Link 1</a>
+                  <a href="#">Link 2</a>
+                  <a href="#">Link 3</a>
+                </div>
+                <div className="column">
+                  <a href="#">Link 1</a>
+                  <a href="#">Link 2</a>
+                  <a href="#">Link 3</a>
+                </div>
+                <div className="column">
+                  <a href="#">Link 1</a>
+                  <a href="#">Link 2</a>
+                  <a href="#">Link 3</a>
+                </div>
+              </div>
             </div>
-
-            <div className="col-sm-2 sec-2-col text-center">
-              <a href="#information technology">Information Technology</a>
-            </div>
-
-            <div className="col-sm-2 sec-2-col text-center">
-              <a href="#mechanical">Mechanical</a>
-            </div>
-
-            <div className="col-sm-2 sec-2-col text-center">
-              <a href="#civil">Civil</a>
-            </div>
-
-            <div className="col-sm-2 sec-2-col text-center">
-              <a href="#electronics">Electronics</a>
-            </div>
-
           </div>
         </div>
 
