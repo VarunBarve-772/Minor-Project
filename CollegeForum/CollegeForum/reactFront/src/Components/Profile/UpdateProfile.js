@@ -12,14 +12,23 @@ const schema = yup.object().shape({
 function UpdateProfile() {
 
     // let userProfileData = {};
-    const [userProfileData, setUserProfileData] = useState(JSON.parse(sessionStorage.getItem('userProfileData')))
+    // const [userProfileData, setUserProfileData] = useState(JSON.parse(sessionStorage.getItem('userProfileData')))
+    const [userProfileData, setUserProfileData] = useState({})
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     });
 
     useEffect( () => {
-        setUserProfileData(JSON.parse(sessionStorage.getItem('userProfileData')));
+        fetch(`http://127.0.0.1:8000/authentication/updateProfile`)
+
+        // Converting to JSON
+        .then(response => response.json())
+
+        // Displaying results to console
+        .then(json => {
+            setUserProfileData(json);
+        })
     }, [])
     
     const submitProfile = (data, e) => {
