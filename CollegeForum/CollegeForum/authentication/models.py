@@ -9,5 +9,5 @@ class CustomUser(AbstractUser):
     year = models.IntegerField(null=True, blank=True)
     idCardString = models.TextField(blank=True, null=True)
 
-    def __str__(self):
-        return self.first_name
+    # def __str__(self):
+    #     return self.first_name
