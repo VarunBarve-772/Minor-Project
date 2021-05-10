@@ -31,7 +31,7 @@ const ShowQuestions = (props) => {
             setQuestions(json.questions);
         });
 
-    }, []) 
+    }, [props.questionCategory]) 
 
     questionsList = questionsList.map(question => {
         // questionsList.push(

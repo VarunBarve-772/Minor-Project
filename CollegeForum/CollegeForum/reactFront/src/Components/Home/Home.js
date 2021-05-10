@@ -1,9 +1,10 @@
 import React,{ useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import ShowQuestions from './Question/ShowQuestions';
-import '../css/Home.css';
-// import poster from "./Images/logo.png";
-function Home(props) {
+import ShowQuestions from './ShowQuestions';
+import Category from './Category';
+import '../../css/Home.css';
+
+const Home = (props) => {
 
   const [questionCategory, setQuestionCategory] = useState('SVIIT');
   let history = useHistory();
@@ -43,33 +44,7 @@ function Home(props) {
           <input type="text" className="ques_input"/>
           <button className="search_btn"><i className="fa fa-search" aria-hidden="true"></i></button>
 
-          <div className="drop_down">
-            <button className="dropbtn">Category 
-              <i className="fa fa-caret-down"></i>
-            </button>
-            <div className="drop_down-content">
-              <div className="header">
-                <h3 className="cat_heading">categories</h3>
-              </div>   
-              <div className="row">
-                <div className="column">
-                  <a href="#">Link 1</a>
-                  <a href="#">Link 2</a>
-                  <a href="#">Link 3</a>
-                </div>
-                <div className="column">
-                  <a href="#">Link 1</a>
-                  <a href="#">Link 2</a>
-                  <a href="#">Link 3</a>
-                </div>
-                <div className="column">
-                  <a href="#">Link 1</a>
-                  <a href="#">Link 2</a>
-                  <a href="#">Link 3</a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Category setQuestionCategory={setQuestionCategory} />
         </div>
 
         <div className="sec-3">

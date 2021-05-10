@@ -9,7 +9,6 @@ from .OTP import otp
 
 userOTPData = {
     'email': '',
-    'mobile': '',
 }
 otpValue = {
     'value': 0,
@@ -44,7 +43,6 @@ def registerUser(request):
         user = CustomUser.objects.create_user(first_name=userData['firstName'], last_name=userData['lastName'], email=userData['email'], password=userData['password'], username=userData['enrollment'], mobile=userData['mobile'], institute=userData['institute'], year=userData['year'], idCardString=userData['idCard'])
         user.save()
         userOTPData['email'] = userData['email']
-        userOTPData['mobile'] = userData['mobile']
         resData = {
             'response': "all good"
         }
@@ -52,7 +50,6 @@ def registerUser(request):
 
 @csrf_exempt
 def OTP(request):
-    print(otpValue)
     if request.method == 'GET':
         whereToOtp = request.GET.get('otpDes')
         if whereToOtp == 'Email':
@@ -104,8 +101,7 @@ def changePassword(request):
         data = request.body.decode('utf-8')
         userData = json.loads(data)  
         user = CustomUser.objects.get(username__contains=userInfo['username'])
-        user.password = user.set_password(str(userData['password']))
-        print(user.password)
+        user.set_password(str(userData['password']))
         user.save()
         resData = {
             'response': 'Password Updated'
@@ -123,5 +119,16 @@ def viewProfile(request):
         'mobile': user.mobile,
         'institute': user.institute,
         'year': user.year,
+    }
+    return JsonResponse(resData)
+
+@csrf_exempt
+def forgetPasswordUsername(request):
+    usernameData = request.GET.get('userId')
+    user = CustomUser.objects.get(username = usernameData)
+    otpValue['value'] = otp.sendEmail(user.email)
+    userInfo['username'] = user.username
+    resData = {
+        'response': 'OTP sent'
     }
     return JsonResponse(resData)

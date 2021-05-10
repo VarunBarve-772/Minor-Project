@@ -81,7 +81,6 @@ function OTP(props) {
             <form onSubmit={handleSubmit(onSubmitOTP)}>
               <input type="text" name="otpValue" {...register('otpValue')} className="smsCode" autoFocus="" maxLength="4" size="1" min="0" max="9" pattern="[0-9]{4}"/><br/>
 
-              {/* <Link to="/Home" className="btn btn-primary btn-lg otp-button">Verify</Link> */}
               <button type="submit" className="otp_submit_button">Verify</button><br/>
               <span className="error_msg">*{ otpError }</span>
             </form> 

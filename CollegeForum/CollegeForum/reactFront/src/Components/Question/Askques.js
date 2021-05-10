@@ -1,8 +1,6 @@
 import React from "react";
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-// import poster from "./Images/ASKQ.png";
-import ask1 from "../Images/ask1.png";
 import '../../css/Askques.css';
 
 function Aques() {
