@@ -126,3 +126,23 @@ def QuesPage(request):
         answer.save()
 
         return JsonResponse(body['ans_content'], safe=False)
+
+
+@csrf_exempt
+def searchQues(request):
+    grammer_words = ['this','it','how','can','i','in','on','what','am','is','was','and','were','being','been','be','have','has','had','do','does','did','would','shall','should','may','might','must','can','could','they','there','their','this','these','not','let','as','help','how','where','when']
+    main_list = []
+
+    if request.method == "POST":
+        data = request.body.decode('utf-8')
+        body = json.loads(data)
+
+        ques = body['content']
+        trimed_ques = ques.split()
+
+        for word in trimed_ques:
+            if word not in grammer_words:
+                main_list.append(word)
+
+        print(main_list)
+        return JsonResponse(main_list, safe=False)
