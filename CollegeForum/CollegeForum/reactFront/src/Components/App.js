@@ -3,12 +3,13 @@ import {Route} from 'react-router-dom';
 import Register from './RegisterUser/Register';
 import Login from './Login';
 import OTP from './OTP';
-import Home from './Home';
+import Home from './Home/Home';
 import About from "./About-us";
 import Contact from "./Contact-us";
 import Aques from "./Question/Askques";
 import Front from "./front";
 import Profile from "./Profile/Profile";
+import ForgetPassword from './Forgetpassword/ForgetPassword';
 
 // import Update from './Update';
 // import Questions from './Questions';
@@ -34,7 +35,8 @@ return(
                 <Route  path="/AboutUs" component= {About}/> 
                 <Route  path="/ContactUS" component= {Contact}/> 
                 <Route  path="/AskQuestion" component= {Aques}/> 
-                <Route  path="/Profile" component= {Profile}/> 
+                <Route  path="/Profile" component= {Profile}/>
+                <Route  path="/ForgetPassword" component= {ForgetPassword}/>
 
                 <Route  path="/Login" render={() => (
                     <Login setUserId={setUserId}/>
@@ -56,6 +58,7 @@ return(
             :
             <div>
                 <Route exact path="/" component= {Front}/> 
+                <Route  path="/ForgetPassword" component= {ForgetPassword}/>
                 
                 <Route  path="/Login" render={() => (
                     <Login setUserId={setUserId}/>

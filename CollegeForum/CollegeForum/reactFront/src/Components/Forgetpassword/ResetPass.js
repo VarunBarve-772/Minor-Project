@@ -1,32 +1,26 @@
 import React, { useState } from "react";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
-import "../../css/Profile/ChangePassword.css";
 
 const schema = yup.object().shape({
-    oldPassword: yup.string().required("This Field is Required"),
     password: yup.string().required("This Field is Required").min(8).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, "Please Enter a Valid Password"),
     confirmPassword: yup.string().oneOf([yup.ref("password"), null]),
 });
 
-function ChangePassword() {
+const ResetPass = () => {
 
-    const [oldPasswordVisibility, setOldPasswordVisibility] = useState(false);
+    let history = useHistory();
     const [passwordVisibility, setPasswordVisibility] = useState(false);
     const [confirmPasswordVisibility, setConfirmPasswordVisibility] = useState(false);
-    const [oldPasswordErrorMessage, setOldPasswordErrorMessage] = useState('')
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     });
     
     const togglePasswordVisiblity = function(value) {
-        switch (value) {
-            case 'oldPassword':
-                setOldPasswordVisibility(oldPasswordVisibility ? false : true);
-                break;
-        
+        switch (value) {        
             case 'password':
                 setPasswordVisibility(passwordVisibility ? false : true);
                 break;
@@ -42,48 +36,34 @@ function ChangePassword() {
 
     const submitPassword = (data) => {
         console.log(data);
-        if(btoa(data.oldPassword) === JSON.parse(sessionStorage.getItem('pass'))) {
-            fetch("http://127.0.0.1:8000/authentication/changePassword", {
-      
-            // Adding method type
-            method: "POST",
-            
-            // Adding body or contents to send
-            body: JSON.stringify(data),
-            
-            // Adding headers to the request
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-            })
+        fetch("http://127.0.0.1:8000/authentication/changePassword", {
     
-            // Converting to JSON
-            .then(response => response.json())
-            
-            // Displaying results to console
-            .then(json => {
-                alert(json['response']);
-            });
-        } else {
-            setOldPasswordErrorMessage('Old Password Does Not Match');
+        // Adding method type
+        method: "POST",
+        
+        // Adding body or contents to send
+        body: JSON.stringify(data),
+        
+        // Adding headers to the request
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
         }
+        })
+
+        // Converting to JSON
+        .then(response => response.json())
+        
+        // Displaying results to console
+        .then(json => {
+            alert(json['response']);
+        });
+        history.push('/Login');
     }
 
     return (
         <div>
             <form onSubmit={handleSubmit(submitPassword)}>
-                <h4 className="profile_heading">Change Password</h4>
-
-                <hr/>
-
-                <div className="form-group">
-                    <label>Old Password</label>
-                    <input type={oldPasswordVisibility ? "text" : "password"} name="oldPassword" {...register('oldPassword')} className="form-control input-style" placeholder="Password..."/>
-                    <span className="show-password" onClick={() => togglePasswordVisiblity('oldPassword')}>Show Password</span>
-                    <p>  { errors.oldPassword?.message } </p>
-                    <span> { oldPasswordErrorMessage } </span>
-                </div>
-
+                <h4 className="profile-component">Change Password</h4>
 
                 <div className="form-group">
                     <label>Password</label>
@@ -99,7 +79,7 @@ function ChangePassword() {
                     <p>  { errors.confirmPassword && "Passwords should match" }</p>
                 </div>
 
-                <button type="submit" className="btn btn-primary save_btn" >Save</button>
+                <button type="submit" className="btn btn-primary btn-lg profile-component" >Save</button>
 
                 </form>
         </div>
@@ -107,4 +87,4 @@ function ChangePassword() {
 
 }
 
-export default ChangePassword;
+export default ResetPass;

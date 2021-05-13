@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../../css/Profile/ViewProfile.css";
 
 const ViewProfile = () => {
 
@@ -19,33 +20,38 @@ const ViewProfile = () => {
 
     return (
         <div>
-            <p> 
-                <span> First Name: </span>
-                <span> { userProfile.firstName } </span>
+
+            <h4 className="profile_heading">View Profile</h4>
+
+            <hr/>
+
+            <p className="profile_row"> 
+                <span className="label"> First Name </span>
+                <span className="profile_info_one"> { userProfile.firstName } </span>
             </p>
-            <p> 
-                <span> Last Name: </span>
-                <span> { userProfile.lastName } </span>
+            <p className="profile_row"> 
+                <span className="label"> Last Name </span>
+                <span className="profile_info_two"> { userProfile.lastName } </span>
             </p>
-            <p> 
-                <span> Email: </span>
-                <span> { userProfile.email } </span>
+            <p className="profile_row"> 
+                <span className="label"> Email </span>
+                <span className="profile_info_three"> { userProfile.email } </span>
             </p>
-            <p> 
-                <span> Enrollment: </span>
-                <span> { userProfile.enrollment } </span>
+            <p className="profile_row"> 
+                <span className="label"> Enrollment </span>
+                <span className="profile_info_four"> { userProfile.enrollment } </span>
             </p>
-            <p> 
-                <span> Mobile: </span>
-                <span> { userProfile.mobile } </span>
+            <p className="profile_row"> 
+                <span className="label"> Mobile </span>
+                <span className="profile_info_five"> { userProfile.mobile } </span>
             </p>
-            <p> 
-                <span> Institute: </span>
-                <span> { userProfile.institute } </span>
+            <p className="profile_row"> 
+                <span className="label"> Institute </span>
+                <span className="profile_info_six"> { userProfile.institute } </span>
             </p>
-            <p> 
-                <span> Year: </span>
-                <span> { userProfile.year } </span>
+            <p className="profile_row"> 
+                <span className="label"> Year </span>
+                <span className="profile_info_seven"> { userProfile.year } </span>
             </p>
         </div>
     )

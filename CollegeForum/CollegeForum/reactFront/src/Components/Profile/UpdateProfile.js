@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
+import "../../css/Profile/ChangePassword.css"
 
 const schema = yup.object().shape({
     email: yup.string().email("Please Enter a Valid Email").required("This Field is Required"),
@@ -61,27 +62,29 @@ function UpdateProfile() {
     return(
         <div className="right-profile">
             <form onSubmit={handleSubmit(submitProfile)}>
-                <h4 className="profile-component">Edit Profile</h4>
+                <h4 className="profile_heading">Update Profile</h4>
+
+                <hr/>
 
                 <div className="form-group">
                     <label className="profile-component">Email</label>
-                    <input type="text" {...register('email')} name="email" className="form-control input-style-profile" placeholder={userProfileData.email} />
+                    <input type="text" {...register('email')} name="email" className="form-control input-style" placeholder={userProfileData.email} />
                     <span>{ errors.email?.message }</span>
                 </div>
 
                 <div className="form-group">
                     <label className="profile-component">Mobile number</label>
-                    <input type="tel" {...register('mobile')} name="mobile" className="form-control input-style-profile" placeholder={userProfileData.mobile} />
+                    <input type="tel" {...register('mobile')} name="mobile" className="form-control input-style" placeholder={userProfileData.mobile} />
                     <span>{ errors.mobile?.message }</span>
                 </div>
 
                 <div className="form-group">
                     <label className="profile-component">Year</label>
-                    <input type="number" {...register('year')} name="year" className="form-control input-style-profile" min='1' max='6' step='1' placeholder={userProfileData.year} />
+                    <input type="number" {...register('year')} name="year" className="form-control input-style" min='1' max='6' step='1' placeholder={userProfileData.year} />
                     <span>{ errors.year?.message }</span>
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-lg profile-component" >Save</button>
+                <button type="submit" className="btn btn-primary save_btn" >Save</button>
                                         
             </form>
         </div>

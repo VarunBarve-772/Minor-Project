@@ -5,5 +5,6 @@ urlpatterns = [
     path('showQues', views.showQues, name="showQues"),
     path('AskQuestion', views.addQues, name="addQues"),
     path('QuesPage', views.QuesPage, name="QuesPage"),
-    path('searchQues', views.searchQues, name="searchQues")
+    path('Search', views.searchQuestion),
+    path('MyQuestions', views.MyQuestions)
 ]

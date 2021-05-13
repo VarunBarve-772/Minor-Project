@@ -4,6 +4,7 @@ from authentication.models import CustomUser
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from authentication.views import userInfo
+from .SmartSearch import SmartSearch
 import json
 
 @csrf_exempt
@@ -33,17 +34,20 @@ def showQues(request):
             main_dict = dict(ques_dict)
             lists.append(main_dict)
 
-    response = {"questions":lists}
-    return JsonResponse(response, safe=False)
+        resData = {
+            "questions": lists
+        }
+
+    return JsonResponse(resData)
 
 @csrf_exempt
 def addQues(request):
     if request.method == "GET":
-        user = CustomUser.objects.get(username = userInfo['username'])
-        print(user)
-
+        result = SmartSearch.extractingKeywords('This is a test question for sviit institute')
+        print(result)
         resData = {
-            "response": "Invalid Request"
+            "response": "Invalid Request",
+            'result': result
         }
         return JsonResponse(resData)
     if request.method == 'POST':
@@ -53,11 +57,75 @@ def addQues(request):
         user = CustomUser.objects.get(username__contains=userInfo['username'])
         category = Categories_for_questions.objects.get(category = body['category'])
 
-        question = Questions(que_username = user, content = body['content'], que_category = category)
+        que_tags = SmartSearch.extractingKeywords(body['content'])
+
+        question = Questions(que_username = user, content = body['content'], que_category = category, tags = que_tags)
         question.save()
 
         resData = {
             "response": "Question Added"
+        }
+
+        return JsonResponse(resData)
+
+@csrf_exempt
+def searchQuestion(request):
+    if request.method == 'POST':
+        lists = []
+
+        data = request.body.decode('utf-8')
+        body = json.loads(data)
+
+        que_tags = SmartSearch.extractingKeywords(body['searchQuery'])
+
+        questions = Questions.objects.filter(tags__icontains = que_tags)
+
+        for question in questions:
+            user = CustomUser.objects.get(username = question.que_username)
+            full_name = user.first_name + " " + user.last_name
+            ques_dict = {
+                            "name": full_name,
+                            "id": question.id,
+                            "question": question.content,
+                            "date": question.que_date,
+                            "time": question.que_time,
+                            "satistactory": question.satisfactory_answer
+            }
+    
+            main_dict = dict(ques_dict)
+            lists.append(main_dict)
+
+        resData = {
+            "questions": lists
+        }
+
+        return JsonResponse(resData)
+
+@csrf_exempt
+def MyQuestions(request):
+    if request.method == 'POST':
+        lists = []
+
+        user = CustomUser.objects.get(username__contains=userInfo['username'])
+        questions = Questions.objects.filter(que_username = user)
+
+        for question in questions:
+            user = CustomUser.objects.get(username = question.que_username)
+            full_name = user.first_name + " " + user.last_name
+            ques_dict = {
+                            "name": full_name,
+                            "id": question.id,
+                            "question": question.content,
+                            "date": question.que_date,
+                            "time": question.que_time,
+                            "satistactory": question.satisfactory_answer
+            }
+    
+            main_dict = dict(ques_dict)
+            lists.append(main_dict)
+
+        resData = {
+            "questions": lists
         }
 
         return JsonResponse(resData)

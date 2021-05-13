@@ -76,15 +76,17 @@ function Login(props) {
                 </div>
                 <span>{ errorMessage }</span>
 
-                {/* <Link className="btn btn-dark btn-lg btn-block" to="/Home">Login</Link> */}
                 <center>
                     <button type="submit" className="register-btn">Login</button>
                 </center>
 
                 <p className="text-right">
-                    <span>Don not have an account? </span>
+                    <span>Don't have an account? </span>
                     <Link to="/Signin">Create Account</Link>
-                    {/* <a href="">Create Account?</a> */}
+                </p>
+
+                <p className="text-right">
+                    <Link to="/ForgetPassword">Forget Password</Link>
                 </p>
                 </form>
         </div>
