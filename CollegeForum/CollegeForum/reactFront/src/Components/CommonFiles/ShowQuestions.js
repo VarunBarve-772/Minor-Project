@@ -6,16 +6,14 @@ const ShowQuestions = (props) => {
     let questionsList = questions;
 
     useEffect(() =>{
-        let category = {
-            'category': props.questionCategory
-        }
-        fetch("http://127.0.0.1:8000/qna/showQues", {
+        
+        fetch(`http://127.0.0.1:8000/qna/${props.fetchUrl}`, {
       
             // Adding method type
             method: "POST",
             
             // Adding body or contents to send
-            body: JSON.stringify(category),
+            body: JSON.stringify(props.questionCategory),
             
             // Adding headers to the request
             headers: {
@@ -49,9 +47,11 @@ const ShowQuestions = (props) => {
     });
 
     return (
-        <div className="sec-3-div">
-            <div>
-                { questionsList }
+        <div className="sec-3">
+            <div className="sec-3-div">
+                <div>
+                    { questionsList }
+                </div>
             </div>
         </div>
     )

@@ -3,7 +3,10 @@ import React from 'react';
 const Category = (props) => {
 
     const setCategory = (category) => {
-        props.setQuestionCategory(category);
+      let category_temp = {
+        'category': category
+      }
+      props.setQuestionCategory(category_temp);
     }
 
     return (

@@ -1,6 +1,6 @@
 from django.db import models
 from authentication.models import CustomUser
-from datetime import datetime, date
+from datetime import date
 import django.utils.timezone
 
 
@@ -17,6 +17,7 @@ class Questions(models.Model):
     que_time = models.TimeField(default=django.utils.timezone.now)
     satisfactory_answer = models.CharField(default=None, max_length=10, blank=True, null=True)
     que_username = models.ForeignKey(CustomUser, on_delete = models.CASCADE, related_name = "que_username")
+    tags = models.CharField(blank=True, null=True, max_length=200)
 
     def __str__(self):
         return str(self.id)
@@ -30,3 +31,9 @@ class Answers(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+class ExcludeKeywords(models.Model):
+    keyword = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.keyword

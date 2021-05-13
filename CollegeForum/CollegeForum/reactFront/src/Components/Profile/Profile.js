@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import ViewProfile from './ViewProfile';
 import UpdateProfile from './UpdateProfile';
 import ChangePassword from './ChangePassword';
+import ShowQuestions from '../CommonFiles/ShowQuestions';
 
 function Profile() {
     
     const [state, setState] = useState(<ViewProfile/>);
+    const questionState = <ShowQuestions questionCategory={ '' } fetchUrl={ 'MyQuestions' } />
 
     return(
 
@@ -24,6 +26,10 @@ function Profile() {
 
                 <div className="profile-a">
                     <p className="" onClick={() => setState(<UpdateProfile/>)}>Update Profile</p>
+                </div>
+ 
+                <div className="profile-a">
+                    <p className="" onClick={() => setState(questionState)}>My Questions</p>
                 </div>
             </div>
 
