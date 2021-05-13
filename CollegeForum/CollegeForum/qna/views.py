@@ -132,24 +132,20 @@ def MyQuestions(request):
 
 @csrf_exempt
 def QuesPage(request):
-    if request.method == "GET":
+    if request.method == "POST":
         ans_list = []
+        
         data = request.body.decode('utf-8')
         body = json.loads(data)
-        print(body)
 
         ques_id = body['id']
-        print(ques_id)
 
-        question = Questions.objects.filter(id=body['id'])
-        print(question[0].que_username)
+        question = Questions.objects.filter(id=ques_id)
         que_user = CustomUser.objects.filter(username__contains=question[0].que_username)
         q_full_name = que_user[0].first_name+" "+que_user[0].last_name
-        print(q_full_name)
 
 
-        answers = list(Answers.objects.filter(que_id=body['id']))
-        print(answers)
+        answers = list(Answers.objects.filter(que_id=ques_id))
 
         for answer in answers:
             ans_users = list(CustomUser.objects.filter(username__contains=answer.ans_username))
@@ -159,7 +155,7 @@ def QuesPage(request):
 
             ans_dict = {
                             "name": a_full_names,
-                            "answer id": answer.id,
+                            "answer_id": answer.id,
                             "answer": answer.ans_content,
                             "date": answer.ans_date,
                             "time": answer.ans_time,
@@ -167,7 +163,6 @@ def QuesPage(request):
 
             main_dict = dict(ans_dict)
             ans_list.append(main_dict)
-        print(ans_list)
 
         response = {
                     "question": question[0].content,
@@ -179,38 +174,20 @@ def QuesPage(request):
         }
         return JsonResponse(response, safe=False)
 
-    elif request.method == "POST":
-        data = request.body.decode('utf-8')
-        body = json.loads(data)
-
-        user = CustomUser.objects.get(username__contains=userInfo['username'])
-        print(user)
-        
-        question = Questions.objects.get(id=body['que_id'])
-        # question = Questions.objects.filter(id=category)
-
-        answer = Answers(ans_content=body['ans_content'], que_id=question, ans_username=user)
-        # print(answer)
-        answer.save()
-
-        return JsonResponse(body['ans_content'], safe=False)
-
-
 @csrf_exempt
-def searchQues(request):
-    grammer_words = ['this','it','how','can','i','in','on','what','am','is','was','and','were','being','been','be','have','has','had','do','does','did','would','shall','should','may','might','must','can','could','they','there','their','this','these','not','let','as','help','how','where','when']
-    main_list = []
-
+def answerSubmit(request):
     if request.method == "POST":
         data = request.body.decode('utf-8')
         body = json.loads(data)
 
-        ques = body['content']
-        trimed_ques = ques.split()
+        user = CustomUser.objects.get(username__contains=userInfo['username'])        
+        question = Questions.objects.get(id=body['que_id'])
 
-        for word in trimed_ques:
-            if word not in grammer_words:
-                main_list.append(word)
+        answer = Answers(ans_content=body['answerContent'], ans_code=body['codeContent'], que_id=question, ans_username=user)
+        answer.save()
 
-        print(main_list)
-        return JsonResponse(main_list, safe=False)
+        resData = {
+            "response": 'Answer Submitted'
+        }
+        return JsonResponse(resData)
+

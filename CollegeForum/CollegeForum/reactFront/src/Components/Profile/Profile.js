@@ -5,7 +5,7 @@ import ChangePassword from './ChangePassword';
 import ShowQuestions from '../CommonFiles/ShowQuestions';
 import '../../css/Profile/Profile.css'
 
-function Profile() {
+const Profile = (props) => {
     
     const [state, setState] = useState(<ViewProfile/>);
     const questionState = <ShowQuestions questionCategory={ '' } fetchUrl={ 'MyQuestions' } />

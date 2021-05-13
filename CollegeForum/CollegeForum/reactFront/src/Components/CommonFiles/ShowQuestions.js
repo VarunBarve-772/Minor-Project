@@ -1,8 +1,10 @@
 import React,{ useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const ShowQuestions = (props) => {
 
     const [questions, setQuestions] = useState([]);
+    let history = useHistory();
     let questionsList = questions;
 
     useEffect(() =>{
@@ -31,10 +33,14 @@ const ShowQuestions = (props) => {
 
     }, [props.questionCategory]) 
 
+    const toQuestionPage = (id) => {
+        sessionStorage.setItem('questionId', JSON.stringify(id))
+        history.push('/Question')
+    }
+
     questionsList = questionsList.map(question => {
-        // questionsList.push(
             return (
-                <div key={question.id} className="sec-3_div">
+                <div key={question.id} onClick={ () => toQuestionPage(question.id) } className="sec-3_div">
                     <p> 
                         <span> { question.time } </span>                         
                         <span> { question.date } </span>                         
@@ -43,7 +49,6 @@ const ShowQuestions = (props) => {
                     <h6> { question.name } </h6>
                 </div>
             )
-        // )            
     });
 
     return (

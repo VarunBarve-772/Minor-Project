@@ -26,7 +26,7 @@ class Answers(models.Model):
     ans_content = models.TextField()
     que_id = models.ForeignKey(Questions, on_delete = models.CASCADE, related_name = "question_id")
     ans_username = models.ForeignKey(CustomUser, on_delete = models.CASCADE, related_name = "ans_username")
-    ans_code = models.TextField(default="")
+    ans_code = models.TextField(default=None)
     ans_date = models.DateField(default=date.today)
     ans_time = models.TimeField(default=django.utils.timezone.now)
 
