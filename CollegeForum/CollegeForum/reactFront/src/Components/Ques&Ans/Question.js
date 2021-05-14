@@ -1,5 +1,6 @@
 import React,{ useState, useEffect } from 'react';
 import AnswerSubmit from './AnswerSubmit';
+import "../../css/question_page.css";
 
 const Question = () => {
     const [questionContent, setQuestionContent] = useState({});
@@ -43,15 +44,16 @@ const Question = () => {
             return (
                 <div className="answers" key={ answer.answer_id }>
                     <div className="answer_header">
-                        <p>
-                            <b> { answer.name } </b>  
-                            <b> { answer.date } </b>
-                            <b> { answer.time } </b>
-                        </p>
+                            <b> { answer.name } </b>
+                            <div className="ans_date_time">
+                                <p>{ answer.date }</p>
+                                <p>{ answer.time }</p>
+                            </div>
                     </div>
                     <div className="answer_body">
                         <p> { answer.answer } </p>
                     </div>
+                    <hr className="inbetween_hr"/>
                 </div>
             )
         });     
@@ -61,7 +63,7 @@ const Question = () => {
         <div>
             <div className="question_head">
                 <div className="question_content">
-                    <h2> { questionContent.question } </h2>
+                    <p className="question_content_p"> { questionContent.question } </p>
                 </div>
         
                 <div className="question_details">
@@ -70,20 +72,21 @@ const Question = () => {
                         <p></p>
                     </div>
                     <div className="date_time">
-                        <p>Asked on: 
+                        <p>Asked on: </p>
+                        <div className="date_time_b">
                             <b> { questionContent.date } </b>
                             <b> { questionContent.time } </b>
-                        </p>
+                        </div>
                     </div>
-                    <hr/>
                 </div>
             </div>
+            <hr/>
 
             <div className="answer_section">
                 { answerContent }
             </div>
 
-            <hr/>
+            <hr className="answer_section_hr"/>
             <div className="answer_input_section">
                 <AnswerSubmit setContentReload={ setContentReload } contentReload={ contentReload } />
             </div>

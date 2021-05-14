@@ -2,6 +2,7 @@ import React,{ useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
+import "../../css/question_page.css";
 
 const schema = yup.object().shape({
     answerContent: yup.string().required("This Field is Required"),
@@ -48,12 +49,13 @@ const AnswerSubmit = (props) => {
 
     return (
         <form onSubmit={ handleSubmit(submitAnswer) }>
-            <h3>Add your answer</h3>
+            <h3 className="add_ans_heading">Add your answer</h3><br/><br/><br/>
             
-            <p onClick={ () => codeState?setCodeState(false):setCodeState(true)}><b>[ ]</b></p>
-            <button><b>B</b></button>
-            <button><i>I</i></button>
-            <br/>
+            <div className="ans_btns">
+                <p className="ans_btn" onClick={ () => codeState?setCodeState(false):setCodeState(true)}><b>{ "{ }" }</b></p>
+                <p className="ans_btn"><b>B</b></p>
+                <p className="ans_btn"><i>I</i></p>
+            </div>
 
             <textarea {...register('answerContent')} placeholder='Enter Your Answer'></textarea><br/>
             <span>{ errors.answerContent?.message }</span>
@@ -66,11 +68,11 @@ const AnswerSubmit = (props) => {
                 </div>
                 :
                 <div>
-                    <input type='hidden' name="codeContent" {...register('codeContent')} ></input><br/>
+                    <input className="code_input" type='hidden' name="codeContent" {...register('codeContent')} ></input><br/>
                 </div>
             }
             
-            <button type='submit'>Publish</button>
+            <button type='submit' className="submit_btn">Publish</button>
         </form>
     )
 }
