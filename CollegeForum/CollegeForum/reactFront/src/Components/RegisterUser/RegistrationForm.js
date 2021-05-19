@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
 // import 'CollegeForum/CollegeForum/reactFront/src/css/registration.css'
-import '../../css/registration.css'
+import '../../css/registration.css';
 
 const schema = yup.object().shape({
     firstName: yup.string().required("This Field is Required").min(2).max(50).matches(/^[A-Za-z]+((('|-|\.)?([A-Za-z])+))?$/, "Please Enter a Valid First Name"),
@@ -105,80 +105,86 @@ function Form(props) {
 
     
     return (
-        <form onSubmit={handleSubmit(submitForm)}>
-            <h3>Register Here!!</h3>
-
-            <div className="form-group">
-                <label>First Name</label>
-                <input type="text" name="firstName" {...register('firstName')} className="form-control input-style" placeholder="First Name..."/>
-                <span>{ errors.firstName?.message }</span>
+        <div className="register_bg">
+            <div className="left_banner">
+                this is college forum
             </div>
 
-            <div className="form-group">
-                <label>Last Name</label>
-                <input type="text" name="lastName" {...register('lastName')} className="form-control input-style" placeholder="last Name..."/>
-                <span>{ errors.lastName?.message }</span>
-            </div>
+            <form className="register_form" onSubmit={handleSubmit(submitForm)}>
+                <h3>Register</h3>
 
-            <div className="form-group">
-                <label>Enrollment Number</label>
-                <input type="text" name="enrollment" {...register('enrollment')} className="form-control input-style" placeholder="Enrollment Number..."/>
-                <span>{ errors.enrollment?.message }</span>
-            </div>
+                <div className="form-group">
+                    <label>First Name</label>
+                    <input type="text" name="firstName" {...register('firstName')} className="form-control input-style" placeholder="First Name..."/>
+                    <span>{ errors.firstName?.message }</span>
+                </div>
 
-            <div className="form-group">
-                <label>Email</label>
-                <input type="text" name="email" {...register('email')} className="form-control input-style" placeholder="Email..."/>
-                <span>{ errors.email?.message }</span>
-            </div>
+                <div className="form-group">
+                    <label>Last Name</label>
+                    <input type="text" name="lastName" {...register('lastName')} className="form-control input-style" placeholder="last Name..."/>
+                    <span>{ errors.lastName?.message }</span>
+                </div>
 
-            <div className="form-group">
-                <label>Password</label>
-                <input type={passwordShown ? "text" : "password"} name="password" {...register('password')} className="form-control input-style" placeholder="Password..."/>
-                <span className="show-password" onClick={togglePasswordVisiblity}>Show Password</span>
-                <span>  { errors.password?.message }</span>
-            </div>
+                <div className="form-group">
+                    <label>Enrollment Number</label>
+                    <input type="text" name="enrollment" {...register('enrollment')} className="form-control input-style" placeholder="Enrollment Number..."/>
+                    <span>{ errors.enrollment?.message }</span>
+                </div>
 
-            <div className="form-group">
-                <label>Confirm Password</label>
-                <input type={confirmPasswordShown ? "text" : "password"} name="confirmPassword" {...register('confirmPassword')} className="form-control input-style" placeholder="Confirm Password..."/>
-                <span className="show-password" onClick={toggleConfirmPasswordVisiblity}>Show Password</span>
-                <span>  { errors.confirmPassword && "Passwords should match" }</span>
-            </div>
+                <div className="form-group">
+                    <label>Email</label>
+                    <input type="text" name="email" {...register('email')} className="form-control input-style" placeholder="Email..."/>
+                    <span>{ errors.email?.message }</span>
+                </div>
 
-            <div className="form-group">
-                <label>Mobile number</label>
-                <input type="text" name="mobile" {...register('mobile')} className="form-control input-style" placeholder="Mobile Number..." />
-                <span>{ errors.mobile?.message }</span>
-            </div>
+                <div className="form-group">
+                    <label>Password</label>
+                    <input type={passwordShown ? "text" : "password"} name="password" {...register('password')} className="form-control input-style" placeholder="Password..."/>
+                    <span className="show-password" onClick={togglePasswordVisiblity}>Show Password</span>
+                    <span>  { errors.password?.message }</span>
+                </div>
 
-            <div className="form-group">
-                <label>Institute Name</label>
-                <input type="text" name="institute" {...register('institute')} className="form-control input-style" placeholder="Institute..."/>
-                <span>{ errors.institute?.message }</span>
-            </div>
+                <div className="form-group">
+                    <label>Confirm Password</label>
+                    <input type={confirmPasswordShown ? "text" : "password"} name="confirmPassword" {...register('confirmPassword')} className="form-control input-style" placeholder="Confirm Password..."/>
+                    <span className="show-password" onClick={toggleConfirmPasswordVisiblity}>Show Password</span>
+                    <span>  { errors.confirmPassword && "Passwords should match" }</span>
+                </div>
 
-            <div className="form-group">
-                <label>Year</label>
-                <input type="text" name="year" {...register('year')} className="form-control input-style" placeholder="Year..."/>
-                <span>{ errors.year && "This must be a number" }</span>
-            </div>
+                <div className="form-group">
+                    <label>Mobile number</label>
+                    <input type="text" name="mobile" {...register('mobile')} className="form-control input-style" placeholder="Mobile Number..." />
+                    <span>{ errors.mobile?.message }</span>
+                </div>
 
-            <div className="id-div">
-                <label className="id-label">Id Card photo</label>
-                <input type="file" name="idCard" {...register('idCard')}/>
-                <span>{ idCardErrorMessage }</span>
-            </div>
+                <div className="form-group">
+                    <label>Institute Name</label>
+                    <input type="text" name="institute" {...register('institute')} className="form-control input-style" placeholder="Institute..."/>
+                    <span>{ errors.institute?.message }</span>
+                </div>
 
-            <center>
-                <button type="submit" className="btn btn-center register-btn">Register</button>
-            </center>
+                <div className="form-group">
+                    <label>Year</label>
+                    <input type="text" name="year" {...register('year')} className="form-control input-style" placeholder="Year..."/>
+                    <span>{ errors.year && "This must be a number" }</span>
+                </div>
 
-            <p className="text-right">
-                Already registered? 
-                <Link to='/Login'> Login</Link>
-            </p>
-        </form>
+                <div className="id-div">
+                    <label className="id-label">Id Card photo</label>
+                    <input type="file" name="idCard" {...register('idCard')}/>
+                    <span>{ idCardErrorMessage }</span>
+                </div>
+
+                <center>
+                    <button type="submit" className="btn btn-center register-btn">Register</button>
+                </center>
+
+                <p className="text-right">
+                    Already registered? 
+                    <Link to='/Login'> Login</Link>
+                </p>
+            </form>
+        </div>
     )
 }
 

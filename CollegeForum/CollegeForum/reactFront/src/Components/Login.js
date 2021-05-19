@@ -1,9 +1,10 @@
 import React,{ useState } from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup'
+import { yupResolver } from '@hookform/resolvers/yup';
+import Particles from 'react-particles-js';
 import * as yup from 'yup';
-import '../css/registration.css';
+import '../css/login.css';
 
 const schema = yup.object().shape({
     enrollment: yup.string().required("This Field is Required"),
@@ -55,11 +56,40 @@ function Login(props) {
         
     }
 
+    const particlesOptions = {
+        particles: {
+            number: {
+                value: 40,
+                desity: {
+                    enable: true,
+                    value_area: 900
+                }
+            },
+            
+            color: {
+                value: "#17242A"
+            },
+
+            size: {
+                value: 4
+            },
+
+            events: {
+                onhover: {
+                  enable: true,
+                  mode: "repulse"
+                },
+            }
+        }
+    }
+
     return(
     
-    <div className="container">
-        <div className="card">
-            <form onSubmit={handleSubmit(submitForm)}>
+    <div>
+        <Particles className="particles_bg" params={particlesOptions} />
+        <div className="login_bg"></div>
+        <div className="login_card">
+            <form className="login_form" onSubmit={handleSubmit(submitForm)}>
                 <h3>Login</h3>
 
                 <div className="form-group">
@@ -67,6 +97,8 @@ function Login(props) {
                     <input type="text" className="form-control input-style" name="enrollment" {...register('enrollment')} placeholder="Enter Enrollment Number" />
                     <span>{ errors.enrollment?.message }</span>
                 </div>
+
+                <br/>
 
                 <div className="form-group">
                     <label>Password</label>
@@ -77,18 +109,22 @@ function Login(props) {
                 <span>{ errorMessage }</span>
 
                 <center>
-                    <button type="submit" className="register-btn">Login</button>
+                    <button type="submit" className="login_btn">Login</button>
                 </center>
 
-                <p className="text-right">
-                    <span>Don't have an account? </span>
-                    <Link to="/Signin">Create Account</Link>
-                </p>
-
-                <p className="text-right">
-                    <Link to="/ForgetPassword">Forget Password</Link>
-                </p>
-                </form>
+                <div className="bottom_links">
+                    <p className="text-center">
+                        <Link to="/ForgetPassword">Forget Password</Link>
+                    </p>
+                    <br/>
+                    <br/>
+                    
+                    <p className="text-right">
+                        <span>Don't have an account? </span>
+                        <Link to="/Signin">Create Account</Link>
+                    </p>
+                </div>    
+            </form>
         </div>
     </div>
 

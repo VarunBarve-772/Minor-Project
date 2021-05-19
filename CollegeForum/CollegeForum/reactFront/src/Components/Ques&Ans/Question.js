@@ -60,7 +60,7 @@ const Question = () => {
     }
 
     return (
-        <div>
+        <div class="main_wrapper">
             <div className="question_head">
                 <div className="question_content">
                     <p className="question_content_p"> { questionContent.question } </p>
