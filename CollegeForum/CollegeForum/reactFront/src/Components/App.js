@@ -51,7 +51,7 @@ return(
                 </Route>  
 
                 <Route  path="/OTP" >
-                    <OTP tempUserId={ tempUserId }/>
+                    <OTP tempUserId={ tempUserId } setUserId={ setUserId }/>
                 </Route>  
                           
                 <Route  path="/Question" >

@@ -1,20 +1,12 @@
 import React,{ useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup';
 import "../../css/question_page.css";
-
-const schema = yup.object().shape({
-    answerContent: yup.string().required("This Field is Required"),
-})
 
 const AnswerSubmit = (props) => {
 
     const [codeState, setCodeState] = useState(false);
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema),
-    });
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     const submitAnswer = (data) => {
         console.log(data);
@@ -57,8 +49,8 @@ const AnswerSubmit = (props) => {
                 <p className="ans_btn"><i>I</i></p>
             </div>
 
-            <textarea {...register('answerContent')} placeholder='Enter Your Answer'></textarea><br/>
-            <span>{ errors.answerContent?.message }</span>
+            <textarea {...register('answerContent', { required: true })} placeholder='Enter Your Answer'></textarea><br/>
+            <span>{ errors.answerContent?.type === 'required' && "Answer Field is required" }</span>
 
             {
                 codeState

@@ -52,6 +52,13 @@ const Question = () => {
                     </div>
                     <div className="answer_body">
                         <p> { answer.answer } </p>
+                        {
+                        answer.code === 'None' || answer.code === ''
+                        ?
+                        <span></span>
+                        :
+                        <code> { answer.code } </code>
+                    }
                     </div>
                     <hr className="inbetween_hr"/>
                 </div>
@@ -60,10 +67,17 @@ const Question = () => {
     }
 
     return (
-        <div>
+        <div className="question_body">  
             <div className="question_head">
                 <div className="question_content">
                     <p className="question_content_p"> { questionContent.question } </p>
+                    {
+                        questionContent.code === 'None' || questionContent.code === ''
+                        ?
+                        <span></span>
+                        :
+                        <code> { questionContent.code } </code>
+                    }
                 </div>
         
                 <div className="question_details">

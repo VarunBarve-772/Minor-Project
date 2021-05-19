@@ -57,9 +57,9 @@ def addQues(request):
         user = CustomUser.objects.get(username__contains=userInfo['username'])
         category = Categories_for_questions.objects.get(category = body['category'])
 
-        que_tags = SmartSearch.extractingKeywords(body['content'])
+        que_tags = SmartSearch.extractingKeywords(body['queContent'])
 
-        question = Questions(que_username = user, content = body['content'], que_category = category, tags = que_tags)
+        question = Questions(que_username = user, content = body['queContent'], que_code=body['codeContent'], que_category = category, tags = que_tags)
         question.save()
 
         resData = {
@@ -140,18 +140,16 @@ def QuesPage(request):
 
         ques_id = body['id']
 
-        question = Questions.objects.filter(id=ques_id)
-        que_user = CustomUser.objects.filter(username__contains=question[0].que_username)
-        q_full_name = que_user[0].first_name+" "+que_user[0].last_name
+        question = Questions.objects.get(id=ques_id)
+        que_user = CustomUser.objects.get(username__contains=question.que_username)
+        q_full_name = que_user.first_name+" "+que_user.last_name
 
 
         answers = list(Answers.objects.filter(que_id=ques_id))
 
         for answer in answers:
-            ans_users = list(CustomUser.objects.filter(username__contains=answer.ans_username))
-
-            for user in ans_users:
-                a_full_names = user.first_name+" "+user.last_name
+            ans_users = CustomUser.objects.get(username__contains=answer.ans_username)
+            a_full_names = ans_users.first_name+" "+ans_users.last_name
 
             ans_dict = {
                             "name": a_full_names,
@@ -159,17 +157,19 @@ def QuesPage(request):
                             "answer": answer.ans_content,
                             "date": answer.ans_date,
                             "time": answer.ans_time,
+                            "code": answer.ans_code
             }
 
             main_dict = dict(ans_dict)
             ans_list.append(main_dict)
 
         response = {
-                    "question": question[0].content,
+                    "question": question.content,
                     "questioner": q_full_name,
-                    "date": question[0].que_date,
-                    "time": question[0].que_time,
-                    "satisfactory": question[0].satisfactory_answer,
+                    "date": question.que_date,
+                    "time": question.que_time,
+                    "satisfactory": question.satisfactory_answer,
+                    "code": question.que_code,
                     "answers": ans_list
         }
         return JsonResponse(response, safe=False)

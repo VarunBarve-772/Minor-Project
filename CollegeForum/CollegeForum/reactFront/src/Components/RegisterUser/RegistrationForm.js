@@ -10,7 +10,7 @@ const schema = yup.object().shape({
     firstName: yup.string().required("This Field is Required").min(2).max(50).matches(/^[A-Za-z]+((('|-|\.)?([A-Za-z])+))?$/, "Please Enter a Valid First Name"),
     lastName: yup.string().required("This Field is Required").min(2).max(50).matches(/^[A-Za-z]+((('|-|\.)?([A-Za-z])+))?$/, "Please Enter a Valid Last Name"),
     enrollment: yup.string().required("This Field is Required").min(12).max(20),
-    email: yup.string().email("Please Enter a Valid Email"),
+    email: yup.string().required("This Field is Required").email("Please Enter a Valid Email"),
     password: yup.string().required("This Field is Required").min(8).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,"Please Enter a Valid Password"),
     confirmPassword: yup.string().oneOf([yup.ref("password"), null]),
     mobile: yup.string().required("This Field is Required").matches(/^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)$/, "Please Enter a Valid Mobile Number"),
@@ -33,6 +33,10 @@ function Form(props) {
     };
 
     const [idCardErrorMessage, setIdCardErrorMessage] = useState(false);
+    
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema),
+    });
 
     const checkFileFormat = function(fileList) {
         let file = fileList[0];
@@ -98,11 +102,6 @@ function Form(props) {
             };
         });
     };
-
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema),
-    });
-
     
     return (
         <form onSubmit={handleSubmit(submitForm)}>
