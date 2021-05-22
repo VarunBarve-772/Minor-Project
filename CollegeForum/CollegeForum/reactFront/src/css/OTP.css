@@ -1,6 +1,6 @@
 .otp-option{
     border-radius: 0;
-    background-color: #17242A;
+    background-color: #13252F;
     height: 45px;
     width: 150px;
     border: none;
@@ -12,7 +12,7 @@
 
 .otp_submit_button{
     border-radius: 0;
-    background-color: #17242A;
+    background-color: #13252F;
     border: none;
     color: white;
     cursor: pointer;

@@ -1,5 +1,5 @@
 .nav_bar{
-    background-color: #17242A;
+    background-color: #13252F;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -27,5 +27,5 @@
 }
 
 .nav_ele:hover{
-    background-color: #3AAFA9;
+    background-color: #2EA8B5;
 }

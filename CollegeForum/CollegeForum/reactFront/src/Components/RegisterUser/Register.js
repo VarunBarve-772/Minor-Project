@@ -6,11 +6,11 @@ import '../../css/registration.css'
 
 function Register(props) {
     return(
-    <div className="container">
+    // <div className="container">
         <div className="card">
             <Form setTempUserId={props.setTempUserId} />
         </div>
-    </div>
+    // </div>
     )
 }
 export default Register;

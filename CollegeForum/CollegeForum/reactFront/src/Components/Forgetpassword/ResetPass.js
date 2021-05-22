@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
+import '../../css/Profile/ChangePassword.css';
 
 const schema = yup.object().shape({
     password: yup.string().required("This Field is Required").min(8).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, "Please Enter a Valid Password"),
@@ -62,26 +63,33 @@ const ResetPass = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit(submitPassword)}>
-                <h4 className="profile-component">Change Password</h4>
+            <div className="reset_bg">
+                <div className="reset_card">
+                    <form onSubmit={handleSubmit(submitPassword)}>
+                        <center>
+                            <h4 className="profile-component">Change Password</h4>
+                        </center>
 
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type={passwordVisibility ? "text" : "password"} name="password" {...register('password')} className="form-control input-style" placeholder="Password..."/>
-                    <span className="show-password" onClick={() => togglePasswordVisiblity('password')}>Show Password</span>
-                    <p>  { errors.password?.message }</p>
+                        <div className="form-group">
+                            <label>Password</label>
+                            <input type={passwordVisibility ? "text" : "password"} name="password" {...register('password')} className="form-control input-style" placeholder="Password..."/>
+                            <span className="show-password" onClick={() => togglePasswordVisiblity('password')}>Show Password</span>
+                            <p>  { errors.password?.message }</p>
+                        </div>
+
+                        <div className="form-group">
+                            <label>Confirm Password</label>
+                            <input type={confirmPasswordVisibility ? "text" : "password"} name="confirmPassword" {...register('confirmPassword')} className="form-control input-style" placeholder="Confirm Password..."/>
+                            <span className="show-password" onClick={() => togglePasswordVisiblity('confirmPassword')}>Show Password</span>
+                            <p>  { errors.confirmPassword && "Passwords should match" }</p>
+                        </div>
+
+                        <center>
+                            <button type="submit" className="btn btn-primary btn-lg profile-component save_btn">Save</button>
+                        </center>
+                    </form>
                 </div>
-
-                <div className="form-group">
-                    <label>Confirm Password</label>
-                    <input type={confirmPasswordVisibility ? "text" : "password"} name="confirmPassword" {...register('confirmPassword')} className="form-control input-style" placeholder="Confirm Password..."/>
-                    <span className="show-password" onClick={() => togglePasswordVisiblity('confirmPassword')}>Show Password</span>
-                    <p>  { errors.confirmPassword && "Passwords should match" }</p>
-                </div>
-
-                <button type="submit" className="btn btn-primary btn-lg profile-component" >Save</button>
-
-                </form>
+            </div>
         </div>
     )
 

@@ -1,28 +1,24 @@
-.register_bg{
-    border: none;
-}
-
 .card{
     border: none;
 }
 
-.input-style{
+.register_input_style{
     border-radius: 0;
     border: none;
-    border-bottom: 2px solid #17242A;
+    border: 2px solid #13252F;
     height: 40px;
-    padding: 0;
+    padding: 10px;
     margin-top: 0.8%;
 }
 
 a{
     text-decoration: none;
-    color: #3AAFA9;
+    color: #2EA8B5;
 }
 
 a:hover{
     text-decoration: none;
-    color: #3AAFA9;
+    color: #2EA8B5;
 }
 
 .form-group{
@@ -46,14 +42,14 @@ a:hover{
     position: relative;
     display: inline-block;
     padding: 15px 25px;
-    width: 100%;
+    width: 30%;
     background-color: #FFFFFF;
-    border: 2.5PX solid #3AAFA9;
+    border: 2.5PX solid #2EA8B5;
     text-transform: uppercase;
-    color: #17242A;
+    color: #13252F;
     font-family: arial;
     letter-spacing: 1px;
-    box-shadow: -6px 6px 0 #3AAFA9;
+    box-shadow: -6px 6px 0 #2EA8B5;
     text-decoration: none;
 }
 
@@ -61,9 +57,9 @@ a:hover{
     top: 3px;
     color: #404040;
     left: -3px;
-    background-color: #3AAFA9;
-    box-shadow: -3px 3px 0 #17242A;
-    border: 2.5PX solid #17242A;
+    background-color: #2EA8B5;
+    box-shadow: -3px 3px 0 #13252F;
+    border: 2.5PX solid #13252F;
     color: white;
 }
 
@@ -89,7 +85,7 @@ a:hover{
     left: -4px;
     width: 8px;
     height: 8px;
-    background-color: #17242A;
+    background-color: #13252F;
     transform: rotate(45deg);
     z-index: -1;
 }
@@ -102,7 +98,7 @@ a:hover{
     right: 2px;
     width: 8px;
     height: 8px;
-    background-color: #17242A;
+    background-color: #13252F;
     transform: rotate(45deg);
     z-index: -1;
 }
@@ -115,17 +111,17 @@ button:active.register-btn {
     top: 6px;
     left: -6px;
     box-shadow: none;
-    background-color: #3AAFA9;
+    background-color: #2EA8B5;
 }
 
 button:active.register-btn:before {
-    background-color: #3AAFA9;
+    background-color: #2EA8B5;
     bottom: 1px;
     right: 1px;
 }
 
 button:active.register-btn:after {
-    background-color: #3AAFA9;
+    background-color: #2EA8B5;
     top: 1px;
     left: 1px;
 }
@@ -133,35 +129,38 @@ button:active.register-btn:after {
 /*----------btn css ended----------*/
 
 .register_form{
-    width: 700px;
-    padding-top: 40px;
+    width: 1100px;
+    padding-top: 20px;
     padding-left: 30px;
     padding-right: 30px;
-    padding-bottom: 70px;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
+    margin-top: 40px;
+    background-color: #E2F2F2;
+    border: 3px solid #13252F;
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(0%, 0%);
+    transform: translate(-50%, 0%);
+    box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, .25);
 }
 
 .text-right{
     padding-top: 10px;
 }
 
-h3{
-    padding-bottom: 20px;
-    color: #17242A;
+.register_heading{
+    padding-bottom: 50px;
+    color: #13252F;
 }
 
 label{
     font-weight: 600;
-    color: #17242A;
+    color: #13252F;
 }
 
 .show-password{
     font-weight: 600;
-    color: #17242A;
+    color: #13252F;
     opacity: 0.7;
 }
 
@@ -178,10 +177,20 @@ label{
     height: 100vh;
     width: 45%;
     position: fixed;
-    background-color: #3AAFA9;
+    background-color: #2EA8B5;
     float: left;
     left: 50%;
     top: 50%;
     transform: translate(-111.15%, -50%);
     box-shadow: 0 4px 20px 0 rgba(13, 48, 48, 0.4);
+}
+
+.register_bg{
+    height: 125vh;
+    width: 100%;
+    padding-top: 40px;
+    background-color: #2EA8B5;
+    position: absolute;
+    z-index: -3;
+    margin-bottom: 50px;
 }

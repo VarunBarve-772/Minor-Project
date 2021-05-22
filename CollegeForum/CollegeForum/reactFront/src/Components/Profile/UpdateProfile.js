@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import "../../css/Profile/ChangePassword.css"
 
 const schema = yup.object().shape({
-    email: yup.string().email("Please Enter a Valid Email").required("This Field is Required"),
+    email: yup.string().required("This Field is Required").email("Please Enter a Valid Email"),
     mobile: yup.string().required("This Field is Required").matches(/^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)$/, "Please Enter a Valid Mobile Number"),
     year: yup.string().required("This Field is Required"),
 })

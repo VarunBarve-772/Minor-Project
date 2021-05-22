@@ -1,15 +1,19 @@
-import React from "react";
+import React,{ useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import '../../css/Askques.css';
 
 function Aques() {
 
-    const { register, handleSubmit } = useForm({});
+    const [codeState, setCodeState] = useState(false);
+    const { register, handleSubmit, formState: { errors } } = useForm({});
     let history = useHistory();
 
     const questionSubmit = (data) => {
         console.log(data);
+        if(data.codeContent === "") {
+            data.codeContent = 'None';
+        }
         fetch("http://127.0.0.1:8000/qna/AskQuestion", {
       
             // Adding method type
@@ -40,16 +44,33 @@ function Aques() {
 
     return(
         <div className="askcard">       
-            {/* <img className="img-ask" src={ask1} alt="Please type your question below."/> */}
-            <h2>Type your question below</h2>
             <form className="form" onSubmit={ handleSubmit(questionSubmit) }>
-                <div className="form-group">
-                    <textarea {...register('content')} name="content" className="form-control ask_ques_input" required></textarea>
+                <h2 className="add_ans_heading">Ask Your Question</h2><br/><br/><br/>
+                
+                <div className="ans_btns">
+                    <p className="ans_btn" onClick={ () => codeState?setCodeState(false):setCodeState(true)}><b>{ "{ }" }</b></p>
+                    <p className="ans_btn"><b>B</b></p>
+                    <p className="ans_btn"><i>I</i></p>
                 </div>
-            
+
+                <textarea {...register('queContent', { required: true })} placeholder='Enter Your Question'></textarea>
+                <span>{ errors.queContent?.type === 'required' && "Question Field is required" }</span>
+                <br/>
+
+                {
+                    codeState
+                    ?
+                    <div>
+                        <textarea name="codeContent" {...register('codeContent')} placeholder='Enter Your Code Here'></textarea><br/>
+                    </div>
+                    :
+                    <div>
+                        <input className="code_input" type='hidden' name="codeContent" {...register('codeContent')} ></input><br/>
+                    </div>
+                }
+                
                 <div className="row">
                     <div className="col-lg-6">
-                        {/* <div className="dropdown"> */}
                             <select name="category" {...register('category')} defaultValue="General">
                                 <option value="General">General</option>
                                 <option value="SVIIT">SVIIT</option>
@@ -58,7 +79,6 @@ function Aques() {
                                 <option value="SVVV">SVVV</option>
                                 <option value="SVIFA">SVIFA</option>
                             </select>
-                        {/* </div> */}
                     </div>
 
                     <div className="col-lg-6">

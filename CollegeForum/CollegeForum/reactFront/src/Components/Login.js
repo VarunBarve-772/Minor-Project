@@ -1,24 +1,17 @@
 import React,{ useState } from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+// import { yupResolver } from '@hookform/resolvers/yup';
 import Particles from 'react-particles-js';
-import * as yup from 'yup';
+// import * as yup from 'yup';
 import '../css/login.css';
-
-const schema = yup.object().shape({
-    enrollment: yup.string().required("This Field is Required"),
-    password: yup.string().required("This Field is Required"),
-})
 
 function Login(props) {
        
     let history = useHistory();
     const [passwordShown, setPasswordShown] = useState(false);
     const [errorMessage, setErrorMessage]  = useState('');
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema),
-    });
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     const togglePasswordVisiblity = () => {
         setPasswordShown(passwordShown ? false : true);
@@ -88,23 +81,26 @@ function Login(props) {
     <div>
         <Particles className="particles_bg" params={particlesOptions} />
         <div className="login_bg"></div>
-        <div className="login_card">
-            <form className="login_form" onSubmit={handleSubmit(submitForm)}>
-                <h3>Login</h3>
+
+        <div className="row login_card">
+            <form className="col-md-12 login_form" onSubmit={handleSubmit(submitForm)}>
+                <div className="col-md-12 text-center">
+                    <h3 className="login_heading">Login</h3>
+                </div>
 
                 <div className="form-group">
                     <label>Enrollment Number</label>
-                    <input type="text" className="form-control input-style" name="enrollment" {...register('enrollment')} placeholder="Enter Enrollment Number" />
-                    <span>{ errors.enrollment?.message }</span>
+                    <input type="text" className="form-control login_input_style" name="enrollment" {...register('enrollment', { required: true })} placeholder="Enter Enrollment Number" />
+                    <span>{ errors.enrollment?.type === 'required' && "Enrollment Field is required" }</span>
                 </div>
 
                 <br/>
 
                 <div className="form-group">
                     <label>Password</label>
-                    <input type={passwordShown ? "text" : "password"} name="password" {...register('password')} className="form-control input-style" placeholder="Password..."/>
+                    <input type={passwordShown ? "text" : "password"} name="password" {...register('password', { required: true })} className="form-control login_input_style" placeholder="Password..."/>
                     <span className="show-password" onClick={togglePasswordVisiblity}>Show Password</span>
-                    <span>{ errors.password?.message }</span>
+                    <span>{ errors.password?.type === 'required' && "Password Field is required" }</span>
                 </div>
                 <span>{ errorMessage }</span>
 
@@ -118,7 +114,7 @@ function Login(props) {
                     </p>
                     <br/>
                     <br/>
-                    
+                
                     <p className="text-right">
                         <span>Don't have an account? </span>
                         <Link to="/Signin">Create Account</Link>
@@ -128,7 +124,7 @@ function Login(props) {
         </div>
     </div>
 
-     );
+    );
  }
 
  export default Login;

@@ -12,6 +12,7 @@ class Categories_for_questions(models.Model):
     
 class Questions(models.Model):
     content = models.TextField(default=None, max_length=1200)
+    que_code = models.TextField(default=None)
     que_category = models.ForeignKey(Categories_for_questions, on_delete = models.CASCADE, related_name = "que_Category")
     que_date = models.DateField(default=date.today)
     que_time = models.TimeField(default=django.utils.timezone.now)

@@ -1,16 +1,11 @@
-body{
-    padding: 0;
-    margin: 0;
-}
-
 .title{
     cursor: pointer;
     color: white;
-    margin-left: 10%;
+    margin-left: 11.2%;
 }
 
 .sec-1{
-    background-color: #3AAFA9;
+    background-color: #2EA8B5;
     height:100px;
     padding: 20px 40px 20px 40px;
 }
@@ -27,13 +22,13 @@ body{
 
 .topnav .a:hover{
     text-decoration: none;
-    color: #17242A;
+    color: #13252F;
 }
 
 .topnav button{
     float: right;
     margin: 11px 20px;
-    background-color: #3AAFA9;
+    background-color: #2EA8B5;
     border: 3px solid white;
     color: white;
     font-weight: 500;
@@ -42,9 +37,9 @@ body{
 }
 
 .topnav button:hover{
-    background-color: #3AAFA9;
-    border: 3px solid #17242A;
-    color: #17242A;
+    background-color: #2EA8B5;
+    border: 3px solid #13252F;
+    color: #13252F;
 }
 
 .topnav-right {
@@ -57,21 +52,9 @@ form{
 }
  
 .sec-2 {
-   background-color: #17242A; /*ddffbc*//*b8b5ff*/
+   background-color: #13252F;
    height:60px;
    padding-top: 10px;
-}
- 
-.sec-2-col a {
-   color: white;
-   opacity: 0.7;
-   font-weight: bold;
-}
- 
-.sec-2-col a:hover {
-   color: white;
-   opacity: 1;
-   text-decoration: none;
 }
 
 .rowsec2{
@@ -83,7 +66,7 @@ form{
 }
 
 .sec-3_div{
-    border: 2px solid #17242A;
+    border: 2px solid #13252F;
     margin-bottom: 20px;
     padding: 10px 40px;
     margin-bottom: 20px;
@@ -106,7 +89,9 @@ form{
     height: 40px;
     width: 60px;
     border: none;
-    background-color: #3AAFA9;
+    background-color: #2EA8B5;
+    border-top: 4px solid #2EA8B5;
+    border-bottom: 3px solid #2EA8B5;
     cursor: pointer;
 }
 
@@ -115,7 +100,7 @@ form{
 }
 
 i{
-    color: #17242A;
+    color: #13252F;
 }
 
 /*-------btn css--------*/
@@ -134,10 +119,10 @@ i{
     width: 150px;
     height: 40px;
     background-color: #FFFFFF;
-    border: 2.5px solid #17242A;
+    border: 2.5px solid #13252F;
     font-weight: 600;
-    color: #17242A;
-    box-shadow: 6px 6px 0 #17242A;
+    color: #13252F;
+    box-shadow: 6px 6px 0 #13252F;
     text-decoration: none;
 }
 
@@ -147,9 +132,9 @@ i{
     left: -3px;
     background-color: white;
     text-decoration: none;
-    box-shadow: 3px 3px 0 #17242A;
-    border: 2.5PX solid #17242A;
-    color: #17242A;
+    box-shadow: 3px 3px 0 #13252F;
+    border: 2.5PX solid #13252F;
+    color: #13252F;
 }
 
 .ask:hover::after {
@@ -174,7 +159,7 @@ i{
     left: -4px;
     width: 8px;
     height: 8px;
-    background-color: #17242A;
+    background-color: #13252F;
     transform: rotate(45deg);
     z-index: -1;
 }
@@ -187,7 +172,7 @@ i{
     right: 2px;
     width: 8px;
     height: 8px;
-    background-color: #17242A;
+    background-color: #13252F;
     transform: rotate(45deg);
     z-index: -1;
 }

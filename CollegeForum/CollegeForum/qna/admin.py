@@ -8,7 +8,8 @@ class QuestionsAdmin(admin.ModelAdmin):
         'category',
         'q_date',
         'q_time',
-        'satisfactory_answer'
+        'satisfactory_answer',
+        'que_code'
     ]
 
     class Meta:
@@ -20,7 +21,8 @@ class AnswersAdmin(admin.ModelAdmin):
         'a_content',
         'q_id',
         'a_date',
-        'a_time'
+        'a_time',
+        'ans_code'
     ]
 
     class Meta:

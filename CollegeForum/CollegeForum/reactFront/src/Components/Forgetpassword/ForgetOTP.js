@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from 'react-hook-form';
 import ResetPass from './ResetPass';
+import '../../css/Forgotpassword.css';
 
 const ForgetOTP = (props) => {
 
@@ -39,17 +40,23 @@ const ForgetOTP = (props) => {
 
 return(
     <div>
-      <div className="OTP-div">
+      <div className="enrol_bg">
+        <div className="otp_card">
 
-      <h2>Account Verification!</h2>
-      <h6> Enter the OTP we just send on your Email. </h6>
+          <center>
+            <h2>Account Verification!</h2>
+            <h6> Enter the OTP we just send on your Email. </h6>
+          </center>
 
-      <form onSubmit={handleSubmit(onSubmitOTP)}>
-        <input type="text" name="otpValue" {...register('otpValue')} className="smsCode" autoFocus="" maxLength="4" size="1" min="0" max="9" pattern="[0-9]{4}"/><br/>
+          <form onSubmit={handleSubmit(onSubmitOTP)}>
+            <center>
+              <input type="text" name="otpValue" {...register('otpValue')} className="smsCode otp_input_style" autoFocus="" maxLength="4" size="1" min="0" max="9" pattern="[0-9]{4}"/><br/>
 
-        <button type="submit" className="otp_submit_button">Verify</button><br/>
-        <span className="error_msg">{ otpError }</span>
-      </form> 
+              <button type="submit" className="otp_submit_button">Verify</button><br/>
+              <span className="error_msg">{ otpError }</span>
+            </center>
+          </form> 
+        </div>
       </div>
     </div>       
   );
