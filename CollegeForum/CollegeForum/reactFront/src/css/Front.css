@@ -1,0 +1,29 @@
+.container-fluid{
+    padding: 2% 10%;
+  }
+  .navbarcolor{
+    background-color: black;
+    color: #fff;
+    
+  } 
+  img
+  {
+    height:600px;
+    width: 100%;
+
+  }
+  
+    .carousel-content {
+  margin-bottom: 80px;
+  margin-right: 750px;
+    }
+ button
+ {
+   margin-left: 40px;
+   margin-top: 20px;
+ }
+ .div-2
+ {
+  height:500px;
+  width: 100%;
+ }
