@@ -2,9 +2,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate
 import json
-from qna.models import Questions
-# from qna.views import showQues 
-from .models import CustomUser
+from .models import CustomUser, ContactUs
 from .OTP import otp
 
 userOTPData = {
@@ -109,7 +107,7 @@ def changePassword(request):
         return JsonResponse(resData)
 
 @csrf_exempt
-def viewProfile(request):
+def viewProfile():
     user = CustomUser.objects.get(username__contains=userInfo['username'])
     resData = {
         'firstName': user.first_name,
@@ -132,3 +130,18 @@ def forgetPasswordUsername(request):
         'response': 'OTP sent'
     }
     return JsonResponse(resData)
+
+@csrf_exempt
+def contactUs(request):
+    if request.method == 'POST':
+        data = request.body.decode('utf-8')
+        body = json.loads(data) 
+
+        complaint = ContactUs.objects.create(name = body['name'], email = body['email'], message = body['content'])
+        complaint.save()
+
+        resData = {
+            'response': "Complaint Added"
+        }
+
+        return JsonResponse(resData)

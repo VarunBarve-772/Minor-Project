@@ -193,17 +193,18 @@ def answerSubmit(request):
 
 @csrf_exempt
 def satisfactoryAnswerSubmit(request):
-    data = request.body.decode('utf-8')
-    body = json.loads(data)
+    if request.method == "POST":
+        data = request.body.decode('utf-8')
+        body = json.loads(data)
 
-    question = Questions.objects.get(id=body['que_id'])
+        question = Questions.objects.get(id=body['que_id'])
 
-    question.satisfactory_answer = body['ans_id']
+        question.satisfactory_answer = body['ans_id']
 
-    question.save()
+        question.save()
 
-    resData = {
-        'response': 'satisfactory answer submitted'
-    }
+        resData = {
+            'response': 'satisfactory answer submitted'
+        }
 
-    return JsonResponse(resData)
+        return JsonResponse(resData)

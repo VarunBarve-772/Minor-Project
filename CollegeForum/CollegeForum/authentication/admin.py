@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser
+from django.db import models
+from .models import CustomUser, ContactUs
 
 # Register your models here.
 class CustomUserAdmin(UserAdmin):
@@ -22,4 +23,15 @@ class CustomUserAdmin(UserAdmin):
         )
     )
 
+class ContactUsAdmin(admin.ModelAdmin):
+    fields = [
+        'name',
+        'email',
+        'message'
+    ]
+
+    class Meta:
+        model = ContactUs
+
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(ContactUs, ContactUsAdmin)
