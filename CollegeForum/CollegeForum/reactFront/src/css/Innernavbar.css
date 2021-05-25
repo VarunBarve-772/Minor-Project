@@ -1,8 +1,8 @@
 .container-fluid{
-    padding: 2% 10%;
-  }
-  .navbarcolor{
-    background-color: black;
-    color: #fff;
-    
-  } 
+  padding: 2% 10%;
+}
+
+.navbarcolor{
+  background-color: black;
+  color: #fff;  
+}

@@ -1,12 +1,13 @@
 import React,{ useState, useEffect } from 'react';
 import AnswerSubmit from './AnswerSubmit';
+import Answers from './Answers';
 import "../../css/question_page.css";
 
 const Question = () => {
     const [questionContent, setQuestionContent] = useState({});
     const [answerList, setAnswerList] = useState([]);
     const [contentReload, setContentReload] = useState(0);
-    let answerContent = answerList;
+    const [satisfactoryAnswer, setSatisfactoryAnswer] = useState(null);
 
     useEffect(() => {
         let questionId = {
@@ -33,39 +34,13 @@ const Question = () => {
         .then(json => {            
             setQuestionContent(json);
             setAnswerList(json['answers']);
+            setSatisfactoryAnswer(json.satisfactory);
+            console.log(json);
         });
 
     }, [contentReload]) 
 
-    if ( answerContent.length === 0 ) {
-        answerContent = <h2>No Answers</h2>
-    } else {
-        answerContent = answerContent.map(answer => {
-            return (
-                <div className="answers" key={ answer.answer_id }>
-                    <div className="answer_header">
-                            <b> { answer.name } </b>
-                            <div className="ans_date_time">
-                                <p>{ answer.date }</p>
-                                <p>{ answer.time }</p>
-                            </div>
-                    </div>
-                    <div className="answer_body">
-                        <p> { answer.answer } </p>
-                        {
-                        answer.code === 'None' || answer.code === ''
-                        ?
-                        <span></span>
-                        :
-                        <code> { answer.code } </code>
-                    }
-                    </div>
-                    <hr className="inbetween_hr"/>
-                </div>
-            )
-        });     
-    }
-
+    
     return (
         <div className="question_body">  
             <div className="question_head">
@@ -97,7 +72,7 @@ const Question = () => {
             <hr/>
 
             <div className="answer_section">
-                { answerContent }
+                <Answers answerList={ answerList } satisfactoryAnswer={ satisfactoryAnswer } setContentReload={ setContentReload } contentReload={ contentReload } />
             </div>
 
             <hr className="answer_section_hr"/>

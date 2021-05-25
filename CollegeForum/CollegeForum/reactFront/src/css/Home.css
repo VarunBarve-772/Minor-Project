@@ -56,10 +56,6 @@ form{
    height:60px;
    padding-top: 10px;
 }
-
-.rowsec2{
-    margin-top: 10px;
-}
  
 .sec-3 {
    padding: 0px 85px 20px 85px;
@@ -88,6 +84,7 @@ form{
 .search_btn{
     height: 40px;
     width: 60px;
+    margin: 0;
     border: none;
     background-color: #2EA8B5;
     border-top: 4px solid #2EA8B5;
