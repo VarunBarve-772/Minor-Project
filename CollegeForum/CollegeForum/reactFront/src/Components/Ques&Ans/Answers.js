@@ -1,8 +1,28 @@
-import React from 'react';
+import React ,{useState} from 'react';
+import Modal from 'react-modal';
+import '../../css/Modal.css';
+// var Modal = require('react-bootstrap-modal');
 
 const Answers = (props) => {
-    let answerContent = props.answerList;
 
+    const [modalisOpen, setModalIsOpen] = useState(false);
+    const customStyles = {
+        content : {
+          top                   : '40%',
+          left                  : '50%',
+          right                 : 'auto',
+          bottom                : 'auto',
+          marginRight           : '-50%',
+          transform             : 'translate(-50%, -50%)',
+          height                :'300px',
+          width                 :'600px',
+        }
+      };
+
+
+
+    let answerContent = props.answerList;
+    
     const submitSatisfactoryAnswer = (answer_id) => {
         const data = {
             ans_id: answer_id,
@@ -54,7 +74,8 @@ const Answers = (props) => {
                         :
                         <code> { answer.code } </code>
                     }
-                    <button onClick={() => { submitSatisfactoryAnswer(answer.answer_id) } }>
+                    <button class="btn btn-success" onClick={() => { submitSatisfactoryAnswer(answer.answer_id) } }>
+                 
                         {
                             Number(props.satisfactoryAnswer) === Number(answer.answer_id)
                             ?
@@ -63,6 +84,11 @@ const Answers = (props) => {
                             "Mark as Satisfactory"
                         }
                     </button>
+                    
+                    <button onClick={()=>setModalIsOpen(true)} class="btn btn-danger">Report</button>
+        
+      
+                    
                     </div>
                     <hr className="inbetween_hr"/>
                 </div>
@@ -73,6 +99,28 @@ const Answers = (props) => {
     return (
         <div>
             { answerContent }
+            
+        <Modal  style={customStyles} isOpen={modalisOpen} >
+        
+        <div className="row">
+        <div  className="col-lg-8"><h1 className="modal-heading">Report content under</h1></div>
+        <div  className="col-lg-4 cross-btn">   <button onClick={() => setModalIsOpen(false)}>❌</button></div>
+        </div>
+                    <div className="">
+                            <select name="category" defaultValue="General">
+                                <option value="Abusive">Abusive Content</option>
+                                <option value="Hate">Hate Speech</option>
+                                <option value="Violence">Violence</option>
+                                <option value="Illegal">Illegal Activities</option>
+                                <option value="Inappropriate">Inappropriate info</option>
+                                <option value="Terrorist">Terrorist content</option>
+                            </select>
+                    </div>
+                    <div className="">
+                    <button type="button" onClick={() => setModalIsOpen(false)} class="btn btn-danger btn-lg">Report</button>
+                    </div>
+                  
+      </Modal>
         </div>
     )
 }
