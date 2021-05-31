@@ -40,3 +40,18 @@ class ExcludeKeywords(models.Model):
     def __str__(self):
         return self.keyword
         
+class ReportCategory(models.Model):
+    category = models.CharField(max_length=200, unique=True)
+
+    def __str__(self):
+        return self.category
+
+class Report(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete = models.CASCADE, related_name = "User")
+    type = models.CharField(max_length=1)
+    category = models.ForeignKey(ReportCategory, on_delete = models.CASCADE, related_name = "Category")
+    reportedId = models.IntegerField()
+    reportedOn = models.DateTimeField(default=django.utils.timezone.now, verbose_name='Reported On')
+
+    def __str__(self):
+        return str(self.id)

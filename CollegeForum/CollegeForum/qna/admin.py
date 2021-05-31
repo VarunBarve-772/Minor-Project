@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Questions, Answers, Categories_for_questions, ExcludeKeywords
+from .models import Questions, Answers, Categories_for_questions, ExcludeKeywords, Report, ReportCategory
 
 class QuestionsAdmin(admin.ModelAdmin):
     fields = [
@@ -46,7 +46,30 @@ class ExcludeKeywordsAdmin(admin.ModelAdmin):
     class Meta:
         model = Categories_for_questions
 
+class ReportAdmin(admin.ModelAdmin):
+    fields = [
+        'User',
+        'Type',
+        'Category',
+        'Reported Id',
+        'Reported On',
+    ]
+
+    class Meta:
+        model = Report
+
+class ReportCategoryAdmin(admin.ModelAdmin):
+    fields = [
+        'Category',
+        'id'
+    ]
+
+    class Meta:
+        model = ReportCategory
+
 admin.site.register(Questions)
 admin.site.register(Answers)
 admin.site.register(Categories_for_questions)
 admin.site.register(ExcludeKeywords)
+admin.site.register(Report)
+admin.site.register(ReportCategory)

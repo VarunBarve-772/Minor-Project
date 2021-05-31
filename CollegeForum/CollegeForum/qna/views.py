@@ -1,6 +1,6 @@
-# from django.shortcuts import render
-from .models import Questions, Answers, Categories_for_questions
+from .models import Questions, Answers, Categories_for_questions, Report, ReportCategory
 from authentication.models import CustomUser
+from authentication.views import userInfo
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from authentication.views import userInfo
@@ -15,9 +15,8 @@ def showQues(request):
         data = request.body.decode('utf-8')
         body = json.loads(data)
 
-        category = Categories_for_questions.objects.get(category=body['category'])
-        questions = list(Questions.objects.filter(que_category=category))
-        print(questions)
+        category = Categories_for_questions.objects.get(category = body['category'])
+        questions = list(Questions.objects.filter(que_category = category))
 
         for question in questions:
             user = CustomUser.objects.get(username = question.que_username)
@@ -42,24 +41,31 @@ def showQues(request):
 
 @csrf_exempt
 def addQues(request):
-    if request.method == "GET":
-        result = SmartSearch.extractingKeywords('This is a test question for sviit institute')
-        print(result)
-        resData = {
-            "response": "Invalid Request",
-            'result': result
-        }
-        return JsonResponse(resData)
+    # if request.method == "GET":
+    #     result = SmartSearch.extractingKeywords('This is a test question for sviit institute')
+    #     print(result)
+    #     resData = {
+    #         "response": "Invalid Request",
+    #         'result': result
+    #     }
+    #     return JsonResponse(resData)
     if request.method == 'POST':
         data = request.body.decode('utf-8')
         body = json.loads(data)
 
-        user = CustomUser.objects.get(username__contains=userInfo['username'])
+        user = CustomUser.objects.get(username = userInfo['username'])
         category = Categories_for_questions.objects.get(category = body['category'])
 
         que_tags = SmartSearch.extractingKeywords(body['queContent'])
 
-        question = Questions(que_username = user, content = body['queContent'], que_code=body['codeContent'], que_category = category, tags = que_tags)
+        question = Questions(
+            que_username = user, 
+            content = body['queContent'], 
+            que_code = body['codeContent'], 
+            que_category = category, 
+            tags = que_tags
+            )
+
         question.save()
 
         resData = {
@@ -106,7 +112,7 @@ def MyQuestions(request):
     if request.method == 'POST':
         lists = []
 
-        user = CustomUser.objects.get(username__contains=userInfo['username'])
+        user = CustomUser.objects.get(username = userInfo['username'])
         questions = Questions.objects.filter(que_username = user)
 
         for question in questions:
@@ -140,15 +146,15 @@ def QuesPage(request):
 
         ques_id = body['id']
 
-        question = Questions.objects.get(id=ques_id)
-        que_user = CustomUser.objects.get(username__contains=question.que_username)
+        question = Questions.objects.get(id = ques_id)
+        que_user = CustomUser.objects.get(username = question.que_username)
         q_full_name = que_user.first_name+" "+que_user.last_name
 
 
-        answers = list(Answers.objects.filter(que_id=ques_id))
+        answers = list(Answers.objects.filter(que_id = ques_id))
 
         for answer in answers:
-            ans_users = CustomUser.objects.get(username__contains=answer.ans_username)
+            ans_users = CustomUser.objects.get(username = answer.ans_username)
             a_full_names = ans_users.first_name+" "+ans_users.last_name
 
             ans_dict = {
@@ -172,7 +178,8 @@ def QuesPage(request):
                     "code": question.que_code,
                     "answers": ans_list
         }
-        return JsonResponse(response, safe=False)
+
+        return JsonResponse(response)
 
 @csrf_exempt
 def answerSubmit(request):
@@ -180,15 +187,22 @@ def answerSubmit(request):
         data = request.body.decode('utf-8')
         body = json.loads(data)
 
-        user = CustomUser.objects.get(username__contains=userInfo['username'])        
+        user = CustomUser.objects.get(username = userInfo['username'])        
         question = Questions.objects.get(id=body['que_id'])
 
-        answer = Answers(ans_content=body['answerContent'], ans_code=body['codeContent'], que_id=question, ans_username=user)
+        answer = Answers(
+            ans_content = body['answerContent'], 
+            ans_code = body['codeContent'], 
+            que_id = question, 
+            ans_username = user
+        )
+
         answer.save()
 
         resData = {
             "response": 'Answer Submitted'
         }
+
         return JsonResponse(resData)
 
 @csrf_exempt
@@ -197,14 +211,46 @@ def satisfactoryAnswerSubmit(request):
         data = request.body.decode('utf-8')
         body = json.loads(data)
 
-        question = Questions.objects.get(id=body['que_id'])
+        question = Questions.objects.get(id = body['que_id'])
 
-        question.satisfactory_answer = body['ans_id']
+        if question.que_username == userInfo['username']:
 
-        question.save()
+            question.satisfactory_answer = body['ans_id']
+            question.save()
 
+        else:
+            resData = {
+                'response': "Invalid User"
+            }
+
+            return JsonResponse(resData)
+            
         resData = {
             'response': 'satisfactory answer submitted'
+        }
+
+        return JsonResponse(resData)
+
+@csrf_exempt
+def ReportContent(request):
+    if request.method == "POST":
+        data = request.body.decode('utf-8')
+        body = json.loads(data)
+
+        reportingUser = CustomUser.objects.get(username = userInfo['username'])
+        reportCategory = ReportCategory.objects.get(category = body['category'])
+
+        report = Report.objects.create(
+            user = reportingUser, 
+            type = body['type'], 
+            category = reportCategory, 
+            reportedId = body['id']
+            )
+
+        report.save()
+
+        resData = {
+            'response': 'Report Submitted'
         }
 
         return JsonResponse(resData)

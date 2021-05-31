@@ -6,8 +6,19 @@ const ViewProfile = () => {
     const [userProfile, setUserProfile] = useState({});
 
     useEffect( () => {
-        fetch(`http://127.0.0.1:8000/authentication/viewProfile`)
-
+        fetch("http://127.0.0.1:8000/authentication/viewProfile", {
+      
+            // Adding method type
+            method: "POST",
+            
+            // Adding body or contents to send
+            body: JSON.stringify(''),
+            
+            // Adding headers to the request
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
         // Converting to JSON
         .then(response => response.json())
 
