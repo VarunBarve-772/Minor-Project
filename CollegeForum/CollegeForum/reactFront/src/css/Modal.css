@@ -7,5 +7,24 @@
 .cross-btn
 {
 text-align: right;
+}
 
+.report_post_btn{
+   background-color: #13252F;
+    width: 90px;
+    height: 40px;
+    border: none;
+    float: right;
+    border-radius: 0;
+}
+
+.report_post_btn:hover{
+   background-color: #13252F;
+}
+
+.close_btn{
+   border: none;
+   background-color: #ffffff;
+   color: #13252F;
+   cursor: pointer;
 }

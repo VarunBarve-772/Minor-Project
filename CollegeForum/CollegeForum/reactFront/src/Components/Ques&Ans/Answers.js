@@ -76,11 +76,18 @@ const Answers = (props) => {
 
                     <div className="ans_right">
                         <div className="answer_header">
-                                <b> { answer.name } </b>
+                            <b> { answer.name } </b>
+                            <div className="answer_header_right">
                                 <div className="ans_date_time">
                                     <p>{ answer.date }</p>
                                     <p>{ answer.time }</p>
+                                </div><br/>
+                                <div className="report_btn_div">
+                                    <button onClick={()=>setModalIsOpen(true)} class="btn btn-danger report_btn">
+                                    <span className="report_icon">❕</span>
+                                    </button>
                                 </div>
+                            </div>
                         </div>
                         <div className="answer_body">
                             <p> { answer.answer } </p>
@@ -93,7 +100,6 @@ const Answers = (props) => {
                             }
                         </div>
                                                 
-                    <button onClick={()=>setModalIsOpen(true)} class="btn btn-danger">Report</button>
 
                     </div>
                     {/* <hr className="inbetween_hr"/> */}
@@ -107,13 +113,20 @@ const Answers = (props) => {
         <div>
             { answerContent }
             
-        <Modal  style={customStyles} isOpen={modalisOpen} >
-        
-        <div className="row">
-        <div  className="col-lg-8"><h1 className="modal-heading">Report content under</h1></div>
-        <div  className="col-lg-4 cross-btn">   <button onClick={() => setModalIsOpen(false)}>❌</button></div>
-        </div>
-                    <div className="">
+            <Modal style={customStyles} isOpen={modalisOpen}>
+            
+                <div className="row">
+                    <div  className="col-lg-8">
+                        <h2 className="modal-heading">Report content under</h2>
+                    </div>
+                    
+                    <div  className="col-lg-4 cross-btn">   
+                        <button className="close_btn" onClick={() => setModalIsOpen(false)}>✖</button>
+                    </div>
+                    <br/><br/>
+                    
+                    </div>
+                        <div>
                             <select name="category" defaultValue="General">
                                 <option value="Abusive">Abusive Content</option>
                                 <option value="Hate">Hate Speech</option>
@@ -122,12 +135,11 @@ const Answers = (props) => {
                                 <option value="Inappropriate">Inappropriate info</option>
                                 <option value="Terrorist">Terrorist content</option>
                             </select>
-                    </div>
-                    <div className="">
-                    <button type="button" onClick={() => setModalIsOpen(false)} class="btn btn-danger btn-lg">Report</button>
-                    </div>
-                  
-      </Modal>
+                        </div>
+                        <div>
+                            <button type="button" onClick={() => setModalIsOpen(false)} class="btn btn-danger report_post_btn">Report</button>
+                        </div>
+            </Modal>
         </div>
     )
 }

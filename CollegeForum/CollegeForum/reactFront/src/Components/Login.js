@@ -37,7 +37,7 @@ function Login(props) {
         
         // Displaying results to console
         .then(json => {
-            if(json['response'] === 'valid') {
+            if(json['response'] === 'Valid') {
                 props.setUserId(data['enrollment']);
                 sessionStorage.setItem('userId', JSON.stringify(data['enrollment']));
                 sessionStorage.setItem('pass', JSON.stringify(btoa(data['password'])));
