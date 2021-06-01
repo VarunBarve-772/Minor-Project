@@ -3,6 +3,7 @@ import ViewProfile from './ViewProfile';
 import UpdateProfile from './UpdateProfile';
 import ChangePassword from './ChangePassword';
 import ShowQuestions from '../CommonFiles/ShowQuestions';
+import Navbar from "../CommonFiles/Navbar"
 import '../../css/Profile/Profile.css'
 
 const Profile = (props) => {
@@ -13,6 +14,7 @@ const Profile = (props) => {
     return(
 
         <div className="wrapper">
+        <Navbar setUserId={ props.setUserId }/>
 
             <div className="nav_bar">
                 <h4 className="heading">My profile</h4>

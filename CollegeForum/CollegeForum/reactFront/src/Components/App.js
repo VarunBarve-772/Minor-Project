@@ -32,41 +32,53 @@ return(
         { userId 
             ?
             <div>
-                <Route exact path="/" component= { Front }/>        
-                <Route  path="/AboutUs" component= { About }/> 
-                <Route  path="/ContactUS" component= { Contact }/> 
-                <Route  path="/AskQuestion" component= { Aques }/> 
-                <Route  path="/ForgetPassword" component= { ForgetPassword }/>
 
-                <Route  path="/Login" >
-                    <Login setUserId={ setUserId }/>
-                </Route>
+                <Route  path="/AboutUs" >
+                    <About setUserId={ setUserId }/>
+                </Route> 
+
+                <Route  path="/ContactUS" >
+                    <Contact setUserId={ setUserId }/>
+                </Route> 
+
+                <Route  path="/AskQuestion" >
+                    <Aques setUserId={ setUserId }/>
+                </Route> 
 
                 <Route  path="/Home" >
                     <Home setUserId={ setUserId } />
                 </Route>
-
-                <Route  path="/Signin" >
-                    <Register setTempUserId={ setTempUserId }/>
-                </Route>  
-
-                <Route  path="/OTP" >
-                    <OTP tempUserId={ tempUserId } setUserId={ setUserId }/>
-                </Route>  
                           
                 <Route  path="/Question" >
-                    <Question />
+                    <Question setUserId={ setUserId } />
                 </Route>  
 
                 <Route  path="/Profile" >
-                    <Profile />
+                    <Profile setUserId={ setUserId } />
                 </Route>
-                          
+
+                <Route  path="/Login" >
+                    <Login setUserId={ setUserId }/>
+                </Route>
+                
             </div>
             :
             <div>
-                <Route exact path="/" component= { Front }/> 
-                <Route  path="/ForgetPassword" component= { ForgetPassword }/>
+                <Route exact path="/">
+                    <Front/>
+                </Route> 
+
+                <Route  path="/AboutUs" >
+                    <About />
+                </Route> 
+
+                <Route  path="/ContactUS" >
+                    <Contact />
+                </Route> 
+
+                <Route  path="/ForgetPassword" >
+                    <ForgetPassword/>
+                </Route>
                 
                 <Route  path="/Login" >
                     <Login setUserId={ setUserId }/>

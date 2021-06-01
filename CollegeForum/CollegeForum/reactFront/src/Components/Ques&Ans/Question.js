@@ -1,11 +1,12 @@
 import React,{ useState, useEffect } from 'react';
 import AnswerSubmit from './AnswerSubmit';
 import Answers from './Answers';
+import Navbar from '../CommonFiles/Navbar';
 import Modal from 'react-modal';
 import '../../css/Modal.css';
 import "../../css/question_page.css";
 
-const Question = () => {
+const Question = (props) => {
     const [questionContent, setQuestionContent] = useState({});
     const [answerList, setAnswerList] = useState([]);
     const [contentReload, setContentReload] = useState(0);
@@ -99,91 +100,96 @@ const Question = () => {
     }
     
     return (
-        <div className="question_body">  
-            <div className="question_head">
-                <div className="question_content">
-                    <p className="question_content_p"> { questionContent.question } </p>
-                    {
-                        questionContent.code === 'None' || questionContent.code === ''
-                        ?
-                        <span></span>
-                        :
-                        <code className="code_style"> { questionContent.code } </code>
-                    }
-                </div>
-        
-                <div className="question_details">
-                    <div className="questioner">
-                        <p>Asked by: <b> { questionContent.questioner } </b></p>
-                        <p></p>
+        <div>
+            <Navbar setUserId={ props.setUserId }/>
+
+            <div className="question_body"> 
+
+                <div className="question_head">
+                    <div className="question_content">
+                        <p className="question_content_p"> { questionContent.question } </p>
+                        {
+                            questionContent.code === 'None' || questionContent.code === ''
+                            ?
+                            <span></span>
+                            :
+                            <code className="code_style"> { questionContent.code } </code>
+                        }
                     </div>
-                    <div className="date_time">
-                        <p>Asked on: </p>
-
-                        <div className="date_time_b">
-                            <b> { questionContent.date } </b>
-                            <b> { questionContent.time } </b>
-                        </div>
-
-                        <div className="report_btn_div">
-                                <button onClick={() => onModelClick(JSON.parse(sessionStorage.getItem('questionId')))} class="btn btn-danger report_btn">
-                                <span className="report_icon">❕</span>
-                                </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr/>
-
-            <div className="answer_section">
-                <Answers answerList={ answerList } satisfactoryAnswer={ satisfactoryAnswer } setContentReload={ setContentReload } contentReload={ contentReload } />
-            </div>
-
-            <hr className="answer_section_hr"/>
-            <div className="answer_input_section">
-                <AnswerSubmit setContentReload={ setContentReload } contentReload={ contentReload } />
-            </div>
-
-            <Modal style={customStyles} isOpen={modalisOpen}>
             
-                <div className="row">
-                    
-                    <div  className="col-lg-8">
-                        <h2 className="modal-heading">Report content under</h2>
+                    <div className="question_details">
+                        <div className="questioner">
+                            <p>Asked by: <b> { questionContent.questioner } </b></p>
+                            <p></p>
+                        </div>
+                        <div className="date_time">
+                            <p>Asked on: </p>
+
+                            <div className="date_time_b">
+                                <b> { questionContent.date } </b>
+                                <b> { questionContent.time } </b>
+                            </div>
+
+                            <div className="report_btn_div">
+                                    <button onClick={() => onModelClick(JSON.parse(sessionStorage.getItem('questionId')))} class="btn btn-danger report_btn">
+                                    <span className="report_icon">❕</span>
+                                    </button>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div  className="col-lg-4 cross-btn">   
-                        <button className="close_btn" onClick={() => setModalIsOpen(false)}>✖</button>
+                </div>
+                <hr/>
+
+                <div className="answer_section">
+                    <Answers answerList={ answerList } satisfactoryAnswer={ satisfactoryAnswer } setContentReload={ setContentReload } contentReload={ contentReload } />
+                </div>
+
+                <hr className="answer_section_hr"/>
+                <div className="answer_input_section">
+                    <AnswerSubmit setContentReload={ setContentReload } contentReload={ contentReload } />
+                </div>
+
+                <Modal style={customStyles} isOpen={modalisOpen}>
+                
+                    <div className="row">
+                        
+                        <div  className="col-lg-8">
+                            <h2 className="modal-heading">Report content under</h2>
+                        </div>
+                        
+                        <div  className="col-lg-4 cross-btn">   
+                            <button className="close_btn" onClick={() => setModalIsOpen(false)}>✖</button>
+                        </div>
+
+                        <br/><br/>
+                        
                     </div>
 
-                    <br/><br/>
-                    
-                </div>
+                    <div onChange={ setReportCategory }>
+                        
+                    <input type="radio" value="Abusive Content" name="category" /> Abusive Content
+                    <br/>
+                    <input type="radio" value="Hate Speech" name="category" /> Hate Speech
+                    <br/>
+                    <input type="radio" value="Violence" name="category" /> Violence
+                    <br/>
+                    <input type="radio" value="Illegal Activities" name="category" /> Illegal Activities
+                    <br/>
+                    <input type="radio" value="Inappropriate info" name="category" /> Inappropriate info
+                    <br/>
+                    <input type="radio" value="Terrorist content" name="category" /> Terrorist content
+                    <br/>
+                    <input type="radio" value="Other" name="category" /> Other
+                    <br/>
 
-                <div onChange={ setReportCategory }>
-                    
-                <input type="radio" value="Abusive Content" name="category" /> Abusive Content
-                <br/>
-                <input type="radio" value="Hate Speech" name="category" /> Hate Speech
-                <br/>
-                <input type="radio" value="Violence" name="category" /> Violence
-                <br/>
-                <input type="radio" value="Illegal Activities" name="category" /> Illegal Activities
-                <br/>
-                <input type="radio" value="Inappropriate info" name="category" /> Inappropriate info
-                <br/>
-                <input type="radio" value="Terrorist content" name="category" /> Terrorist content
-                <br/>
-                <input type="radio" value="Other" name="category" /> Other
-                <br/>
+                    </div>
 
-                </div>
+                    <div>
+                        <button type="button" onClick={ reportSubmit } class="btn btn-danger report_post_btn">Report</button>
+                    </div>
 
-                <div>
-                    <button type="button" onClick={ reportSubmit } class="btn btn-danger report_post_btn">Report</button>
-                </div>
-
-            </Modal>
+                </Modal>
+            </div>
         </div>
     )
 }
