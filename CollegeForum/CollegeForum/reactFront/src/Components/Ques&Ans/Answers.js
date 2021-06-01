@@ -38,34 +38,44 @@ const Answers = (props) => {
         answerContent = answerContent.map(answer => {
             return (
                 <div className="answers" key={ answer.answer_id }>
-                    <div className="answer_header">
-                            <b> { answer.name } </b>
-                            <div className="ans_date_time">
-                                <p>{ answer.date }</p>
-                                <p>{ answer.time }</p>
-                            </div>
+                    <div className="ans_left">
+                        <button className="sat_ans_btn" onClick={() => { submitSatisfactoryAnswer(answer.answer_id) } }>
+                            {
+                                Number(props.satisfactoryAnswer) === Number(answer.answer_id)
+                                ?
+                                <span>
+                                    <i class="fa fa-check fa-2x"></i>
+                                </span>
+                                :
+                                <span>
+                                    <i class="fa fa-star fa-2x"></i>
+                                </span>
+                            }
+                        </button>
                     </div>
-                    <div className="answer_body">
-                        <p> { answer.answer } </p>
-                        {
-                        answer.code === 'None' || answer.code === ''
-                        ?
-                        <span></span>
-                        :
-                        <code> { answer.code } </code>
-                    }
-                    <button onClick={() => { submitSatisfactoryAnswer(answer.answer_id) } }>
-                        {
-                            Number(props.satisfactoryAnswer) === Number(answer.answer_id)
+
+                    <div className="ans_right">
+                        <div className="answer_header">
+                                <b> { answer.name } </b>
+                                <div className="ans_date_time">
+                                    <p>{ answer.date }</p>
+                                    <p>{ answer.time }</p>
+                                </div>
+                        </div>
+                        <div className="answer_body">
+                            <p> { answer.answer } </p>
+                            {
+                            answer.code === 'None' || answer.code === ''
                             ?
-                            "Marked Satisfactory"
+                            <span></span>
                             :
-                            "Mark as Satisfactory"
-                        }
-                    </button>
+                            <code className="code_style"> { answer.code } </code>
+                            }
+                        </div>
                     </div>
-                    <hr className="inbetween_hr"/>
+                    {/* <hr className="inbetween_hr"/> */}
                 </div>
+                
             )
         });     
     }

@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import '../../css/Profile/ChangePassword.css';
+import Particles from 'react-particles-js';
 
 const schema = yup.object().shape({
     password: yup.string().required("This Field is Required").min(8).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, "Please Enter a Valid Password"),
@@ -61,8 +62,38 @@ const ResetPass = () => {
         history.push('/Login');
     }
 
+    const particlesOptions = {
+        particles: {
+            number: {
+                value: 40,
+                desity: {
+                    enable: true,
+                    value_area: 900
+                }
+            },
+            
+            color: {
+                value: "#17242A"
+            },
+
+            size: {
+                value: 4
+            },
+
+            events: {
+                onhover: {
+                  enable: true,
+                  mode: "repulse"
+                },
+            }
+        }
+    }
+
     return (
         <div>
+            <Particles className="change_pass_particles_bg" params={particlesOptions} />
+            <div className="change_pass_bg"></div>
+
             <div className="reset_bg">
                 <div className="reset_card">
                     <form onSubmit={handleSubmit(submitPassword)}>

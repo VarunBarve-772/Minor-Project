@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from 'react-hook-form';
 import ResetPass from './ResetPass';
 import '../../css/Forgotpassword.css';
+import Particles from 'react-particles-js';
 
 const ForgetOTP = (props) => {
 
@@ -38,8 +39,38 @@ const ForgetOTP = (props) => {
         });
       } 
 
+      const particlesOptions = {
+        particles: {
+            number: {
+                value: 40,
+                desity: {
+                    enable: true,
+                    value_area: 900
+                }
+            },
+            
+            color: {
+                value: "#17242A"
+            },
+
+            size: {
+                value: 4
+            },
+
+            events: {
+                onhover: {
+                  enable: true,
+                  mode: "repulse"
+                },
+            }
+        }
+    }
+
 return(
     <div>
+      <Particles className="change_pass_particles_bg" params={particlesOptions} />
+      <div className="change_pass_bg"></div>
+
       <div className="enrol_bg">
         <div className="otp_card">
 

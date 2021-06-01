@@ -51,7 +51,7 @@ const Question = () => {
                         ?
                         <span></span>
                         :
-                        <code> { questionContent.code } </code>
+                        <code className="code_style"> { questionContent.code } </code>
                     }
                 </div>
         
