@@ -1,9 +1,7 @@
 import React,{ useState } from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-// import { yupResolver } from '@hookform/resolvers/yup';
 import Particles from 'react-particles-js';
-// import * as yup from 'yup';
 import '../css/login.css';
 
 function Login(props) {
@@ -48,6 +46,13 @@ function Login(props) {
         });
         
     }
+
+    const checkUser = () => {
+        if (sessionStorage.getItem('userId')) {
+            history.push('/Home');
+        }
+    }
+    checkUser();
 
     const particlesOptions = {
         particles: {

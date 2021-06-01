@@ -213,7 +213,7 @@ def satisfactoryAnswerSubmit(request):
 
         question = Questions.objects.get(id = body['que_id'])
 
-        if question.que_username == userInfo['username']:
+        if question.que_username.username == userInfo['username']:
 
             question.satisfactory_answer = body['ans_id']
             question.save()
