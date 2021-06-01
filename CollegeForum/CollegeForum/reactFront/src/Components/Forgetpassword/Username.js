@@ -18,7 +18,19 @@ const Username = (props) => {
 
     const submitForm = (data) => {
         console.log(data);
-        fetch(`http://127.0.0.1:8000/authentication/forgetPasswordUsername?userId=${data.enrollment}`)
+        fetch("http://127.0.0.1:8000/authentication/forgetPasswordUsername", {
+      
+            // Adding method type
+            method: "POST",
+            
+            // Adding body or contents to send
+            body: JSON.stringify(data),
+            
+            // Adding headers to the request
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
         props.setState(<ForgetOTP setState={props.setState}/>)
     }
 

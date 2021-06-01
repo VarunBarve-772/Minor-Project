@@ -11,7 +11,7 @@ const ForgetOTP = (props) => {
 
 
   const onSubmitOTP = function(data) {
-
+    data.location = 'forgetPassword'
     fetch("http://127.0.0.1:8000/authentication/OTP", {
       
             // Adding method type
@@ -31,7 +31,7 @@ const ForgetOTP = (props) => {
         
         // Displaying results to console
         .then(json => {
-          if(json['result'] === 'valid') {
+          if(json['result'] === 'Valid') {
             props.setState(<ResetPass/>);
           }else {
             setOtpError('Invalid OTP');

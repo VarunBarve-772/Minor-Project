@@ -31,6 +31,7 @@ function OTP(props) {
   }
 
   const onSubmitOTP = function(data) {
+    data.location = 'resgister';
     fetch("http://127.0.0.1:8000/authentication/OTP", {
       
             // Adding method type
