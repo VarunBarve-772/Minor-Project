@@ -131,7 +131,7 @@ const Question = (props) => {
                             </div>
 
                             <div className="report_btn_div">
-                                    <button onClick={() => onModelClick(JSON.parse(sessionStorage.getItem('questionId')))} class="btn btn-danger report_btn">
+                                    <button onClick={() => onModelClick(JSON.parse(sessionStorage.getItem('questionId')))} className="btn btn-danger report_btn">
                                     <span className="report_icon">❕</span>
                                     </button>
                             </div>
@@ -185,7 +185,7 @@ const Question = (props) => {
                     </div>
 
                     <div>
-                        <button type="button" onClick={ reportSubmit } class="btn btn-danger report_post_btn">Report</button>
+                        <button type="button" onClick={ reportSubmit } className="btn btn-danger report_post_btn">Report</button>
                     </div>
 
                 </Modal>

@@ -2,7 +2,6 @@ import React,{ useState } from 'react';
 import { Route } from 'react-router-dom';
 import Register from './RegisterUser/Register';
 import Login from './Login';
-import OTP from './OTP';
 import Home from './Home/Home';
 import About from "./About-us";
 import Contact from "./Contact-us";
@@ -25,7 +24,6 @@ function App() {
     }
 
     const [userId, setUserId] = useState(setUserSession);
-    const [tempUserId, setTempUserId] = useState('');
   
 return( 
     <div>
@@ -60,6 +58,10 @@ return(
                 <Route  path="/Login" >
                     <Login setUserId={ setUserId }/>
                 </Route>
+
+                <Route  path="/Signin" >
+                    <Register setUserId={ setUserId } />
+                </Route> 
                 
             </div>
             :
@@ -85,12 +87,9 @@ return(
                 </Route>
 
                 <Route  path="/Signin" >
-                    <Register setTempUserId={ setTempUserId }/>
+                    <Register setUserId={ setUserId } />
                 </Route>  
 
-                <Route  path="/OTP" >
-                    <OTP tempUserId={ tempUserId }/>
-                </Route>
             </div>    
             }
     </div>

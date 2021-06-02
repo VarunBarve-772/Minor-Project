@@ -1,16 +1,28 @@
-import React from 'react';
+import React,{ useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import Form from './RegistrationForm';
-// import 'src/css/registration.css';
 import '../../css/registration.css'
-// import 'CollegeForum/CollegeForum/reactFront/src/css/registration.css'
 
 function Register(props) {
+
+    const [state, setState] = useState('');
+    let history = useHistory();
+
+    useEffect( () => {
+        setState(<Form setState={ setState } setUserId={ props.setUserId } />)
+    }, [])
+
+    const checkUser = () => {
+        if (sessionStorage.getItem('userId')) {
+            history.push('/Home');
+        }
+    }
+    checkUser();
+
     return(
-    // <div className="container">
         <div className="card">
-            <Form setTempUserId={props.setTempUserId} />
+            { state }
         </div>
-    // </div>
     )
 }
 export default Register;

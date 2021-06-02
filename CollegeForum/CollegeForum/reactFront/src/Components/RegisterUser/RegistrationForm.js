@@ -1,11 +1,11 @@
 import React,{ useState } from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import {Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
-// import 'CollegeForum/CollegeForum/reactFront/src/css/registration.css'
 import '../../css/registration.css';
 import Particles from 'react-particles-js';
+import RegisterOTP from './RegisterOTP';
 
 
 const schema = yup.object().shape({
@@ -21,8 +21,6 @@ const schema = yup.object().shape({
 })
 
 function Form(props) {
-
-    const history = useHistory();
 
     const [passwordShown, setPasswordShown] = useState(false);
     const togglePasswordVisiblity = () => {
@@ -82,10 +80,11 @@ function Form(props) {
             .then(response => response.json())
             
             // Displaying results to console
-            .then(json => console.log(json));
+            .then(json => {
+                console.log(json)
+                props.setState(<RegisterOTP setUserId={ props.setUserId } />)
+            });
 
-            props.setTempUserId(data['enrollment']);
-            history.push('/OTP');
         }
         
     }
@@ -212,7 +211,7 @@ function Form(props) {
             </div>
 
             <center>
-                <button type="submit" className="btn btn-center register-btn">Register</button>
+                <button type="submit" className="btn btn-center register-btn">Get OTP</button>
             </center>
 
             <p className="text-right">

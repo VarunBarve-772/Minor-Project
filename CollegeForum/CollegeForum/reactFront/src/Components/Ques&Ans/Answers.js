@@ -105,11 +105,11 @@ const Answers = (props) => {
                                 Number(props.satisfactoryAnswer) === Number(answer.answer_id)
                                 ?
                                 <span>
-                                    <i class="fa fa-check fa-2x"></i>
+                                    <i className="fa fa-check fa-2x"></i>
                                 </span>
                                 :
                                 <span>
-                                    <i class="fa fa-star fa-2x"></i>
+                                    <i className="fa fa-star fa-2x"></i>
                                 </span>
                             }
                         </button>

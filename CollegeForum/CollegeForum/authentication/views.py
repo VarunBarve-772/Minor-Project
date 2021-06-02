@@ -64,7 +64,7 @@ def registerUser(request):
             userRegisterData['year'] = body['year']
             userRegisterData['idCard'] = body['idCard']
 
-            otpValue['value'] = otp.sendEmail(body['email'])
+            otpValue['value'] = otp.sendEmail(body['email'], "Registration")
 
         if checkUser:
             resData = {
@@ -101,12 +101,15 @@ def OTP(request):
                 user.save()
 
                 userInfo['username'] = userRegisterData['username']
-
-                userRegisterData.clear()
                 
             resData = {
-                'result': 'Valid'
+                'result': 'Valid',
+                'userId': userRegisterData['username'],
+                'pass': userRegisterData['password']
             }
+
+            userRegisterData.clear()
+
         else:
             resData = {
                 'result': 'Invalid'
@@ -166,7 +169,7 @@ def changePassword(request):
 @csrf_exempt
 def viewProfile(request):
     if request.method == "POST":
-        user = CustomUser.objects.get(username__contains=userInfo['username'])
+        user = CustomUser.objects.get(username = userInfo['username'])
 
         resData = {
             'firstName': user.first_name,
@@ -188,7 +191,7 @@ def forgetPasswordUsername(request):
 
         user = CustomUser.objects.get(username = body['enrollment'])
 
-        otpValue['value'] = otp.sendEmail(user.email)
+        otpValue['value'] = otp.sendEmail(user.email, "Forget Password")
         userInfo['username'] = user.username
 
         resData = {

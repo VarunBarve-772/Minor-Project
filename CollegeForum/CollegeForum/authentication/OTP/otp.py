@@ -1,12 +1,12 @@
 import smtplib
 import random
 
-def sendEmail(emailTo):
+def sendEmail(emailTo, message):
 	otp = random.randint(1000,9999)
 
 	email = emailTo
 
-	subject = "OTP for Registration in College Forum."
+	subject = f"OTP for {message} in College Forum."
 	body = f"Your OTP is {str(otp)}"
 
 	message = f'Subject: {subject}\n\n{body}'
