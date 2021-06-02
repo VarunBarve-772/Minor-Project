@@ -49,7 +49,7 @@ const AnswerSubmit = (props) => {
                 <p className="ans_btn"><i>I</i></p>
             </div>
 
-            <textarea {...register('answerContent', { required: true })} placeholder='Enter Your Answer'></textarea><br/>
+            <textarea {...register('answerContent', { required: true })} placeholder='Enter Your Answer' className="ask_ques_textarea"></textarea><br/>
             <span>{ errors.answerContent?.type === 'required' && "Answer Field is required" }</span>
 
             {

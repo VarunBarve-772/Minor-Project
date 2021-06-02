@@ -133,3 +133,7 @@ option{
     max-height: 100px;
     overflow: scroll;
 }
+
+.askcard{
+    margin-top: 3%;
+}

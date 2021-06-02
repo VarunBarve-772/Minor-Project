@@ -5,10 +5,14 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import Particles from 'react-particles-js';
 import * as yup from 'yup';
 import '../../css/Forgotpassword.css';
+import otp_send from '../../Images/otp_send.gif';
+
 
 const schema = yup.object().shape({
     enrollment: yup.string().required("This Field is Required"),
 })
+
+// document.getElementsByClassName('gif_container').style.display = "none";
 
 const Username = (props) => {
 
@@ -83,6 +87,11 @@ const Username = (props) => {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            {/* gif loading */}
+            <div className="gif_container">
+                <img src={otp_send} alt="loading" className="gif_style"/>
             </div>
         </div>
     );

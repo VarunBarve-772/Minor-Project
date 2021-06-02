@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import Navbar from "./CommonFiles/Navbar"
 import '../css/Front.css';
 import carouselimg from '../Images/students.jpg';
 import c1 from '../Images/c1.png';
@@ -86,29 +87,30 @@ export default Front;
                  <button type="button" class="btn btn-primary btn-lg">Sign Up</button>
                  <button type="button" class="btn btn-info btn-lg">Login</button>
               </div>
-         <img src={carouselimg} alt="profile"/>
-         
-         </div>
-      
-     
-         <div className="carousel-item  ">
-         <div className="carousel-caption carousel-content">
-                 <h1>WELCOME</h1>
-                 <h1>to</h1>
-                 <h1>COLLEGE FORUM</h1>
-                 <button type="button" class="btn btn-primary">Sign Up</button>
-                 <button type="button" class="btn btn-info">Login</button>
+            
+          
+              <div className="carousel-item  ">
+                <div className="carousel-caption carousel-content">
+                  <h1>WELCOME</h1>
+                  <h1>to</h1>
+                  <h1>COLLEGE FORUM</h1>
+                  <button type="button" className="btn btn-primary">Sign Up</button>
+                  <button type="button" className="btn btn-info">Login</button>
+                </div>
+                <img src={carouselimg} alt="profile"/>
+              
               </div>
-         <img src={carouselimg} alt="profile"/>
-         
-         </div>
-         <div className="carousel-item  ">
-         <div className="carousel-caption carousel-content">
-                 <h1>WELCOME</h1>
-                 <h1>to</h1>
-                 <h1>COLLEGE FORUM</h1>
-                 <button type="button" class="btn btn-primary">Sign Up</button>
-                 <button type="button" class="btn btn-info">Login</button>
+
+              <div className="carousel-item  ">
+                <div className="carousel-caption carousel-content">
+                  <h1>WELCOME</h1>
+                  <h1>to</h1>
+                  <h1>COLLEGE FORUM</h1>
+                  <button type="button" className="btn btn-primary">Sign Up</button>
+                  <button type="button" className="btn btn-info">Login</button>
+                </div>
+              <img src={carouselimg} alt="profile"/>
+              
               </div>
          <img src={carouselimg} alt="profile"/>
          

@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
+import Navbar from './CommonFiles/Navbar';
 import '../css/Contactus.css';
 
 const schema = yup.object().shape({
@@ -11,7 +12,7 @@ const schema = yup.object().shape({
 })
 
 
-const ContactUs = () => {
+const ContactUs = (props) => {
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
@@ -42,28 +43,32 @@ const ContactUs = () => {
     }
 
     return(
-        <div className="card container">
-            <h3>Contact-Us</h3>
+        <div>
+            <Navbar setUserId={ props.setUserId } />
 
-            <form className="center" onSubmit={handleSubmit(submitForm)} >
-                <div className="form-group">
-                    <label>Name</label>
-                    <input type="text" name="name" {...register('name')} className="form-control input-style" />
-                    <span>{ errors.name?.message }</span>
-                </div>
+            <div className="card container contact_container">
+                <h3 className="contact_heading">Contact-Us</h3>
 
-                <div className="form-group">
-                    <label>Email</label>
-                    <input type="text" name="email" {...register('email')} className="form-control input-style" />
-                    <span>{ errors.email?.message }</span>
-                </div>
+                <form className="center" onSubmit={handleSubmit(submitForm)} >
+                    <div className="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" {...register('name')} className="form-control input-style" />
+                        <span>{ errors.name?.message }</span>
+                    </div>
 
-                <textarea {...register('content')} placeholder='Enter Your Query'></textarea>
-                <span>{ errors.content?.message }</span>
+                    <div className="form-group">
+                        <label>Email</label>
+                        <input type="text" name="email" {...register('email')} className="form-control input-style" />
+                        <span>{ errors.email?.message }</span>
+                    </div>
 
-                <button type='submit' className="submit_btn">Submit</button> 
-            </form>
+                    <textarea {...register('content')} placeholder='Enter Your Query' className="contact_textarea"></textarea>
+                    <span>{ errors.content?.message }</span>
 
+                    <button type='submit' className="submit_btn">Submit</button> 
+                </form>
+
+            </div>
         </div>
     );
 
