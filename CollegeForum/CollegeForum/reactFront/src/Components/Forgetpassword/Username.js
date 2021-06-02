@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useState } from "react";
 import ForgetOTP from './ForgetOTP';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -12,9 +12,10 @@ const schema = yup.object().shape({
     enrollment: yup.string().required("This Field is Required"),
 })
 
-// document.getElementsByClassName('gif_container').style.display = "none";
-
 const Username = (props) => {
+
+    let userAuthentication = '';
+    const [usernameError, setUsernameError] = useState('');
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
@@ -35,7 +36,24 @@ const Username = (props) => {
                 "Content-type": "application/json; charset=UTF-8"
             }
         })
-        props.setState(<ForgetOTP setState={props.setState}/>)
+
+        // Converting to JSON
+        .then(response => response.json())
+            
+        // Displaying results to console
+        .then(json => {
+            console.log(json);
+            userAuthentication = json['response'];
+        });
+        document.getElementById('otp_gif').style.display = 'block';
+        setTimeout(() => {
+            if (userAuthentication === "Valid"){
+                props.setState(<ForgetOTP setState={props.setState}/>)
+            } else{
+                setUsernameError("This Enrollment is not Correct, Please insert correct Enrollment!!!")
+                document.getElementById('otp_gif').style.display = 'none';
+            }
+        }, 4000);
     }
 
     const particlesOptions = {
@@ -80,6 +98,9 @@ const Username = (props) => {
                                     <input type="text" name="enrollment" {...register('enrollment')} className="form-control enrol_input_style" placeholder="Enter Enrollment..." />
                                     <span>{ errors.enrollment?.message }</span>
                                 </div>
+
+                                <span> { usernameError } </span>
+
                                 <center>
                                     <button type="submit" className="btn btn-primary btn-lg get_otp_btn">Get OTP</button>
                                 </center>
@@ -89,8 +110,7 @@ const Username = (props) => {
                 </div>
             </div>
 
-            {/* gif loading */}
-            <div className="gif_container">
+            <div className="gif_container" id="otp_gif">
                 <img src={otp_send} alt="loading" className="gif_style"/>
             </div>
         </div>

@@ -189,15 +189,19 @@ def forgetPasswordUsername(request):
         data = request.body.decode('utf-8')
         body = json.loads(data)  
 
-        user = CustomUser.objects.get(username = body['enrollment'])
+        try:
+            user = CustomUser.objects.get(username = body['enrollment'])
 
-        otpValue['value'] = otp.sendEmail(user.email, "Forget Password")
-        userInfo['username'] = user.username
+            otpValue['value'] = otp.sendEmail(user.email, "Forget Password")
+            userInfo['username'] = user.username
 
-        resData = {
-            'response': 'OTP sent'
-        }
-
+            resData = {
+                'response': 'Valid'
+            }
+        except:
+            resData = {
+                'response': "Invalid"
+            }
         return JsonResponse(resData)
 
 @csrf_exempt

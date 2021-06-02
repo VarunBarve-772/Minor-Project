@@ -1,42 +1,14 @@
 import React from "react";
-import { Link } from 'react-router-dom';
 import Navbar from "./CommonFiles/Navbar"
 import '../css/Front.css';
-import carouselimg from '../Images/students.jpg';
 import c1 from '../Images/c1.png';
 import c2 from '../Images/c2.png';
-import c3 from '../Images/c3.png';
-
-
+import c3 from '../Images/c3.png';  
 
 function Front() {
     return(
       <div>
-        <Link to="/Login">Login page link</Link>
-        <section className="navbarcolor">
-          <div className="container-fluid">
-        
-            <nav className="navbar navbar-expand-lg navbar-dark">
-              <a className="navbar-brand" href="">College Forum</a>
-              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
-                <span className="navbar-toggler-icon"></span>
-              </button>
-              <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul className="navbar-nav ml-auto">
-                  <li className="nav-item">
-                    <a className="nav-link" href="#Aboutus">AboutUs</a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="#contactus">Contact us</a>
-                  </li>
-                  <li className="nav-item">
-                    <button className="nav-link front_login_btn" href="#">Log in</button>
-                  </li>
-                </ul>
-              </div>
-            </nav>
-          </div>
-        </section>
+        <Navbar/>
 
         <section className="carousel_container">
           <div className="carousel slide z-depth-1-half" data-ride="carousel">
@@ -73,6 +45,31 @@ function Front() {
     );
 }
 export default Front;
+
+{/* <section className="navbarcolor">
+          <div className="container-fluid">
+        
+            <nav className="navbar navbar-expand-lg navbar-dark">
+              <a className="navbar-brand" href="">College Forum</a>
+              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
+                <span className="navbar-toggler-icon"></span>
+              </button>
+              <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul className="navbar-nav ml-auto">
+                  <li className="nav-item">
+                    <a className="nav-link" href="#Aboutus">AboutUs</a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="#contactus">Contact us</a>
+                  </li>
+                  <li className="nav-item">
+                    <button className="nav-link front_login_btn" href="#">Log in</button>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </section> */}
 
  {/* </section> */}
 

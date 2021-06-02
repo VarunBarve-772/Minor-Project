@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
 import '../../css/registration.css';
+import otp_send from '../../Images/otp_send.gif';
 import Particles from 'react-particles-js';
 import RegisterOTP from './RegisterOTP';
 
@@ -33,6 +34,8 @@ function Form(props) {
     };
 
     const [idCardErrorMessage, setIdCardErrorMessage] = useState(false);
+    const [usernameError, setUsernameError] = useState('');
+    let userAuthentication = '';
     
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
@@ -82,9 +85,17 @@ function Form(props) {
             // Displaying results to console
             .then(json => {
                 console.log(json)
-                props.setState(<RegisterOTP setUserId={ props.setUserId } />)
+                userAuthentication = json['response'];
             });
-
+            document.getElementById('otp_gif').style.display = 'block';
+            setTimeout(() => {
+                if (userAuthentication === "Valid"){
+                    props.setState(<RegisterOTP setState={props.setState}/>)
+                } else{
+                    setUsernameError("This Enrollment is not Correct, Please insert correct Enrollment!!!")
+                    document.getElementById('otp_gif').style.display = 'none';
+                }
+            }, 4000);
         }
         
     }
@@ -210,6 +221,8 @@ function Form(props) {
                 </div>
             </div>
 
+            <span> { usernameError } </span>
+
             <center>
                 <button type="submit" className="btn btn-center register-btn">Get OTP</button>
             </center>
@@ -219,6 +232,10 @@ function Form(props) {
                 <Link to='/Login'> Login</Link>
             </p>
         </form>
+
+        <div className="gif_container" id="otp_gif">
+            <img src={otp_send} alt="loading" className="gif_style"/>
+        </div>
     </div>
     )
 }
