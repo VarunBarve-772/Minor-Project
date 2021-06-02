@@ -58,7 +58,7 @@ function Aques(props) {
                         <p className="ans_btn"><i>I</i></p>
                     </div>
 
-                    <textarea {...register('queContent', { required: true })} placeholder='Enter Your Question'></textarea>
+                    <textarea {...register('queContent', { required: true })} placeholder='Enter Your Question' className="ask_ques_textarea"></textarea>
                     <span>{ errors.queContent?.type === 'required' && "Question Field is required" }</span>
                     <br/>
 

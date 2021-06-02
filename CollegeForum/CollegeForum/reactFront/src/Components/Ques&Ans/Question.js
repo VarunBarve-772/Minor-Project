@@ -118,18 +118,21 @@ const Question = (props) => {
                     </div>
             
                     <div className="question_details">
-                        <div className="questioner">
-                            <p>Asked by: <b> { questionContent.questioner } </b></p>
-                            <p></p>
-                        </div>
-                        <div className="date_time">
-                            <p>Asked on: </p>
-
-                            <div className="date_time_b">
-                                <b> { questionContent.date } </b>
-                                <b> { questionContent.time } </b>
+                        <div className="question_detail_left">
+                            <div className="questioner">
+                                <p>Asked by: <b> { questionContent.questioner } </b></p>
                             </div>
+                            <div className="date_time">
+                                <p>Asked on: &nbsp;
+                                    <b> 
+                                        { questionContent.date }<span>  </span>
+                                        { questionContent.time } 
+                                    </b>
+                                </p>
+                            </div>
+                        </div>
 
+                        <div className="question_detail_right">
                             <div className="report_btn_div">
                                     <button onClick={() => onModelClick(JSON.parse(sessionStorage.getItem('questionId')))} className="btn btn-danger report_btn">
                                     <span className="report_icon">❕</span>

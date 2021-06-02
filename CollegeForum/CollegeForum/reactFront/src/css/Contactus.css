@@ -21,8 +21,12 @@
     height: 230px;
 }
 
-textarea{
+.contact_textarea{
+    height: 200px;
+    width: 100%;
     font-weight: 500;
+    border: 2px solid #e4e4e4;
+    border-radius: 5px;
 }
 
 .contact_wrap{
@@ -40,4 +44,12 @@ textarea{
 
 .contact_form{
     padding: 0;
+}
+
+.contact_container{
+    margin-top: 3%;
+}
+
+.contact_heading{
+    margin-bottom: 4%;
 }

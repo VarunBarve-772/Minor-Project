@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import '../../css/Home.css';
+import '../../css/Navbar.css';
 
 const Navbar = (props) => {
 
@@ -21,7 +21,7 @@ const Navbar = (props) => {
                     <div className="row">
 
                         <div className="col-lg-4">
-                            <h1 className="title"><Link to="/Home"> College Forum </Link></h1>                
+                            <h1><Link to="/Home" className="title"> College Forum </Link></h1>                
                         </div>
 
                         <div className="col-lg-8">
@@ -34,7 +34,6 @@ const Navbar = (props) => {
                                     <Link className="a" to="/Profile">Profile</Link>
                                     <button onClick={ userLogout } >Logout</button>
                                 </div>
-
                             </div>
                         </div>
                     </div>

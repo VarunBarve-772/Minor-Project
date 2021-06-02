@@ -46,8 +46,8 @@ const ContactUs = (props) => {
         <div>
             <Navbar setUserId={ props.setUserId } />
 
-            <div className="card container">
-                <h3>Contact-Us</h3>
+            <div className="card container contact_container">
+                <h3 className="contact_heading">Contact-Us</h3>
 
                 <form className="center" onSubmit={handleSubmit(submitForm)} >
                     <div className="form-group">
@@ -62,7 +62,7 @@ const ContactUs = (props) => {
                         <span>{ errors.email?.message }</span>
                     </div>
 
-                    <textarea {...register('content')} placeholder='Enter Your Query'></textarea>
+                    <textarea {...register('content')} placeholder='Enter Your Query' className="contact_textarea"></textarea>
                     <span>{ errors.content?.message }</span>
 
                     <button type='submit' className="submit_btn">Submit</button> 
