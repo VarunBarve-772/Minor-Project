@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate
 import json
 from .models import CustomUser, ContactUs
 from .OTP import otp
+from django.shortcuts import render
 
 userRegisterData = {}
 otpValue = {
@@ -272,3 +273,6 @@ def contactUs(request):
             'response': 'Wrong'
         }
         return JsonResponse(resData)
+
+def redirectHome(request):
+    return render(request, 'authentication/index.html')

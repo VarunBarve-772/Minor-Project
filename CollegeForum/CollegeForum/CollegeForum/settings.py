@@ -59,9 +59,7 @@ ROOT_URLCONF = 'CollegeForum.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'reactFront/build')
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,10 +131,3 @@ CORS_ALLOWED_ORIGINS = [
 
 STATIC_URL = '/static/'
 
-MEDIA_URL = '/images/'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'reactFront/build/static')
-]
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
