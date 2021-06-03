@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('showQues', views.showQues),
-    path('AskQuestion', views.addQues),
+    path('AddQuestion', views.addQues),
     path('QuesPage', views.QuesPage),
     path('Search', views.searchQuestion),
     path('MyQuestions', views.MyQuestions),

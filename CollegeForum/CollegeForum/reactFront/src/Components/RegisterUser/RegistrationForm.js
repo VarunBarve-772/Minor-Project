@@ -84,20 +84,25 @@ function Form(props) {
             
             // Displaying results to console
             .then(json => {
-                console.log(json)
-                userAuthentication = json['response'];
+                if (json.response === 'Valid') {
+                    userAuthentication = 'Valid';
+                } else if (json.response === 'Invalid') {
+                    userAuthentication = 'Invalid';
+                } else if (json.response === 'Wrong') {
+                    alert('Something Went Wrong, Please try Again!!!');
+                }
             });
+    
             document.getElementById('otp_gif').style.display = 'block';
             setTimeout(() => {
                 if (userAuthentication === "Valid"){
                     props.setState(<RegisterOTP setState={props.setState}/>)
-                } else{
-                    setUsernameError("This Enrollment is not Correct, Please insert correct Enrollment!!!")
+                } else if(userAuthentication === "Invalid") {
+                    setUsernameError("This Enrollment is already Registered, Please insert correct Enrollment!!!");
                     document.getElementById('otp_gif').style.display = 'none';
                 }
             }, 4000);
         }
-        
     }
 
     const convertBase64 = (file) => {

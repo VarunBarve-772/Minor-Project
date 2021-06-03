@@ -24,6 +24,7 @@ const Answers = (props) => {
     let answerContent = props.answerList;
     
     const submitSatisfactoryAnswer = (answer_id) => {
+        // if (answer_id === JSON.parse(sessionStorage.getItem('userId')))
         const data = {
             ans_id: answer_id,
             que_id: JSON.parse(sessionStorage.getItem('questionId'))
@@ -48,8 +49,13 @@ const Answers = (props) => {
         
         // Displaying results to console
         .then(json => {
-            alert(json.response);
-            props.setContentReload(props.contentReload + 1);
+            if (json.response === 'Valid') {
+                props.setContentReload(props.contentReload + 1);
+            } else if (json.response === 'Invalid') {
+                alert('Invalid User');
+            } else if (json.response === 'Wrong') {
+                alert('Something Went Wrong, Please try again!!!');
+            }
         });
     }
 
@@ -84,7 +90,11 @@ const Answers = (props) => {
         
         // Displaying results to console
         .then(json => {
-            console.log(json);
+            if (json.response === 'Valid') {
+                alert('Answer Reported!!!');
+            } else if (json.response === 'Wrong') {
+                alert('Something Went Wrong, Please try again!!!');
+            }
         });
         setModalIsOpen(false);
     }

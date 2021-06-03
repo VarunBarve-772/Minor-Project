@@ -265,7 +265,7 @@ def contactUs(request):
             complaint.save()
 
             resData = {
-                'response': "Complaint Added"
+                'response': "Valid"
             }
         except:
             resData = {

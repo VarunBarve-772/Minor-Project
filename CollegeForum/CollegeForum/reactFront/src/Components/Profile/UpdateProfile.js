@@ -12,8 +12,6 @@ const schema = yup.object().shape({
 
 function UpdateProfile() {
 
-    // let userProfileData = {};
-    // const [userProfileData, setUserProfileData] = useState(JSON.parse(sessionStorage.getItem('userProfileData')))
     const [userProfileData, setUserProfileData] = useState({})
 
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -28,7 +26,11 @@ function UpdateProfile() {
 
         // Displaying results to console
         .then(json => {
-            setUserProfileData(json);
+            if (json.response === 'Valid') {
+                setUserProfileData(json);
+            } else if (json.response === 'Wrong') {
+                alert('Something Went Wrong, Please Try Again!!!');
+            }
         })
     }, [])
     
@@ -52,10 +54,14 @@ function UpdateProfile() {
         
         // Displaying results to console
         .then(json => {
-            sessionStorage.setItem('userProfileData', JSON.stringify(json));
-            setUserProfileData(JSON.stringify(json));
-            e.target.reset();
-            alert('Profile Updated');
+            if (json.response === 'Valid') {
+                // sessionStorage.setItem('userProfileData', JSON.stringify(json));
+                setUserProfileData(JSON.stringify(json));
+                e.target.reset();
+                alert('Profile Updated');    
+            } else if (json.response === 'Wrong') {
+                alert('Something Went Wrong, Please Try Again!!!');
+            }
         });
     }
 

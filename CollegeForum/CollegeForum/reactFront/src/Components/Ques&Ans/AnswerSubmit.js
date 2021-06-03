@@ -34,8 +34,11 @@ const AnswerSubmit = (props) => {
         
         // Displaying results to console
         .then(json => {
-            alert(json.response);
-            props.setContentReload(props.contentReload + 1);
+            if (json.response === 'Valid') {
+                props.setContentReload(props.contentReload + 1);
+            } else if (json.response === 'Wrong') {
+                alert("Something Went Wrong, Please try again!!!");
+            }
         });
     }
 

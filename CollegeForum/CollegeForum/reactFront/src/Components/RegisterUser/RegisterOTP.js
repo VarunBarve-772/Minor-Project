@@ -23,23 +23,24 @@ const RegisterOTP = (props) => {
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
-        })
-  
-        // Converting to JSON
-        .then(response => response.json())
-        
-        // Displaying results to console
-        .then(json => {
-          if(json['result'] === 'Valid') {
-            console.log(json);
-            props.setUserId(json['userId']);
-            sessionStorage.setItem('userId', JSON.stringify(json['userId']));
-            sessionStorage.setItem('pass', JSON.stringify(btoa(json['pass'])));
-            history.push('/Home');
-          }else {
-            setOtpError('Invalid OTP');
-          }
-        });
+    })
+
+    // Converting to JSON
+    .then(response => response.json())
+    
+    // Displaying results to console
+    .then(json => {
+      if(json.response === 'Valid') {
+        props.setUserId(json['userId']);
+        sessionStorage.setItem('userId', JSON.stringify(json['userId']));
+        sessionStorage.setItem('pass', JSON.stringify(btoa(json['pass'])));
+        history.push('/Home');
+      }else if(json.response === 'Invalid') {
+        setOtpError('Invalid OTP');
+      } else if (json.response === 'Wrong') {
+        alert('Something Went Wrong, Please Try Again!!!');
+      }
+    });
 
   }
 

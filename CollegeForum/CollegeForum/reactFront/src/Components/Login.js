@@ -94,6 +94,8 @@ function Login(props) {
                         <h3 className="login_heading">Login</h3>
                     </div>
 
+                    <div>{ errorMessage }</div>
+
                     <div className="form-group">
                         <label>Enrollment Number</label>
                         <input type="text" className="form-control login_input_style" name="enrollment" {...register('enrollment', { required: true })} placeholder="Enter Enrollment Number" />
@@ -108,7 +110,6 @@ function Login(props) {
                         <span className="show-password" onClick={togglePasswordVisiblity}>Show Password</span>
                         <span>{ errors.password?.type === 'required' && "Password Field is required" }</span>
                     </div>
-                    <span>{ errorMessage }</span>
 
                     <center>
                         <button type="submit" className="login_btn">Login</button>

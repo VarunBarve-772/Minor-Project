@@ -50,11 +50,14 @@ const Question = (props) => {
         .then(response => response.json())
         
         // Displaying results to console
-        .then(json => {            
-            setQuestionContent(json);
-            setAnswerList(json['answers']);
-            setSatisfactoryAnswer(json.satisfactory);
-            console.log(json);
+        .then(json => {     
+            if (json.response === "Valid") {
+                setQuestionContent(json);
+                setAnswerList(json['answers']);
+                setSatisfactoryAnswer(json.satisfactory);
+            } else if (json.response === "Wrong") {
+                alert("Something Went Wrong, Please try again Later!!!");
+            }
         });
 
     }, [contentReload]) 
@@ -90,7 +93,11 @@ const Question = (props) => {
         
         // Displaying results to console
         .then(json => {
-            console.log(json);
+            if (json.response === 'Valid') {
+                alert('Question Reported!!!');
+            } else if (json.response === 'Wrong') {
+                alert('Something Went Wrong, Please try again!!!');
+            }
         });
         setModalIsOpen(false);
     }

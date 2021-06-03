@@ -13,7 +13,6 @@ const Home = (props) => {
   const [questionCategory, setQuestionCategory] = useState(category);
   const [questionState, setQuestionState] = useState('');
   const { register, handleSubmit } = useForm();
-  // let history = useHistory();
   
   useEffect( () => {
     setQuestionState(<ShowQuestions questionCategory={ questionCategory } fetchUrl={ 'showQues' } />)
@@ -38,15 +37,11 @@ const Home = (props) => {
 
           </form>
 
-          {/* <Category setQuestionCategory={setQuestionCategory} /> */}
-
           <div className="sec-3">
             { questionState }
           </div>
 
         </div>
-
-        
       </div>
 
     );

@@ -63,7 +63,11 @@ function ChangePassword() {
             
             // Displaying results to console
             .then(json => {
-                alert(json['response']);
+                if (json.response === 'Valid') {
+                    alert("Password Updated!!!");
+                } else if (json.response === 'Wrong') {
+                    alert('Something Went Wrong, Please Try Again!!!');
+                }
             });
         } else {
             setOldPasswordErrorMessage('Old Password Does Not Match');

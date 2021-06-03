@@ -27,8 +27,12 @@ const ShowQuestions = (props) => {
         .then(response => response.json())
         
         // Displaying results to console
-        .then(json => {            
-            setQuestions(json.questions);
+        .then(json => {   
+            if (json.response === 'Valid'){
+                setQuestions(json.questions);
+            } else if (json.response === 'Wrong') {
+                alert('Something Went Wrong, Please try again!!!');
+            }        
         });
 
     }, [props.questionCategory]) 

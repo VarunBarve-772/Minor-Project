@@ -15,7 +15,7 @@ function Aques(props) {
         if(data.codeContent === "") {
             data.codeContent = 'None';
         }
-        fetch("http://127.0.0.1:8000/qna/AskQuestion", {
+        fetch("http://127.0.0.1:8000/qna/AddQuestion", {
       
             // Adding method type
             method: "POST",
@@ -34,11 +34,10 @@ function Aques(props) {
         
         // Displaying results to console
         .then(json => {
-            if(json['response'] === 'Question Added') {
-                alert(json['response']);
+            if(json['response'] === 'Valid') {
                 history.push('/Home')
-            } else {
-                alert('Something Went Wrong')
+            } else if (json['response'] === 'Wrong') {
+                alert('Something Went Wrong, Please try again!!!')
             }
         });
     }

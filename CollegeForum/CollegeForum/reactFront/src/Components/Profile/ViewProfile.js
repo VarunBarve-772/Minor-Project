@@ -24,8 +24,11 @@ const ViewProfile = () => {
 
         // Displaying results to console
         .then(json => {
-            console.log(json);
-            setUserProfile(json);
+            if (json.response === 'Valid') {
+                setUserProfile(json);
+            } else if (json.response === 'Wrong') {
+                alert('Something Went Wrong, Please Try Again!!!');
+            }
         })
     }, [])
 

@@ -38,7 +38,11 @@ const ContactUs = (props) => {
         
         // Displaying results to console
         .then(json => {
-            alert(json.response);
+            if (json.response === 'Valid') {
+                alert('Complaint Added');
+            } else if (json.response === 'Wrong') {
+                alert('Something Went Wrong, Please Try Again!!!');
+            }
         });
     }
 
