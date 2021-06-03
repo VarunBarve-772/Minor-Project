@@ -64,7 +64,13 @@ def registerUser(request):
             userRegisterData['year'] = body['year']
             userRegisterData['idCard'] = body['idCard']
 
-            otpValue['value'] = otp.sendEmail(body['email'], "Registration")
+            try:
+                otpValue['value'] = otp.sendEmail(body['email'], "Registration")
+            except:
+                resData = {
+                    'response': "Wrong"
+                }  
+                return JsonResponse(resData)
 
         if checkUser:
             resData = {
@@ -83,51 +89,66 @@ def OTP(request):
         data = request.body.decode('utf-8')
         body = json.loads(data)
 
-        if otpValue['value'] == int(body['otpValue']):
-            
-            if body['location'] == 'register':
-
-                user = CustomUser.objects.create_user(
-                first_name = userRegisterData['firstName'], 
-                last_name = userRegisterData['lastName'], 
-                email = userRegisterData['email'], 
-                password = userRegisterData['password'], 
-                username = userRegisterData['username'], 
-                mobile = userRegisterData['mobile'], 
-                institute = userRegisterData['institute'], 
-                year = userRegisterData['year'], 
-                idCardString = userRegisterData['idCard']
-                )
-                user.save()
-
-                userInfo['username'] = userRegisterData['username']
+        try:
+            if otpValue['value'] == int(body['otpValue']):
                 
+                if body['location'] == 'register':
+
+                    user = CustomUser.objects.create_user(
+                        first_name = userRegisterData['firstName'], 
+                        last_name = userRegisterData['lastName'], 
+                        email = userRegisterData['email'], 
+                        password = userRegisterData['password'], 
+                        username = userRegisterData['username'], 
+                        mobile = userRegisterData['mobile'], 
+                        institute = userRegisterData['institute'], 
+                        year = userRegisterData['year'], 
+                        idCardString = userRegisterData['idCard']
+                    )
+                    user.save()
+
+                    userInfo['username'] = userRegisterData['username']
+                    
+                    resData = {
+                        'response': 'Valid',
+                        'userId': userRegisterData['username'],
+                        'pass': userRegisterData['password']
+                    }
+                else:
+                    resData = {
+                        'response': 'Valid'
+                    }
+
+                userRegisterData.clear()
+            else:
+                resData = {
+                    'response': 'Invalid'
+                }
+
+        except:
             resData = {
-                'result': 'Valid',
-                'userId': userRegisterData['username'],
-                'pass': userRegisterData['password']
+                'response': 'Wrong'
             }
 
-            userRegisterData.clear()
-
-        else:
-            resData = {
-                'result': 'Invalid'
-            }
-
-        return JsonResponse(resData)
+    return JsonResponse(resData)
 
 
 @csrf_exempt
 def updateProfile(request):
     if request.method == 'GET':
-        user = CustomUser.objects.get(username = userInfo['username'])
+        try:
+            user = CustomUser.objects.get(username = userInfo['username'])
 
-        resData = {
-            'email': user.email,
-            'mobile': user.mobile,
-            'year': user.year 
-        }
+            resData = {
+                'response': 'Valid',
+                'email': user.email,
+                'mobile': user.mobile,
+                'year': user.year 
+            }
+        except:
+            resData = {
+                'response': 'Wrong'
+            }
 
         return JsonResponse(resData)
 
@@ -135,17 +156,23 @@ def updateProfile(request):
         data = request.body.decode('utf-8')
         body = json.loads(data)
 
-        user = CustomUser.objects.get(username = body['username'])
-        user.email = body['email']
-        user.mobile = body['mobile']
-        user.year = body['year']
-        user.save()
+        try:
+            user = CustomUser.objects.get(username = body['username'])
+            user.email = body['email']
+            user.mobile = body['mobile']
+            user.year = body['year']
+            user.save()
 
-        resData = {
-            'email': user.email,
-            'mobile': user.mobile,
-            'year': user.year 
-        }
+            resData = {
+                'response': 'Valid',
+                'email': user.email,
+                'mobile': user.mobile,
+                'year': user.year 
+            }
+        except:
+            resData = {
+                'response': 'Wrong'
+            }
 
         return JsonResponse(resData)
 
@@ -155,31 +182,42 @@ def changePassword(request):
         data = request.body.decode('utf-8')
         body = json.loads(data)  
 
-        user = CustomUser.objects.get(username = body['username'])
-        user.set_password(str(body['password']))
+        try:
+            user = CustomUser.objects.get(username = body['username'])
+            user.set_password(str(body['password']))
 
-        user.save()
+            user.save()
 
-        resData = {
-            'response': 'Password Updated'
-        }
-        
+            resData = {
+                'response': 'Valid'
+            }
+        except:
+            resData = {
+                'response': 'Wrong'
+            }
+
         return JsonResponse(resData)
 
 @csrf_exempt
 def viewProfile(request):
     if request.method == "POST":
-        user = CustomUser.objects.get(username = userInfo['username'])
+        try:
+            user = CustomUser.objects.get(username = userInfo['username'])
 
-        resData = {
-            'firstName': user.first_name,
-            'lastName': user.last_name,
-            'email': user.email,
-            'enrollment': user.username,
-            'mobile': user.mobile,
-            'institute': user.institute,
-            'year': user.year,
-        }
+            resData = {
+                'response': 'Valid',
+                'firstName': user.first_name,
+                'lastName': user.last_name,
+                'email': user.email,
+                'enrollment': user.username,
+                'mobile': user.mobile,
+                'institute': user.institute,
+                'year': user.year,
+            }
+        except:
+            resData = {
+                'response': 'Wrong'
+            }
 
         return JsonResponse(resData)
 
@@ -191,8 +229,15 @@ def forgetPasswordUsername(request):
 
         try:
             user = CustomUser.objects.get(username = body['enrollment'])
+            
+            try:
+                otpValue['value'] = otp.sendEmail(user.email, "Forget Password")
+            except:
+                resData = {
+                    'response': "Wrong"
+                }
+                return JsonResponse(resData)
 
-            otpValue['value'] = otp.sendEmail(user.email, "Forget Password")
             userInfo['username'] = user.username
 
             resData = {
@@ -200,8 +245,9 @@ def forgetPasswordUsername(request):
             }
         except:
             resData = {
-                'response': "Invalid"
+                'response': 'Invalid'
             }
+
         return JsonResponse(resData)
 
 @csrf_exempt
@@ -210,11 +256,19 @@ def contactUs(request):
         data = request.body.decode('utf-8')
         body = json.loads(data) 
 
-        complaint = ContactUs.objects.create(name = body['name'], email = body['email'], message = body['content'])
-        complaint.save()
+        try:
+            complaint = ContactUs.objects.create(
+                name = body['name'], 
+                email = body['email'], 
+                message = body['content']
+            )
+            complaint.save()
 
-        resData = {
-            'response': "Complaint Added"
+            resData = {
+                'response': "Complaint Added"
+            }
+        except:
+            resData = {
+            'response': 'Wrong'
         }
-
         return JsonResponse(resData)
