@@ -28,7 +28,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['collegeforum.pythonanywhere.com']
 
-
 # Application definition
 
 INSTALLED_APPS = [
