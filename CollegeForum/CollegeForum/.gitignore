@@ -27,6 +27,6 @@ yarn-error.log*
 *.pot
 *.pyc
 __pycache__/
-/local_settings.py
+local_settings.py
 /static/
 *.sqlite3
